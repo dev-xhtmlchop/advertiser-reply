@@ -1,10 +1,11 @@
 $(document).ready(function(){
     var CSRF_TOKEN = $("meta[name='csrf-token']").attr('content');
+    var URL = $("meta[name='web-url']").attr('content');
     var userId = $("#forgot_password #user_id").val();
     $("#current_password").on("keyup change", function(e){
         var curPass = $(this).val();
         $.ajax({
-            url: '/currentpassword',
+            url: URL+'/currentpassword',
             type: 'POST',
             data: {_token: CSRF_TOKEN, current_password: curPass, user_id: userId},
             success: function(response){
@@ -49,7 +50,7 @@ $(document).ready(function(){
         },
         submitHandler: function(form) {
             $.ajax({
-                url: "/post-changepassword",
+                url: URL+"/post-changepassword",
                 type: "POST",
                 data: $(form).serialize(),
                 success: function(response) {

@@ -62,7 +62,8 @@ $(document).ready(function(){
 
 function getDealDashboardData( selectOptionObject = null){
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    var url = '/deal-dashboard';
+    var URL = $("meta[name='web-url']").attr('content');
+    var url = URL+'/deal-dashboard';
     $.ajax({
         url: url,
         type: 'POST',
@@ -84,7 +85,8 @@ function getDealDashboardData( selectOptionObject = null){
 
 function getAdvertiserDashboardData( selectOptionObject = null){
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    var url = '/advertiser-dashboard';
+    var URL = $("meta[name='web-url']").attr('content');
+    var url = URL+'/advertiser-dashboard';
     $.ajax({
         url: url,
         type: 'POST',

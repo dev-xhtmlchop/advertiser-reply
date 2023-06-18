@@ -1,9 +1,10 @@
 $(document).ready(function(){
     var CSRF_TOKEN = $("meta[name='csrf-token']").attr('content');
+    var URL = $("meta[name='web-url']").attr('content');
     $("#login_form #user_name").on("keyup change", function(e){
         var userName = $(this).val();
         $.ajax({
-            url: '/post-login-user',
+            url: URL+"/post-login-user",
             type: 'POST',
             data: {_token: CSRF_TOKEN, user_name: userName},
             success: function(response){
@@ -53,8 +54,9 @@ $(document).ready(function(){
             $(element).parent().find('.form-control').removeClass('is-invalid').addClass('is-valid');
         },
         submitHandler: function(form) {
+     
             $.ajax({
-                url: "/post-login",
+                url: URL+"/post-login",
                 type: "POST",
                 data: $(form).serialize(),
                 success: function(response) {
@@ -64,7 +66,7 @@ $(document).ready(function(){
                     }else{
                         success( response.message );
                         setTimeout(function(){
-                            window.location.href = '/';
+                            window.location.href = URL;
                         },500);
                         return true;
                     }

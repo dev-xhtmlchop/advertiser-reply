@@ -29,8 +29,8 @@ Route::post('/advertiser-dashboard',[ DashboardController::class, 'dashboardAdve
 
 /* Login */
 Route::get('/login',[ LoginController::class, 'index'])->name('login');
-Route::post('post-login',[ LoginController::class, 'postLogin'])->name('login.post');
-Route::post('post-login-user',[ LoginController::class, 'postLoginUser'])->name('login.postuser');
+Route::post('/post-login',[ LoginController::class, 'postLogin'])->name('login.post');
+Route::post('/post-login-user',[ LoginController::class, 'postLoginUser'])->name('login.postuser');
 
 /* Logout */
 Route::get('/logout',[ LogoutController::class, 'index'])->name('logout');

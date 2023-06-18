@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="header-mobile-inner">
                 <a class="logo" href="/">
-                    <img src="{{ asset('assets/images/logo/logo.png') }}" alt="logo" />
+                    <img src="{{ asset('public/assets/images/logo/logo.png') }}" alt="logo" />
                 </a>
                 <button class="hamburger hamburger--slider" type="button">
                     <span class="hamburger-box">
