@@ -1,7 +1,7 @@
 <aside class="menu-sidebar dark_sidebar d-none d-lg-block">
     <div class="logo">
         <a href="/">
-            <img src="{{ asset('public/assets/images/logo/logo.png') }}" alt="logo" />
+            <img src="{{ asset('public/images/logo/logo.png') }}" alt="logo" />
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">
