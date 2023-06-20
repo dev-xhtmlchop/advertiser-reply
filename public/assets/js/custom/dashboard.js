@@ -58,6 +58,9 @@ $(document).ready(function(){
         selectOptionObject['end_date'] = advertiserEndDate;
         getAdvertiserDashboardData( selectOptionObject );
     });
+
+    $("#myModal").modal('show');
+
 });
 
 function getDealDashboardData( selectOptionObject = null){
@@ -70,11 +73,11 @@ function getDealDashboardData( selectOptionObject = null){
         data: {_token: CSRF_TOKEN, data: selectOptionObject},
         success: function(response){
             if( response ){
-                $('#deal_dollars').val('$'+Number(nullNumber(response.rate)).toLocaleString('en'));
-                $('#deal_cpm').val('$'+nullNumber(response.cpm));
-                $('#deal_deal_unit').val(Number(nullNumber(response.deal_unit)).toLocaleString('en'));
-                $('#deal_grp').val(nullNumber(response.grp));
-                $('#deal_impressions').val(Number(nullNumber(response.impressions)).toLocaleString('en'));
+                $('#deal_dollars').empty().append('$'+Number(nullNumber(response.rate)).toLocaleString('en'));
+                $('#deal_cpm').empty().append('$'+nullNumber(response.cpm));
+                $('#deal_deal_unit').empty().append(Number(nullNumber(response.deal_unit)).toLocaleString('en'));
+                $('#deal_grp').empty().append(nullNumber(response.grp));
+                $('#deal_impressions').empty().append(Number(nullNumber(response.impressions)).toLocaleString('en'));
                 return true;
             }else{
                 return fasle;
@@ -93,13 +96,13 @@ function getAdvertiserDashboardData( selectOptionObject = null){
         data: {_token: CSRF_TOKEN, data: selectOptionObject},
         success: function(response){
             console.log(response)
-            $("#advertiser_inflight").val(response.inflight+" Inflight");
-            $("#advertiser_proposal").val(response.proposal+" Proposal");
-            $("#advertiser_ended").val(response.ended+" Ended");
-            $("#advertiser_approved").val(response.approved+" Approved");
-            $("#advertiser_order").val(response.ordered+" Ordered");
-            $("#advertiser_planning").val(response.planning+" Planning");
-            $("#advertiser_expired").val(response.expired+" Expired");
+            $("#advertiser_inflight").empty().text(response.inflight+" Inflight");
+            $("#advertiser_proposal").empty().text(response.proposal+" Proposal");
+            $("#advertiser_ended").empty().text(response.ended+" Ended");
+            $("#advertiser_approved").empty().text(response.approved+" Approved");
+            $("#advertiser_order").empty().text(response.ordered+" Ordered");
+            $("#advertiser_planning").empty().text(response.planning+" Planning");
+            $("#advertiser_expired").empty().text(response.expired+" Expired");
         }
     });
 }

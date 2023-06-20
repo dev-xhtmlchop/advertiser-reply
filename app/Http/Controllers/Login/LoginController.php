@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Http\Controllers\Login;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Medias;
 use App\Models\UserActivitiesLog;
@@ -35,45 +35,35 @@ class LoginController extends Controller
     public function postLogin( Request $request ){
         if( ( $request->has('user_name') ) && ( $request->has('password')  ) && ( $request->has('media')  ) ){
             $mediaCount = User::join('advertisers', 'advertisers.id', '=', 'users.advertiser_id')->where('users.user_name', '=' , $request['user_name'])->where('advertisers.media_id', '=' , $request['media'])->count();
-            if (  ( $mediaCount === 1 ) && ( Auth::attempt(['user_name' => $request['user_name'] , 'password' => $request['password']]) ) ) {
+            if( $mediaCount !== 1 ){
+                $data = array( 'status' => 0 , 'class' => 'media', 'message' => 'Please check Media Line is incorrect.' );
+                return response()->json($data);
+            } else if ( Auth::attempt(['user_name' => $request['user_name'] , 'password' => $request['password'], 'delete' => 1]) ){
+                $data = array( 'status' => 0 , 'class' => 'media', 'message' => 'Please check User was Deleted.' );
+                return response()->json($data);
+            }else if ( Auth::attempt(['user_name' => $request['user_name'] , 'password' => $request['password'], 'status' => 0]) ){
+                $data = array( 'status' => 0 , 'class' => 'media', 'message' => 'Please check User was Deactive.' );
+                return response()->json($data);
+            }else if (  ( $mediaCount === 1 ) && ( Auth::attempt(['user_name' => $request['user_name'] , 'password' => $request['password'], 'delete' => 0, 'status' => 1]) ) ) {
                 $userId = Auth::id();
                 $getUserData = User::join('advertisers', 'advertisers.id', '=', 'users.advertiser_id')->where('users.id', '=' , $userId)->first();
                 $currentDate = date('Y-m-d H:i:s');
                 if( $getUserData ){
+                    Session::put('user_id', $userId);
                     Session::put('advertiser_id', $getUserData->id);
                     Session::put('advertiser_name', $getUserData->name);
                     Session::put('advertiser_email_address', $getUserData->email_address);
                     Session::put('advertiser_logintime', $currentDate);
                 }
                 
-                $log = [];
-                $log['message'] = 'Insert Data';
-                $log['url'] = $request->fullUrl();
-                $log['method'] = $request->method();
-                $log['ip_address'] = $request->ip();
-                $log['agent'] = $request->header('user-agent');
-                $log['user_id'] = auth()->check() ? auth()->user()->id : 1;
-                UserActivitiesLog::create($log);
-    
-                $userLog = [];
-                $userLog['user_id'] = auth()->check() ? auth()->user()->id : 1;
-                $userLog['user_logged_in_timestamp'] = $currentDate;
-                $userLog['ip_address'] = $request->ip();
-                $userLog['created_by'] = auth()->check() ? auth()->user()->id : 1;
-                UserHistories::create($userLog);
-    
-                //Auth::user()->role = 'director';
+                Helper::activityLog('Create Login');
+                Helper::userHistory();
+
                 $data = array( 'status' => 1 , 'message' => 'Sucessfully Login.');
                 return response()->json($data);  
             } else {
-                if(  $mediaCount !== 1 ){
-                    $message = 'Please check Media Line is incorrect.';
-                    $class = 'media';
-                }else{
-                    $message = 'Please check User Password is incorrect.';
-                    $class = 'password';
-                }
-                $data = array( 'status' => 0 , 'class' => $class, 'message' => $message );
+                $message = 'Please check Detail is incorrect.';
+                $data = array( 'status' => 0 , 'class' => '', 'message' => $message );
                 return response()->json($data);
             }   
         }else{

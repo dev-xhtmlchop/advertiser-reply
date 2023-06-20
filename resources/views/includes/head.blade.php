@@ -25,3 +25,4 @@
     
     <!-- Custom css -->
     <link href="{{ asset('public/assets/css/style.css') }}" rel="stylesheet" media="all">
+    <link href="{{ asset('public/assets/css/custom.css') }}" rel="stylesheet" media="all">

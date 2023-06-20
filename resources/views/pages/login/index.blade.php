@@ -4,6 +4,7 @@
 
     <div class="page-wrapper login">
         <div class="page-content--bge5">
+            <img src="{{ asset('public/images/login/login-bg.jpg') }}" alt="" class="bg-img">
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">

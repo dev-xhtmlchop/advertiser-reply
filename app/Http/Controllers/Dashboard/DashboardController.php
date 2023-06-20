@@ -32,6 +32,7 @@ class DashboardController extends Controller
         $agencyList = Deals::join('agencys', 'agencys.id', '=', 'deals.agency_id')->where('deals.advertiser_id', '=' , $advertiserId)->get(['agencys.*'])->toArray();
         $locationList = Deals::join('locations', 'locations.id', '=', 'deals.location_id')->where('deals.advertiser_id', '=' , $advertiserId)->get(['locations.*'])->toArray();
         $brandList = Deals::join('brands', 'brands.id', '=', 'deals.brand_id')->where('deals.advertiser_id', '=' , $advertiserId)->get(['brands.*'])->toArray();
+        
         $dashboardData = array( 'dashboard' => 
             array( 
                 'advertiserList' =>  DashboardController::removeDubplicateRow( $advertiser ),

@@ -13,7 +13,9 @@ function success( message ){
 function error( message, className ){
     $(".alert-notification").show().removeClass('alert-success').addClass('alert-danger');
     $(".alert-notification").show().empty().text(message);
-    $('#'+className).removeClass('is-valid').addClass('is-invalid');
+    if( className !== '' ){
+      $('#'+className).removeClass('is-valid').addClass('is-invalid');
+    }
 }
 
 $(document).ready(function(){

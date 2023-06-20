@@ -43,7 +43,7 @@
                     </div>
                     </div>
                     <div class="account-log">
-                        <a href="/logout"><i class="zmdi zmdi-power"></i>Logout</a>
+                        <a href="{{ route('logout') }}"><i class="zmdi zmdi-power"></i>Logout</a>
                     </div>
                 </div>
                 
