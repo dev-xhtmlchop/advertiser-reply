@@ -327,6 +327,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="alert alert-notification text-center mb-3" role="alert"></div>
                     <form id="forgot_password">   
                         @csrf
 
