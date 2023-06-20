@@ -9,10 +9,13 @@ $(document).ready(function(){
             type: 'POST',
             data: {_token: CSRF_TOKEN, current_password: curPass, user_id: userId},
             success: function(response){
-                if( response != 1 ){
-                    $("#forgot_password .message").text(response)
+                console.log( response );
+                if( response.status == 0 ){
+                    error( response.message, response.class );
+                    return false;
                 }else{
-                    $("#forgot_password .message").empty();
+                    $('.alert-notification').hide();
+                    return true;
                 }
             }
         });
@@ -33,6 +36,7 @@ $(document).ready(function(){
                 alphabet: true,
             },
             confirm_password: {
+                required: true,
                 equalTo: "#new_password",
             },
         },
@@ -44,9 +48,22 @@ $(document).ready(function(){
             new_password: {
                 required: "Please enter New Password.",
             },
-            description: {
-                required: "Please enter message",
+            confirm_password: {
+                required: "Please enter Confirm Password.",
             },
+        },
+        errorClass: 'error invalid-feedback',
+        highlight: function (element) {
+           // $(element).closest('.control-group').removeClass('success').addClass('text-danger');
+           $(element).addClass('is-invalid');
+           $(element).parent().find('.error').addClass('invalid-feedback');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parent().find('.error').addClass('invalid-feedback');
+        },
+        success: function (element) {
+            console.log( $(element).parent().find('.form-control') );
+            $(element).parent().find('.form-control').removeClass('is-invalid').addClass('is-valid');
         },
         submitHandler: function(form) {
             $.ajax({
@@ -54,9 +71,14 @@ $(document).ready(function(){
                 type: "POST",
                 data: $(form).serialize(),
                 success: function(response) {
-                    console.log( response.message )
-                    $("#forgot_password .message").text(response.message);
-                    return true;
+                    console.log( response );
+                    if( response.status == 0 ){
+                        error( response.message, response.class );
+                        return false;
+                    }else{
+                        success( response.message );
+                        return true;
+                    }
                 }            
             });
         }

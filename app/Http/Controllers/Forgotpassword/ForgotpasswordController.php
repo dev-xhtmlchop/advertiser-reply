@@ -20,7 +20,8 @@ class ForgotpasswordController extends Controller
         $credentials = $request->only('password');
         
         if (!Auth::attempt(['password' => $request['current_password'], 'id' => $request['user_id'] ])) {
-            return response()->json('Please enter correct Password.');  
+            $data = array('status' => 0,'class' => 'current_password', 'message' => 'Please enter correct Password.');
+            return response()->json($data);   
         }else{
             return true;
         }
@@ -34,7 +35,7 @@ class ForgotpasswordController extends Controller
             $data = array('status' => 1, 'message' => 'Sucessfully Password Updated.');
             return response()->json( $data);  
         }else{
-            $data = array('status' => 0, 'message' => 'Password was not Updated.');
+            $data = array('status' => 0,'class' => 'new_password', 'message' => 'Password was not Updated.');
             return response()->json($data);  
         }
     }

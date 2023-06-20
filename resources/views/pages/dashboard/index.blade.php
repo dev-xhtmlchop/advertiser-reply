@@ -11,7 +11,7 @@
                                 <div class="row">
                                     <div class="col-12 head d-flex justify-content-between align-items-center mb-4">
                                         <h2 class="mb-0">Filter</h2>
-                                        <div class="daterange">
+                                        <div class="daterange d-flex align-items-center">
                                             <label>Flight Date Range</label>
                                             <div class="daterange-input">
                                                 <input type="text" name="daterange" id="daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy" />
@@ -327,6 +327,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="alert alert-notification text-center mb-3" role="alert"></div>
                     <form id="forgot_password" novalidate="novalidate">   
                         @csrf
 
@@ -335,20 +336,20 @@
                             <input type="hidden" id="user_id" class="form-control" name="user_id" value="{{ Session::get('user_id') }}">
                         </div>
                         <div class="form-group">
-                            <label for="current password" class="col-form-label text-md-right">Current Password</label>
+                            <label for="current password" class="col-form-label">Current Password</label>
                                 <input type="password" id="current_password" class="form-control" name="current_password" value="">
                         </div>
                         <div class="form-group">
-                            <label for="new password" class="col-form-label text-md-right">New Password</label>
+                            <label for="new password" class="col-form-label">New Password</label>
                                 <input type="password" id="new_password" class="form-control" name="new_password" value="">
                         </div>
                         <div class="form-group">
-                            <label for="confirm password" class="col-form-label text-md-right">Confirm Password</label>
+                            <label for="confirm password" class="col-form-label">Confirm Password</label>
                                 <input type="password" id="confirm_password" class="form-control" name="confirm_password">
                         </div>
 
-                        <div class="col-md-12 text-center">
-                            <input type="submit" class="btn btn-primary" value="Chnage Password">
+                        <div class="text-center">
+                            <input type="submit" class="au-btn au-btn--block au-btn--green" value="Change Password">
                         </div>
                     </form>
                 </div>
