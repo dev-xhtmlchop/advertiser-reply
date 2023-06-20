@@ -29,7 +29,8 @@ class ForgotpasswordController extends Controller
 
     public function postChangepassword( Request $request ){
         $updateDetails = User::where('id', $request['user_id'])->where('status', 1)->update([
-            'password' => Hash::make($request['new_password'])
+            'password' => Hash::make($request['new_password']),
+            'login_access_status' => 1
         ]);
         if( $updateDetails ){
             $data = array('status' => 1, 'message' => 'Sucessfully Password Updated.');
