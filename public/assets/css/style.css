@@ -68,6 +68,3 @@ text-align: center;width: 60px;height: 60px;color: #ffffff;}
 .icon-box {display: inline-block;position: absolute;bottom: -50px;right: -7px;}
 .popup-form label{width: 100%;display: block;margin-bottom: 5px;font-size: 1rem;font-weight: 600;}
 .popup-form input{width: 100%;}
-.daterangepicker{ left: auto !important;
-    right: 0px !important;
-    display: block;}
