@@ -319,7 +319,7 @@
             </div>
         </div>
     </div>
-    <div id="myModal" class="modal fade" tabindex="-1">
+    <div id="myModal" class="modal fade popup-form" tabindex="-1" style="display: none;" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -327,36 +327,28 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-notification text-center mb-3" role="alert"></div>
-                    <form id="forgot_password">   
+                    <form id="forgot_password" novalidate="novalidate">   
                         @csrf
 
                         <div class="form-group row">
                             <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" >
                             <input type="hidden" id="user_id" class="form-control" name="user_id" value="{{ Session::get('user_id') }}">
-                            <span class="message"></span>
                         </div>
-                        <div class="form-group row">
-                            <label for="current password" class="col-md-4 col-form-label text-md-right">Current Password</label>
-                            <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="current password" class="col-form-label text-md-right">Current Password</label>
                                 <input type="password" id="current_password" class="form-control" name="current_password" value="">
-                            </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="new password" class="col-md-4 col-form-label text-md-right">New Password</label>
-                            <div class="col-md-6">
-                                <input type="password" id="new_password" class="form-control" name="new_password" value=""  >
-                            </div>
+                        <div class="form-group">
+                            <label for="new password" class="col-form-label text-md-right">New Password</label>
+                                <input type="password" id="new_password" class="form-control" name="new_password" value="">
                         </div>
-                        <div class="form-group row">
-                            <label for="confirm password" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
-                            <div class="col-md-6">
-                                <input type="password" id="confirm_password" class="form-control" name="confirm_password" >
-                            </div>
+                        <div class="form-group">
+                            <label for="confirm password" class="col-form-label text-md-right">Confirm Password</label>
+                                <input type="password" id="confirm_password" class="form-control" name="confirm_password">
                         </div>
 
-                        <div class="col-md-6 offset-md-4">
-                            <input type="submit" class="btn btn-primary" value="Chnage Password" />
+                        <div class="col-md-12 text-center">
+                            <input type="submit" class="btn btn-primary" value="Chnage Password">
                         </div>
                     </form>
                 </div>
