@@ -49,7 +49,7 @@ a{text-decoration: none;}
 .account-log a i{
     margin-right: 10px;
 }
-.login-content{position: relative;background: none;}
+.login-content{position: relative;}
 .bg-img{
     position: absolute;
     top: 0;
@@ -62,7 +62,7 @@ a{text-decoration: none;}
     position: relative;
 }
 .page-wrapper.login{padding-bottom: 0px;}
-.login-form label{color: #ffffff;}
+/*.login-form label{color: #ffffff;}*/
 .card-main{margin-bottom: 30px;}
 .card{padding: 20px;box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);margin-bottom: 1rem; height: 100%;}
 .card h2{font-size: 1.3rem;margin-bottom: 1rem;}
