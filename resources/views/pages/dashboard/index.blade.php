@@ -101,7 +101,7 @@
                     <div class="col-md-6 card-main">
                         <div class="deal-view-box card">
                             <div
-                            class="col-12 head d-flex justify-content-between align-items-center mb-4">
+                            class="head d-flex justify-content-center align-items-center mb-4">
                             <h2 class="mb-0">Deal View</h2>
                             </div>
                             
