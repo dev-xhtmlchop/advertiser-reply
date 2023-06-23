@@ -378,3 +378,6 @@
     color: #fff;
 }*/
 .login-logo img{ position: relative; }
+.login-wrap {
+    padding-top: 14vh !important;
+}
