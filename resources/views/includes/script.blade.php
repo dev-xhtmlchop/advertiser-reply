@@ -7,7 +7,11 @@
 <script src="{{ asset('public/assets/js/common/jquery/additional-methods.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/daterangepicker/moment.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/daterangepicker/daterangepicker.js') }}" defer></script>
+<script src="{{ asset('public/assets/js/common/datatable/jquery.dataTables.min.js') }}" defer></script>
+<script src="{{ asset('public/assets/js/common/datatable/dataTables.bootstrap5.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/common.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/custom/login.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/custom/dashboard.js') }}" defer></script>
-<script src="{{ asset('public/assets/js/custom/forgotpassword.js') }}" defer></script>
+<script src="{{ asset('public/assets/js/custom/forgotpassword.js') }}" defer></script>  
+<script src="{{ asset('public/assets/js/custom/deal.js') }}" defer></script>  
+<script src="{{ asset('public/assets/js/custom/campaign.js') }}" defer></script>  

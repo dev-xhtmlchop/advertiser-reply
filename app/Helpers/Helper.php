@@ -42,5 +42,153 @@ class Helper{
             return response()->json($data);
         }
     }
+
+    public static function dealStatusArray(){
+        $dealStatus = array(
+            array(
+                'id' => 1,
+                'name' => 'Inflight',
+                'slug' => 'inflight',
+                'icon' => 'fa fa-plane',
+                'background' => 'overview-item--c1'
+            ),
+            array(
+                'id' => 2,
+                'name' => 'Proposal',
+                'slug' => 'proposal',
+                'icon' => 'fa fa-file',
+                 'background' => 'overview-item--c2'
+            ),
+            array(
+                'id' => 3,
+                'name' => 'Ended',
+                'slug' => 'ended',
+                'icon' => 'fa fa-clock-o',
+                 'background' => 'overview-item--c3'
+            ),
+            array(
+                'id' => 4,
+                'name' => 'Approved',
+                'slug' => 'approved',
+                'icon' => 'fa fa-thumbs-up',
+                 'background' => 'overview-item--c4'
+            ),
+            array(
+                'id' => 5,
+                'name' => 'Ordered',
+                'slug' => 'order',
+                'icon' => 'fa fa-shopping-cart',
+                 'background' => 'overview-item--c1'
+            ),
+            array(
+                'id' => 6,
+                'name' => 'Planning',
+                'slug' => 'planning',
+                'icon' => 'fa fa-list-alt',
+                 'background' => 'overview-item--c2'
+            ),
+            array(
+                'id' => 7,
+                'name' => 'Expired',
+                'slug' => 'expired',
+                'icon' => 'fa fa-clock-o',
+                 'background' => 'overview-item--c3'
+            ),
+        );
+        return $dealStatus;
+    }
+
+    public static function dealViewArray(){
+        $dealView = array(
+            array(
+                'id' => 1,
+                'name' => 'Dollars',
+                'slug' => 'dollars',
+                'value' => '$0',
+                'background' => 'bg-blue',
+                'image' => 'doller-icon.png'
+            ),
+            array(
+                'id' => 2,
+                'name' => 'CPM',
+                'slug' => 'cpm',
+                'value' => '$0',
+                'background' => 'bg-green',
+                'image' => 'cpm-icon.png'
+            ),
+            array(
+                'id' => 3,
+                'name' => 'Impressions',
+                'slug' => 'impressions',
+                'value' => '$0',
+                'background' => 'bg-yellow',
+                'image' => 'impressions-icon.png'
+            ),
+            array(
+                'id' => 4,
+                'name' => 'GRP',
+                'slug' => 'grp',
+                'value' => '$0',
+                'background' => 'bg-red',
+                'image' => 'grp-icon.png'
+            ),
+            array(
+                'id' => 5,
+                'name' => 'Deal Unit',
+                'slug' => 'deal_unit',
+                'value' => '$0',
+                'background' => 'bg-orange',
+                'image' => 'deal-icon.png'
+            ),
+        );
+        return $dealView;
+    }
+    public static function dealViewTableName(){
+        $dealTableArray = array(
+                        "Deal ID", 
+                        "Campaign Number", 
+                        "Title", 
+                        "Day/ Time", 
+                        "Brand", 
+                        "Inv Type", 
+                        "Inv Length", 
+                        "$ Rate", 
+                        "$ Rate", 
+                        "% Rate", 
+                        "Total Avails", 
+                        "Total Unit", 
+                        "HH Rating", 
+                        "HH (000)", 
+                        "HH CPM", 
+                        "HH Univ", 
+                        "A25-49 Rating", 
+                        "A25-49 (000)", 
+                        "A25-49 CPM", 
+                        "A25-49 Univ"
+                    );
+        return  $dealTableArray;
+    }
+    public static function campaignViewTableName(){
+        $campaignTableArray = array(
+                        "Select",
+                        "Deal ID", 
+                        "Campaign Number", 
+                        "Campaign Name",
+                        "Title", 
+                        "Day/ Time", 
+                        "Brand",
+                        "Start Flight",
+                        "End Flight", 
+                        "Media Line",
+                        "Inv Type", 
+                        "Inv Length", 
+                        "$ Rate", 
+                        "$ Rate", 
+                        "% Rate", 
+                        "Total Avails", 
+                        "Total Unit", 
+                    );
+        return  $campaignTableArray;
+    }
 }
 ?>

@@ -12,7 +12,6 @@
                                     <div class="col-12 head d-flex justify-content-between align-items-center mb-4">
                                         <h2 class="mb-0">Filter</h2>
                                         <div class="daterange d-flex align-items-center">
-                                            <label>Flight Date Range</label>
                                             <div class="daterange-input">
                                                 <input type="text" name="daterange" id="daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy" />
                                                 <input type="hidden" name="start_daterange" id="start_daterange" value="" />
@@ -22,10 +21,10 @@
                                     </div>
                                     <div class="col-md-6 col-lg-4 col-xl-3 form-group">
                                         @if( $dashboard['advertiserList'] )
-                                            <select name="deal_no" id="deal_no"  class="au-input au-input--full">>
-                                                <option value="">Deal No</option>
+                                            <select name="deal_no" id="deal_no"  class="au-input au-input--full">
+                                                <option value="">Deal</option>
                                                 @foreach( $dashboard['advertiserList'] as $advertiserKey =>$advertiserValue )
-                                                    <option value="{{ $advertiserValue['id'] }}">{{ $advertiserValue['title'] }}</option>
+                                                    <option value="{{ $advertiserValue['deal_id'] }}">{{ $advertiserValue['name'] }}</option>
                                                 @endforeach
                                             </select>
                                         @endif
@@ -93,101 +92,6 @@
                                 </div>
                             </form>
                         </div>
-                        <?php /*
-                        <div class="deal-view-box card">
-                            <h2>Deal View</h2>
-                            <div class="row deal-view">
-                                <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                    <div class="deal-component">
-                                        <label>Dollars</label>
-                                        <input type="text" name="" id="deal_dollars" value=""
-                                            class="au-input au-input--full form-control" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                    <div class="deal-component">
-                                        <label>CPM</label>
-                                        <input type="text" name="" id="deal_cpm" value=""
-                                            class="au-input au-input--full form-control" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                    <div class="deal-component">
-                                        <label>Impressions</label>
-                                        <input type="text" name="" id="deal_impressions" value=""
-                                            class="au-input au-input--full form-control" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                    <div class="deal-component">
-                                        <label>GRP</label>
-                                        <input type="text" name="" id="deal_grp" value=""
-                                            class="au-input au-input--full form-control" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                    <div class="deal-component">
-                                        <label>Deal Unit</label>
-                                        <input type="text" name="" id="deal_deal_unit" value=""
-                                            class="au-input au-input--full form-control" disabled>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="advertiser-dashboard-box card">
-                            <div class="advertiser-view">
-                                <div class="row advertiser-component">
-                                    <div
-                                        class="col-12 head d-flex justify-content-between align-items-center mb-4">
-                                        <h2 class="mb-0">Advertiser Dashboard</h2>
-                                        <div class="daterange advertiser-filter">
-                                            <input type="text" name="advertiser_daterange"
-                                                id="advertiser_daterange" value=""
-                                                placeholder="mm/dd/yyyy - mm/dd/yyyy" />
-                                            <input type="hidden" name="advertiser_start_daterange"
-                                                id="advertiser_start_daterange" value="" />
-                                            <input type="hidden" name="advertiser_end_daterange"
-                                                id="advertiser_end_daterange" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        <input type="text" name="advertiser_inflight" id="advertiser_inflight"
-                                            value="0 Inflight" class="au-input au-input--full form-control"
-                                            disabled>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        <input type="text" name="advertiser_proposal" id="advertiser_proposal"
-                                            value="0 Proposal" class="au-input au-input--full form-control"
-                                            disabled>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        <input type="text" name="advertiser_ended" id="advertiser_ended"
-                                            value="0 Ended" class="au-input au-input--full form-control"
-                                            disabled>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        <input type="text" name="advertiser_approved" id="advertiser_approved"
-                                            value="0 Approved" class="au-input au-input--full form-control"
-                                            disabled>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        <input type="text" name="advertiser_order" id="advertiser_order"
-                                            value="0 Ordered" class="au-input au-input--full form-control"
-                                            disabled>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        <input type="text" name="advertiser_planning" id="advertiser_planning"
-                                            value="0 Planning" class="au-input au-input--full form-control"
-                                            disabled>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        <input type="text" name="advertiser_expired" id="advertiser_expired"
-                                            value="0 Expired" class="au-input au-input--full form-control"
-                                            disabled>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */?>
                     </div>
                 </div>
                 <div class="row">
@@ -199,54 +103,24 @@
                             </div>
                             
                             <div class="row deal-view">
-                                <div class="col-md-6 form-group">
-                                    <div class="deal-component bg-blue">
-                                        <h3>Dollars</h3>
-                                        <h5 id="deal_dollars">$0</h5>
-                                        <div class="icon-box">
-                                        <img src="{{ asset('public/images/dashboard/doller-icon.png') }}" alt="">
+                                @if( count( $dealView ) > 0 )
+                                    @foreach( $dealView as $dealViewKey => $dealViewVal )
+                                        @php
+                                            $imageUrl = "public/images/dashboard/".$dealViewVal['image'];
+                                        @endphp
+                                        <div class="col-md-6 form-group">
+                                            <div class="deal-component {{ $dealViewVal['background'] }}">
+                                                <h3>{{ $dealViewVal['name'] }}</h3>
+                                                <h5 id="deal_{{ $dealViewVal['slug'] }}">{{ $dealViewVal['value'] }}</h5>
+                                                <div class="icon-box">
+                                                <img src="{{ asset($imageUrl) }}" alt="">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <div class="deal-component bg-green">
-                                        <h3>CPM</h3>
-                                        <h5 id="deal_cpm">$0</h5>
-                                        <div class="icon-box">
-                                        <img src="{{ asset('public/images/dashboard/cpm-icon.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <div class="deal-component bg-yellow">
-                                        <h3>Impressions</h3>
-                                        <h5 id="deal_impressions">$0</h5>
-                                        <div class="icon-box">
-                                        <img src="{{ asset('public/images/dashboard/impressions-icon.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <div class="deal-component bg-red">
-                                        <h3>GRP</h3>
-                                        <h5 id="deal_grp">$0</h5>
-                                        <div class="icon-box">
-                                        <img src="{{ asset('public/images/dashboard/grp-icon.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <div class="deal-component bg-orange">
-                                        <h3>Deal Unit</h3>
-                                        <h5 id="deal_deal_unit">$0</h5>
-                                        <div class="icon-box">
-                                        <img src="{{ asset('public/images/dashboard/deal-icon.png') }}" alt="">
-                                        </div>
-                                    </div>
-                                </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
-                        
                     </div>
                     <div class="col-md-6 card-main">
                         <div class="advertiser-dashboard-box card">
@@ -264,53 +138,16 @@
                                                 id="advertiser_end_daterange" value="" />
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-4 form-group">
-                                        <div class="advertiser-component d-flex align-items-center">
-                                            <span class="info-icon overview-item--c1"><i class="fa fa-plane"></i></span>
-                                            <h4 id="advertiser_inflight" >0 Inflight</h4>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-4 form-group">
-                                        <div class="advertiser-component d-flex align-items-center">
-                                            <span class="info-icon overview-item--c2"><i class="fa fa-file"></i></span>
-                                            <h4 id="advertiser_proposal">0 Proposal</h4>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-4 form-group">
-                                        <div class="advertiser-component d-flex align-items-center">
-                                            <span class="info-icon overview-item--c3"><i class="fa fa-clock-o"></i></span>
-                                            <h4 id="advertiser_ended" >0 Ended</h4>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-4 form-group">
-                                        <div class="advertiser-component d-flex align-items-center">
-                                            <span class="info-icon overview-item--c4"><i class="fa fa-thumbs-up"></i></span>
-                                            <h4 id="advertiser_approved">0 Approved</h4>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-4 form-group">
-                                        <div class="advertiser-component d-flex align-items-center">
-                                            <span class="info-icon overview-item--c1"><i class="fa fa-shopping-cart"></i></span>
-                                            <h4 id="advertiser_order">0 Ordered</h4>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-4 form-group">
-                                        <div class="advertiser-component d-flex align-items-center">
-                                            <span class="info-icon overview-item--c2"><i class="fa fa-list-alt"></i></span>
-                                            <h4 id="advertiser_planning">0 Planning</h4>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-4 form-group">
-                                        <div class="advertiser-component d-flex align-items-center">
-                                            <span class="info-icon overview-item--c3"><i class="fa fa-clock-o"></i></span>
-                                            <h4 id="advertiser_expired">0 Expired</h4>
-                                        </div>
-                                    </div>
+                                    @if( count( $dealStatus ) > 0 )
+                                        @foreach( $dealStatus as $dealStatusKey => $dealStatusVal )
+                                            <div class="col-md-6 col-lg-4 col-xl-4 form-group">
+                                                <div class="advertiser-component d-flex align-items-center">
+                                                    <span class="info-icon {{ $dealStatusVal['background'] }}"><i class="{{ $dealStatusVal['icon'] }}"></i></span>
+                                                    <h4 id="advertiser_{{ $dealStatusVal['slug'] }}" >0 {{ $dealStatusVal['name'] }}</h4>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -319,7 +156,8 @@
             </div>
         </div>
     </div>
-    <div id="myModal" class="modal fade popup-form" tabindex="-1" style="display: none;" aria-hidden="true">
+    
+    <div id="changepasswrod" class="modal fade popup-form" tabindex="-1" style="display:none;" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

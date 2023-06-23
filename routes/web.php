@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Campaign\CampaignController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Deal\DealController;
 use App\Http\Controllers\Forgotpassword\ForgotpasswordController;
 use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Logout\LogoutController;
@@ -44,3 +46,11 @@ Route::post('post-registration',[ RegistrationController::class, 'postRegistrati
 Route::get('/changepassword',[ForgotpasswordController::class, 'index'])->name('forgotpassword')->middleware('auth');
 Route::post('/currentpassword',[ForgotpasswordController::class, 'currentPassword'])->name('forgotpassword.currentpassword');
 Route::post('/post-changepassword',[ForgotpasswordController::class, 'postChangepassword'])->name('forgotpassword.post');
+Route::post('/check-changepassword',[ForgotpasswordController::class, 'postCheckChangepassword'])->name('check.forgotpassword.post');
+
+/* Deal */
+Route::get('/deal',[DealController::class, 'index'])->name('deal')->middleware('auth');
+Route::post('/post-deal-status',[DealController::class, 'postStatus'])->name('deal.status')->middleware('auth');
+
+/* Campaign */
+Route::get('/campaign',[CampaignController::class, 'index'])->name('campaign')->middleware('auth');

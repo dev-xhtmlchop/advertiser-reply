@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class ForgotpasswordController extends Controller
 {
@@ -38,6 +39,15 @@ class ForgotpasswordController extends Controller
         }else{
             $data = array('status' => 0,'class' => 'new_password', 'message' => 'Password was not Updated.');
             return response()->json($data);  
+        }
+    }
+    public function postCheckChangepassword(){
+        $userId = Session::get('user_id');
+        $changePasswordPopup = User::where('id','=', $userId )->get(['login_access_status'])->first()->toArray();
+        if( $changePasswordPopup['login_access_status'] === 1 ){
+            return true;
+        }else{
+            return false;
         }
     }
 }

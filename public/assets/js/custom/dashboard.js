@@ -1,6 +1,7 @@
 $(document).ready(function(){
     getDealDashboardData( null );
-    getAdvertiserDashboardData( null)
+    getAdvertiserDashboardData( null);
+    checkForgerPasswordChange();
     $("input[name='daterange']").daterangepicker({
         autoUpdateInput: false,
         }, (from_date, to_date) => {
@@ -59,9 +60,29 @@ $(document).ready(function(){
         getAdvertiserDashboardData( selectOptionObject );
     });
 
-    $("#myModal").modal('show');
+    
+   // $("#myModal").modal('show');
 
 });
+
+function checkForgerPasswordChange(){
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    var URL = $("meta[name='web-url']").attr('content');
+    var url = URL+'/check-changepassword';
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {_token: CSRF_TOKEN},
+        success: function(response){
+            if( response ){
+                $("#changepasswrod").modal('hide');
+            }else{
+                $("#changepasswrod").modal('show');
+            }
+            return true;
+        }
+    });
+}
 
 function getDealDashboardData( selectOptionObject = null){
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

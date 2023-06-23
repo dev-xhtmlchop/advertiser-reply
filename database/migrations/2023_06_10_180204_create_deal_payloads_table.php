@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->index('deal_id');
             $table->foreignId('deal_id')->references('id')->on('deals');
+            $table->index('campaign_id');
+            $table->foreignId('campaign_id')->references('id')->on('campaigns');
             $table->string('name');
             $table->string('deal_unit')->nullable();
             $table->string('demo')->nullable();

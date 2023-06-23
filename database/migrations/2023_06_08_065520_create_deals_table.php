@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('advertiser_id')->references('id')->on('advertisers');
             $table->index('campaign_id');
             $table->foreignId('campaign_id')->references('id')->on('campaigns');
-            $table->string('title');
             $table->dateTime('valid_from', 0);
             $table->dateTime('valid_to', 0);
             $table->year('deal_year');

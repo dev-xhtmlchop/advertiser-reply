@@ -10,6 +10,8 @@ use App\Models\Demographic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Helpers\Helper;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -25,25 +27,28 @@ class DashboardController extends Controller
     }
     public function index( Request $request ){
         $advertiserId = Session::get('advertiser_id');
-        $advertiser = Deals::where('advertiser_id', '=' , $advertiserId)->get(['deals.*'])->toArray();
+        $advertiser = Deals::join('deal_payloads', 'deal_payloads.deal_id', '=', 'deals.id')->where('advertiser_id', '=' , $advertiserId)->get(['deal_payloads.*'])->toArray();
         $campaignList = Campaigns::where( 'advertiser_id', '=',  $advertiserId )->get()->toArray();
         $demographicsList = Deals::join('demographics', 'demographics.id', '=', 'deals.demographic_id')->where('deals.advertiser_id', '=' , $advertiserId)->get(['demographics.*'])->toArray();
         $outletList = Deals::join('outlets', 'outlets.id', '=', 'deals.outlet_id')->where('deals.advertiser_id', '=' , $advertiserId)->get(['outlets.*'])->toArray();
         $agencyList = Deals::join('agencys', 'agencys.id', '=', 'deals.agency_id')->where('deals.advertiser_id', '=' , $advertiserId)->get(['agencys.*'])->toArray();
         $locationList = Deals::join('locations', 'locations.id', '=', 'deals.location_id')->where('deals.advertiser_id', '=' , $advertiserId)->get(['locations.*'])->toArray();
         $brandList = Deals::join('brands', 'brands.id', '=', 'deals.brand_id')->where('deals.advertiser_id', '=' , $advertiserId)->get(['brands.*'])->toArray();
-        
-        $dashboardData = array( 'dashboard' => 
-            array( 
-                'advertiserList' =>  DashboardController::removeDubplicateRow( $advertiser ),
-                'campaignList' => DashboardController::removeDubplicateRow( $campaignList ),
-                'demographicsList' => DashboardController::removeDubplicateRow( $demographicsList ),
-                'outletList' => DashboardController::removeDubplicateRow( $outletList ),
-                'agencyList' => DashboardController::removeDubplicateRow( $agencyList ),
-                'locationList' => DashboardController::removeDubplicateRow( $locationList ),
-                'brandList' => DashboardController::removeDubplicateRow( $brandList ),
-            ),
-            'title' => 'Dashboard'
+        $dealStatusArray = Helper::dealStatusArray();
+        $dealViewArray = Helper::dealViewArray();
+        $dashboardData = array( 
+            'title' => 'Dashboard',
+            'dashboard' => array( 
+                    'advertiserList' =>  DashboardController::removeDubplicateRow( $advertiser ),
+                    'campaignList' => DashboardController::removeDubplicateRow( $campaignList ),
+                    'demographicsList' => DashboardController::removeDubplicateRow( $demographicsList ),
+                    'outletList' => DashboardController::removeDubplicateRow( $outletList ),
+                    'agencyList' => DashboardController::removeDubplicateRow( $agencyList ),
+                    'locationList' => DashboardController::removeDubplicateRow( $locationList ),
+                    'brandList' => DashboardController::removeDubplicateRow( $brandList ),
+                ),
+            'dealStatus' => $dealStatusArray,
+            'dealView' => $dealViewArray
         );                        
         return view('pages.dashboard.index', $dashboardData);
     }

@@ -4,7 +4,7 @@
 
     <div class="page-wrapper login">
         <div class="page-content--bge5">
-            <img src="{{ asset('public/images/login/login-bg.jpg') }}" alt="" class="bg-img">
+            <img src="{{ asset('public/images/login/login-bg.png') }}" alt="" class="bg-img">
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">
@@ -40,7 +40,7 @@
                                 </div>
         
                                 <div class="text-center">
-                                    <input type="submit" class="au-btn au-btn--block au-btn--green" value="Advertiser Reply Login" />
+                                    <input type="submit" class="au-btn au-btn--block au-btn--green" value="AdvertiserReplay Login" />
                                 </div>
                             </form>
                         </div>
