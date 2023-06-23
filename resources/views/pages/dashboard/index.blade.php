@@ -11,13 +11,16 @@
                                 <div class="row">
                                     <div class="col-12 head d-flex justify-content-between align-items-center mb-4">
                                         <h2 class="mb-0">Filter</h2>
-                                        <div class="daterange d-flex align-items-center">
-                                            <div class="daterange-input">
-                                                <input type="text" name="daterange" id="daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy" />
-                                                <input type="hidden" name="start_daterange" id="start_daterange" value="" />
-                                                <input type="hidden" name="end_daterange" id="end_daterange" value="" />
-                                                <button class="btn btn-secondary" >Reset</button>
+                                        <div class="d-flex align-items-center">
+                                            <div class="daterange d-flex align-items-center">
+                                                <div class="daterange-input">
+                                                    <input type="text" name="daterange" id="daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy" />
+                                                    <input type="hidden" name="start_daterange" id="start_daterange" value="" />
+                                                    <input type="hidden" name="end_daterange" id="end_daterange" value="" />
+                                                    <button class="btn btn-secondary" >Reset</button>
+                                                </div>
                                             </div>
+                                            <button class="btn btn-secondary">Reset</button>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-4 col-xl-3 form-group">
