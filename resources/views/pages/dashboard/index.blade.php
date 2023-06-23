@@ -16,6 +16,7 @@
                                                 <input type="text" name="daterange" id="daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy" />
                                                 <input type="hidden" name="start_daterange" id="start_daterange" value="" />
                                                 <input type="hidden" name="end_daterange" id="end_daterange" value="" />
+                                                <button class="btn btn-secondary" >Reset</button>
                                             </div>
                                         </div>
                                     </div>

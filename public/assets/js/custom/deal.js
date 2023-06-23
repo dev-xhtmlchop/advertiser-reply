@@ -5,7 +5,8 @@ $(document).ready(function(){
         getDealDashboardData( dealStatus );
     });
     $('#deals_table').DataTable({
-        "pageLength": 1
+        "pageLength": 1,
+        "ordering": false
     });
 });
 function getDealDashboardData( dealStatus = null){

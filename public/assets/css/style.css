@@ -17,7 +17,8 @@ a{text-decoration: none;}
 .menu-sidebar .logo{border: none;justify-content: center;background: none;box-shadow: none;border-bottom: 1px solid #dee2e6;border-bottom: 1px solid #4b545c;}
 .header-desktop{border-bottom: 1px solid #dee2e6;box-shadow: none;}
 .navbar-sidebar{padding: 20px 10px;}
-.navbar-sidebar .navbar__list li a{padding: 0.5rem 1rem;color: #c2c7d0;border-radius: 0.25rem;margin-bottom: 0.2rem;}
+.navbar-sidebar .navbar__list li a i{width: 20px;}
+.navbar-sidebar .navbar__list li a{padding: 0.5rem 1rem;color: #ffffff;border-radius: 0.25rem;margin-bottom: 0.2rem;text-align: center;}
 .navbar-sidebar .navbar__list li a:hover, .navbar-sidebar .navbar__list li.active a{background-color: rgba(255,255,255,.1);color: #fff;}
 .header-wrap{column-gap: 30px;}
 .account-info-main{column-gap: 30px;}
@@ -68,3 +69,6 @@ text-align: center;width: 60px;height: 60px;color: #ffffff;}
 .icon-box {display: inline-block;position: absolute;bottom: -50px;right: -7px;}
 .popup-form label{width: 100%;display: block;margin-bottom: 5px;font-size: 1rem;font-weight: 600;}
 .popup-form input{width: 100%;}
+.account-dropdown__body{text-align: center;}
+.custom-table thead th{background: #343a40;color: #ffffff;font-weight: 400;vertical-align: middle;padding: 10px;}
+.custom-table thead td{font-weight: 400;vertical-align: middle;padding: 10px;}

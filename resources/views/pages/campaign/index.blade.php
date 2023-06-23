@@ -7,12 +7,12 @@
                 <div class="row">
                     <div class="col-md-12 card-main">
                         <div class="deal-view-box card">
-                            <div class="col-12 head d-flex justify-content-between align-items-center mb-4">
+                            <div class="head d-flex justify-content-between align-items-center mb-4">
                                 <h2 class="mb-0">Campaign View</h2>
-                                <button class="btn btn-secondary" >Edit Campaign</button>
+                                <button class="btn btn-secondary" id="edit_campaign" dealid="" autoincrementid="" disabled>Edit Campaign</button>
                             </div>
                             <div class="row table-responsive table-responsive-data2">
-                                <table id="campaign_table" class="table table-striped" style="width:100%" >
+                                <table id="campaign_table" class="table custom-table table-borderless table-striped dataTable no-footer" style="width:100%" >
                                     <thead>
                                         <tr>
                                             @foreach( $tableTitle as $tableTitleRow )
@@ -26,8 +26,8 @@
                                                 @foreach( $tableDetailRowVal as $tableRowDetailKey => $tableRowDetailVal )
                                                     @if( $tableRowDetailKey == 'deal_auto_id' )
                                                     <td>
-                                                        <label class="au-radio">
-                                                            <input type="radio" value="{{ $tableRowDetailVal }}" name="deal_number" id="deal_number" attr-id="{{ $tableDetailRowVal['deal_id'] }}" >
+                                                        <label class="au-radio deal-number">
+                                                            <input type="radio" value="{{ $tableDetailRowVal['deal_id'] }}" name="deal_number" id="deal_number" autoid="{{ $tableRowDetailVal }}" >
                                                         </label>
                                                     </td>
                                                     @else
@@ -39,7 +39,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-12 head d-flex justify-content-between align-items-center mb-4">
+                            <div class="head d-flex justify-content-between align-items-center mb-4">
                                 <button class="btn btn-secondary" >Create Campaign</button>    
                             </div>
                         </div>

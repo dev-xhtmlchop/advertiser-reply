@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\Helpers\Helper;
 use App\Models\Campaigns;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class CampaignController extends Controller
 {
@@ -52,5 +53,15 @@ class CampaignController extends Controller
                 'pagination' => $campaignPagination,
             );
         return view( 'pages.campaign.index', $data );
+    }
+
+    public function getEditCampaignId(){
+        $url = '/edit-campaign/800000003';
+        return Redirect::to(url());
+    }
+
+    public function getEditCampaignInfo(Request $request, $id){
+        echo $id;
+        return view( 'pages.campaign.edit' );
     }
 }
