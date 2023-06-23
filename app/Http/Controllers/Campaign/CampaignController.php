@@ -55,13 +55,11 @@ class CampaignController extends Controller
         return view( 'pages.campaign.index', $data );
     }
 
-    public function getEditCampaignId(){
-        $url = '/edit-campaign/800000003';
-        return Redirect::to(url());
+    public function getEditCampaignId(Request $request){
+        return Redirect::to('/');
     }
 
     public function getEditCampaignInfo(Request $request, $id){
-        echo $id;
         return view( 'pages.campaign.edit' );
     }
 }
