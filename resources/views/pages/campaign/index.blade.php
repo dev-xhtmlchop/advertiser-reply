@@ -8,7 +8,7 @@
                     <div class="col-md-12 card-main">
                         <div class="deal-view-box card">
                             <div class="head d-flex justify-content-center align-items-center mb-4">
-                                <h2 class="mb-0">Deal View</h2>
+                                <h2 class="mb-0">Campaign View</h2>
                                 <div class="d-flex align-items-center flight-range">
                                     <div class="daterange d-flex align-items-center">
                                         <button class="btn btn-lg btn-secondary" >Create Campaign</button>    
