@@ -43,7 +43,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="head d-flex justify-content-between align-items-center mb-4">
+                            <div class="head d-flex justify-content-center align-items-center mb-4">
                                 <button class="btn btn-lg btn-secondary" id="edit_campaign" dealid="" autoincrementid="" disabled>Edit Campaign</button>
                             </div>
                         </div>

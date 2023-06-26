@@ -73,3 +73,4 @@ text-align: center;width: 60px;height: 60px;color: #ffffff;}
 .flight-range{ column-gap: 20px; position: absolute;top: 20px;right: 20px;}
 .card .dataTables_wrapper .row{margin: 10px 0 !important;}
 div.dataTables_wrapper div.dataTables_length select{margin: 0 10px;}
+.table-striped tbody tr:nth-of-type(odd) {background-color: rgba(0,0,0,.05) !important;}
