@@ -20,7 +20,7 @@ class DealController extends Controller
                             ->where('deals.advertiser_id', '=', $advertiserId)
                             ->join('day_parts', 'deals.daypart_id', '=', 'day_parts.id')->where('day_parts.status','=', 1)
                             ->join('brands', 'deals.brand_id', '=', 'brands.id')->where('brands.status','=', 1)
-                            ->orderBy('deals.id', 'desc');
+                            ->orderBy('deals.id', 'asc');
         $dealTableData =  $dealList->get([
                         'deal_payloads.deal_id as deal_id',
                         'deals.campaign_id as campaign_number', 

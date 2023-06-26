@@ -15,7 +15,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row table-responsive table-responsive-data2">
+                            <div class="table-responsive table-responsive-data2">
                                 <table id="campaign_table" class="table custom-table table-borderless table-striped dataTable no-footer" style="width:100%" >
                                     <thead>
                                         <tr>

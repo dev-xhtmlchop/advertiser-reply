@@ -27,7 +27,7 @@ class CampaignController extends Controller
             ->join('brands', 'campaigns.brand_id', '=', 'brands.id')->where('brands.status','=', 1)
             ->join('medias', 'campaigns.media_id', '=', 'medias.id')->where('medias.status','=', 1)
             ->join('deal_payloads', 'campaigns.id', '=', 'deal_payloads.campaign_id')
-            ->orderBy('campaigns.id', 'desc');
+            ->orderBy('campaigns.id', 'asc');
         $campaignTableData =  $campaignList->get([
             'deal_payloads.id as deal_auto_id',
             'deal_payloads.deal_id as deal_id', 
