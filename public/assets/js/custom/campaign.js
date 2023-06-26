@@ -1,8 +1,12 @@
 $(document).ready(function(){
     
     $('#campaign_table').DataTable({
-        "pageLength": 10,
-        "ordering": false
+        pageLength: 10,
+        rowReorder: true,
+        columnDefs: [
+            { orderable: true, className: 'reorder', targets: 0 },
+            { orderable: false, targets: '_all' }
+        ]
     });
     $('input[name="flight_start_date"], input[name="flight_end_date"]').daterangepicker({
         locale: {

@@ -43,14 +43,35 @@ class DealController extends Controller
                         'deal_payloads.a25_49_cpm as a25_49_cpm', 
                         'deal_payloads.a25_49_univ as a25_49_univ'
                         ])->toArray();
+        
+        $dealDayTableData =  $dealList->get([
+                        'deal_payloads.sunday as sunday', 
+                        'deal_payloads.monday as monday', 
+                        'deal_payloads.tuesday as tuesday', 
+                        'deal_payloads.wednesday as wednesday', 
+                        'deal_payloads.thursday as thursday', 
+                        'deal_payloads.friday as friday',
+                        'deal_payloads.saturday as saturday'
+                        ])->toArray();
+        $dayOfArray = array( 'sunday' => 'S', 'monday' => 'M','tuesday' => 'T','wednesday' => 'W', 'thursday' => 'T', 'friday' => 'F', 'saturday' => 'S' );
+        if( count ( $dealDayTableData ) > 0 ){
+            foreach( $dealDayTableData as $dealDayTableKey => $dealDayTableVal ){
+                foreach( $dealDayTableVal as $dealSingleDayKey => $dealSingleDayVal ){
+                    if( ( $dealSingleDayVal == 1 ) && ( array_key_exists( $dealSingleDayKey, $dayOfArray ) ) ){
+                        $dealDayTableVal[$dealSingleDayKey] =  $dayOfArray[$dealSingleDayKey];
+                    }
+                }
+                $dealDayTableData[$dealDayTableKey] = implode(" ", $dealDayTableVal);
+            }
+        }
         $dealPagination = $dealList->paginate(1);
         $dealStatusArray = Helper::dealStatusArray();
         $dealViewArray = Helper::dealViewArray();
-        
         $data = array( 
                 'title' => 'Deal',
                 'tableTitle' => $dealTableTitle,
                 'tableData' => $dealTableData, 
+                'dayTableData' => $dealDayTableData,
                 'pagination' => $dealPagination, 
                 'dealStatus' => $dealStatusArray,
                 'dealView' => $dealViewArray 

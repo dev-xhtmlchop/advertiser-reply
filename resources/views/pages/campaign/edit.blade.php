@@ -1,5 +1,5 @@
 @extends('layouts.default')
-
+@section('title') {{'Edit Campaign'}} @endsection
 @section('content')
     <div class="main-content campaign-edit">
         <div class="section__content section__content--p10">

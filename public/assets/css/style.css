@@ -74,3 +74,12 @@ text-align: center;width: 60px;height: 60px;color: #ffffff;}
 .card .dataTables_wrapper .row{margin: 10px 0 !important;}
 div.dataTables_wrapper div.dataTables_length select{margin: 0 10px;}
 .table-striped tbody tr:nth-of-type(odd) {background-color: rgba(0,0,0,.05) !important;}
+/*.alert{
+    display:none;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    .fa {
+      margin-right:.5em;
+    }
+  }*/

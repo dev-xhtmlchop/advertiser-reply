@@ -1,5 +1,5 @@
 @extends('layouts.default')
-
+@section('title') {{'Campaign'}} @endsection
 @section('content')
     <div class="main-content campaign-view-sec">
         <div class="section__content section__content--p10">
@@ -16,11 +16,15 @@
                                 </div>
                             </div>
                             <div class="table-responsive table-responsive-data2">
-                                <table id="campaign_table" class="table custom-table table-borderless table-striped dataTable no-footer" style="width:100%" >
+                                <table id="campaign_table" class="table custom-table table-borderless table-striped dataTable no-footer" style="width:100%;" >
                                     <thead>
                                         <tr>
-                                            @foreach( $tableTitle as $tableTitleRow )
-                                                <th>{{ $tableTitleRow }}</th>
+                                            @foreach( $tableTitle as $tableTitleKey => $tableTitleRow )
+                                                @if( $tableTitleKey == 1 )
+                                                    <th class="reorder">{{ $tableTitleRow }}</th>
+                                                @else
+                                                    <th>{{ $tableTitleRow }}</th>
+                                                @endif
                                             @endforeach    
                                         </tr>
                                     </thead>
@@ -34,8 +38,10 @@
                                                             <input type="radio" value="{{ $tableDetailRowVal['campaign_id'] }}" name="deal_number" id="deal_number" autoid="" >
                                                         </label>
                                                     </td>
+                                                    @elseif( $tableRowDetailKey == 'day_time' )
+                                                    <td class="{{ $tableRowDetailKey }}">{{ $dayTableData[$tableDetailRowKey] }} {{ $tableRowDetailVal }}</td>
                                                     @else
-                                                        <td key="{{ $tableDetailRowKey }}">{{ $tableRowDetailVal }}</td>    
+                                                        <td key="{{ $tableRowDetailKey }}">{{ $tableRowDetailVal }}</td>    
                                                     @endif
                                                 @endforeach    
                                             </tr>

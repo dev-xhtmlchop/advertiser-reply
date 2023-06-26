@@ -5,8 +5,12 @@ $(document).ready(function(){
         getDealViewData( dealStatus );
     });
     $('#deals_table').DataTable({
-        "pageLength": 10,
-        "ordering": false
+        pageLength: 10,
+        rowReorder: true,
+        columnDefs: [
+            { orderable: true, className: 'reorder', targets: 0 },
+            { orderable: false, targets: '_all' }
+        ]
     });
 });
 function getDealViewData( dealStatus = null){

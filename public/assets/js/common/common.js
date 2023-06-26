@@ -52,4 +52,14 @@ $(document).ready(function(){
       }
       sub_menu_is_showed = -1;
     });
+    /*
+    $(".sendButton").click(function(){
+        $(".alert").show('medium');
+        setTimeout(function(){
+          $(".alert").hide('medium');
+        }, 5000);
+      });
+      $(".sendButton .close").click(function(){
+          $(".alert").hide('medium');
+    });*/
 });

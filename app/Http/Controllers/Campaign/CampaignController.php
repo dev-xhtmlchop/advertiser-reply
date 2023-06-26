@@ -47,11 +47,34 @@ class CampaignController extends Controller
             'deal_payloads.total_avil as total_avil', 
             'deal_payloads.total_unit as total_unit', 
         ])->toArray();
-        $campaignPagination = $campaignList->paginate(2);
         
+        
+        $campaignDayTableData =  $campaignList->get([
+            'campaign_payloads.sunday as sunday', 
+            'campaign_payloads.monday as monday', 
+            'campaign_payloads.tuesday as tuesday', 
+            'campaign_payloads.wednesday as wednesday', 
+            'campaign_payloads.thursday as thursday', 
+            'campaign_payloads.friday as friday',
+            'campaign_payloads.saturday as saturday'
+            ])->toArray();
+        $dayOfArray = array( 'sunday' => 'S', 'monday' => 'M','tuesday' => 'T','wednesday' => 'W', 'thursday' => 'T', 'friday' => 'F', 'saturday' => 'S' );
+        if( count ( $campaignDayTableData ) > 0 ){
+            foreach( $campaignDayTableData as $campaignDayTableKey => $campaignDayTableVal ){
+                foreach( $campaignDayTableVal as $campaignSingleDayKey => $campaignSingleDayVal ){
+                    if( ( $campaignSingleDayVal == 1 ) && ( array_key_exists( $campaignSingleDayKey, $dayOfArray ) ) ){
+                        $campaignDayTableVal[$campaignSingleDayKey] =  $dayOfArray[$campaignSingleDayKey];
+                    }
+                }
+                $campaignDayTableData[$campaignDayTableKey] = implode(" ", $campaignDayTableVal);
+            }
+        }
+        
+        $campaignPagination = $campaignList->paginate(2);
         $data = array( 
                 'title' => 'Campaign',
                 'tableTitle' => $campaignTableTitle,
+                'dayTableData' => $campaignDayTableData,
                 'tableData' => $campaignTableData, 
                 'pagination' => $campaignPagination,
             );

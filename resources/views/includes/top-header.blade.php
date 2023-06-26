@@ -46,8 +46,14 @@
                         <a href="{{ route('logout') }}"><i class="zmdi zmdi-power"></i>Logout</a>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
+
+    <!--<div class="alert alert-notification text-center mb-3" role="alert">
+        <button type="button" class="close" aria-label="Close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <p><i class="fa fa-wrong-circle"></i>Thanks for sending message! I will get back to you shortly.</p>
+    </div>-->
 </header>

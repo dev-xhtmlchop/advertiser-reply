@@ -6,6 +6,7 @@ use App\Http\Controllers\Deal\DealController;
 use App\Http\Controllers\Forgotpassword\ForgotpasswordController;
 use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Logout\LogoutController;
+use App\Http\Controllers\NoPage\NoPageController;
 use App\Http\Controllers\Registration\RegistrationController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
@@ -57,3 +58,5 @@ Route::post('/post-deal-status',[DealController::class, 'postStatus'])->name('de
 Route::get('/campaign',[CampaignController::class, 'index'])->name('campaign')->middleware('auth'); 
 Route::post('/get-campaign-detail',[CampaignController::class, 'getEditCampaignDetail'])->name('campaign.editdetail')->middleware('auth'); 
 Route::get('/campaign/edit/{id}',[CampaignController::class, 'getEditCampaignInfo'])->name('campaign.edit')->middleware('auth'); 
+
+Route::get('/no-page',[NoPageController::class, 'index'])->name('nopage')->middleware('auth');

@@ -1,5 +1,5 @@
 @extends('layouts.default')
-
+@section('title') {{'Deal'}} @endsection
 @section('content')
     <div class="main-content deal-view-sec">
         <div class="section__content section__content--p10">
@@ -29,7 +29,7 @@
                                         @php
                                             $imageUrl = "public/images/dashboard/".$dealViewVal['image'];
                                         @endphp
-                                        <div class="col-md-3 form-group">
+                                        <div class="col form-group">
                                             <div class="deal-component {{ $dealViewVal['background'] }}">
                                                 <h3>{{ $dealViewVal['name'] }}</h3>
                                                 <h5 id="deal_{{ $dealViewVal['slug'] }}">{{ $dealViewVal['value'] }}</h5>
@@ -48,19 +48,27 @@
                     <div class="col-md-12 card-main">
                         <div class="deal-view-box card">
                             <div class="row table-responsive table-responsive-data2">
-                                <table id="deals_table" class="table custom-table table-borderless table-striped dataTable no-footer " style="width:100%">
+                                <table id="deals_table" class="table custom-table table-borderless table-striped dataTable no-footer " style="width:100%;">
                                     <thead>
                                         <tr>
-                                            @foreach( $tableTitle as $tableTitleRow )
-                                                <th>{{ $tableTitleRow }}</th>
+                                            @foreach( $tableTitle as $tableTitleKey => $tableTitleRow )
+                                                @if( $tableTitleKey == 1 )
+                                                    <th class="reorder">{{ $tableTitleRow }}</th>
+                                                @else
+                                                    <th>{{ $tableTitleRow }}</th>
+                                                @endif
                                             @endforeach    
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach( $tableData as $key => $tableDetailRowVal )
                                             <tr class="tr-shadow">
-                                                @foreach( $tableDetailRowVal as $tableRowDetail )
-                                                    <td>{{ $tableRowDetail }}</td>
+                                                @foreach( $tableDetailRowVal as $tableRowDetailKey => $tableRowDetail )
+                                                    @if(  $tableRowDetailKey == 'day_time' )
+                                                        <td class="{{ $tableRowDetailKey }}">{{ $dayTableData[$key] }} {{ $tableRowDetail }}</td>
+                                                    @else 
+                                                        <td class="{{ $tableRowDetailKey }}">{{ $tableRowDetail }}</td>
+                                                    @endif
                                                 @endforeach    
                                             </tr>
                                         @endforeach
