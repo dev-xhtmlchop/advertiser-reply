@@ -39,7 +39,7 @@ $(document).ready(function(){
         var editCampaignId = $(this).attr('autoid');
         $('#edit_campaign').attr('dealid',editCampaignDealId).attr('autoincrementid',editCampaignId).removeAttr("disabled");
     })
-    $('.campaign-list #edit_campaign').click(function(){
+    $('.campaign-view-sec #edit_campaign').click(function(){
         var dealId = $(this).attr('dealid');
         var autoIncrementId = $(this).attr('autoincrementid');
         window.location.href = URL+'/campaign/edit/'+dealId;
