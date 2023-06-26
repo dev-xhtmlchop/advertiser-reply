@@ -17,8 +17,8 @@ a{text-decoration: none;}
 .menu-sidebar .logo{border: none;justify-content: center;background: none;box-shadow: none;border-bottom: 1px solid #dee2e6;border-bottom: 1px solid #4b545c;}
 .header-desktop{border-bottom: 1px solid #dee2e6;box-shadow: none;}
 .navbar-sidebar{padding: 20px 10px;}
-.navbar-sidebar .navbar__list li a i{width: 20px;}
-.navbar-sidebar .navbar__list li a{padding: 0.5rem 1rem;color: #ffffff;border-radius: 0.25rem;margin-bottom: 0.2rem;text-align: center;}
+.navbar-sidebar .navbar__list li a i{width: 20px;text-align: center;}
+.navbar-sidebar .navbar__list li a{padding: 1rem;color: #ffffff;border-radius: 0.25rem;margin-bottom: 0.2rem;}
 .navbar-sidebar .navbar__list li a:hover, .navbar-sidebar .navbar__list li.active a{background-color: rgba(255,255,255,.1);color: #fff;}
 .header-wrap{column-gap: 30px;}
 .account-info-main{column-gap: 30px;}
@@ -32,15 +32,13 @@ a{text-decoration: none;}
 .page-wrapper.login{padding-bottom: 0px;}
 /* .login-form label{color: #ffffff;} */
 .card-main{margin-bottom: 30px;}
-.card{padding: 20px;box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);margin-bottom: 1rem; height: 100%;}
+.card{padding: 20px;box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);margin-bottom: 1rem; height: 100%;position: relative;}
 .card h2{font-size: 1.3rem;margin-bottom: 1rem;}
 .form-group label{display: block;margin-bottom: 5px;}
 .card .head{min-height: 48px;}
-.card .head .daterange{border: 1px solid #e5e5e5;padding: 10px 15px;max-width: 233px;width: 100%;}
+.card .head .daterange input{border: 1px solid #e5e5e5;padding: 10px 15px;min-width: 234px;font-size: 14px;width: 100%;background: #ffffff;}
 .filter-box.card .head .daterange label{font-size: 14px;font-weight: 600;margin-bottom: 0;}
-.filter-box.card .head .daterange{ /* max-width: 368px; */}
 .filter-box.card .head .daterange .daterange-input{width: 100%;}
-.card .head .daterange input{font-size: 14px;width: 100%;}
 .account-item .image, .account-dropdown .info .image{border-radius: 50%;}
 .account-item .image img, .account-dropdown .info .image img{width: 100%;height: 100%;}
 .account-item .image i{font-size: 45px;}
@@ -58,7 +56,7 @@ a{text-decoration: none;}
 .overview-item--c2 {background-image: -moz-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);background-image: -webkit-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);background-image: -ms-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);}
 .overview-item--c3 {background-image: -moz-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);background-image: -webkit-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);background-image: -ms-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);}
 .overview-item--c4 {background-image: -moz-linear-gradient(90deg, #45b649 0%, #dce35b 100%);background-image: -webkit-linear-gradient(90deg, #45b649 0%, #dce35b 100%);background-image: -ms-linear-gradient(90deg, #45b649 0%, #dce35b 100%);}
-.card .deal-component{border-radius: 0.25rem;box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);display: block;padding: 30px;position: relative;overflow: hidden;}
+.card .deal-component{text-align: center; border-radius: 0.25rem;box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);display: block;padding: 30px;position: relative;overflow: hidden;}
 .card .deal-component h3, .card .advertiser-component h4{font-weight: 600;color: #ffffff;}
 .card .deal-component h5{color: #ffffff;font-weight: 400;font-size: 1.2rem;margin-top: 10px;}
 .card .deal-component .icon-box {display: inline-block;position: absolute;bottom: -10px;right: -7px;opacity: 0.3;}
@@ -72,4 +70,6 @@ text-align: center;width: 60px;height: 60px;color: #ffffff;}
 .account-dropdown__body{text-align: center;}
 .custom-table thead th{background: #343a40;color: #ffffff;font-weight: 400;vertical-align: middle;padding: 10px;}
 .custom-table thead td{font-weight: 400;vertical-align: middle;padding: 10px;}
-.flight-range{ column-gap: 20px; width: calc(100% - 88px); justify-content: end; }
+.flight-range{ column-gap: 20px; position: absolute;top: 0;right: 0;}
+.card .dataTables_wrapper .row{margin: 10px 0;}
+div.dataTables_wrapper div.dataTables_length select{margin: 0 10px;}

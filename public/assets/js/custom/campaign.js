@@ -10,13 +10,13 @@ $(document).ready(function(){
       },
       singleDatePicker: true
     });
-    $('input[name="sunday_split"]').keypress(function (e) {    
+    $('input[name="sunday_split"], input[name="monday_split"], input[name="tuesday_split"], input[name="wednesday_split"], input[name="thursday_split"], input[name="friday_split"], input[name="saturday_split"]').keypress(function (e) {    
         var charCode = (e.which) ? e.which : event.keyCode    
         if (String.fromCharCode(charCode).match(/[^0-9-%]/g)) {
             return false;
         } 
     }); 
-    $("input[name='sunday_split']").on('input', function(e) {
+    $('input[name="sunday_split"], input[name="monday_split"], input[name="tuesday_split"], input[name="wednesday_split"], input[name="thursday_split"], input[name="friday_split"], input[name="saturday_split"]').on('input', function(e) {
         $(this).val(function(i, v) {
          return v.replace('%','') + '%';  
         });
