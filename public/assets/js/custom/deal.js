@@ -5,7 +5,7 @@ $(document).ready(function(){
         getDealViewData( dealStatus );
     });
     $('#deals_table').DataTable({
-        "pageLength": 1,
+        "pageLength": 10,
         "ordering": false
     });
 });

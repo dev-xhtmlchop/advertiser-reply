@@ -1,7 +1,7 @@
 $(document).ready(function(){
     
     $('#campaign_table').DataTable({
-        "pageLength": 2,
+        "pageLength": 10,
         "ordering": false
     });
     $('input[name="flight_start_date"], input[name="flight_end_date"]').daterangepicker({
