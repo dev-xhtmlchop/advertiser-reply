@@ -91,20 +91,20 @@
                     <div class="col-md-6 card-main">
                         <div class="advertiser-dashboard-box card">
                             <div class="advertiser-view">
-                                <div class="row">
-                                    <div class="col-12 head d-flex justify-content-between align-items-center mb-4">
-                                        <h2 class="mb-0">Advertiser Dashboard</h2>
-                                        <div class="d-flex align-items-center flight-range">
-                                            <div class="daterange d-flex align-items-center">
-                                                <div class="daterange-input">
-                                                    <input type="text" name="advertiser_daterange" id="advertiser_daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy" />
-                                                    <input type="hidden" name="advertiser_start_daterange" id="advertiser_start_daterange" value="" />
-                                                    <input type="hidden" name="advertiser_end_daterange" id="advertiser_end_daterange" value="" />
-                                                </div>
+                                <div class="head d-flex justify-content-between align-items-center mb-4">
+                                    <h2 class="mb-0">Advertiser Dashboard</h2>
+                                    <div class="d-flex align-items-center flight-range">
+                                        <div class="daterange d-flex align-items-center">
+                                            <div class="daterange-input">
+                                                <input type="text" name="advertiser_daterange" id="advertiser_daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy" />
+                                                <input type="hidden" name="advertiser_start_daterange" id="advertiser_start_daterange" value="" />
+                                                <input type="hidden" name="advertiser_end_daterange" id="advertiser_end_daterange" value="" />
                                             </div>
-                                            <button class="btn btn-lg btn-secondary" id="advertiser_reset">Reset</button>
                                         </div>
+                                        <button class="btn btn-lg btn-secondary" id="advertiser_reset">Reset</button>
                                     </div>
+                                </div>
+                                <div class="row">
                                     @if( count( $dealStatus ) > 0 )
                                         @foreach( $dealStatus as $dealStatusKey => $dealStatusVal )
                                             <div class="col-md-6 col-lg-4 col-xl-4 form-group">
