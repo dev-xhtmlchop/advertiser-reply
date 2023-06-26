@@ -190,5 +190,24 @@ class Helper{
                     );
         return  $campaignTableArray;
     }
+    public static function dashboardInterconnectDropdownHtml( $dashboardData, $field, $defaultName, $selecValue, $addName = 0 ){
+        if( !empty( $field ) ){
+            $fieldName = $field.'_name';
+            $fieldId = $field.'_id';
+            $dealDropdown = [];
+            $dealDropdown[] = '<option value="">'. $defaultName .'</option>';
+            if( !empty( $dashboardData ) && ( count( $dashboardData ) > 0 ) ){
+                foreach( $dashboardData as $dashboardDataKey => $dashboardDataVal ){
+                    if( $dashboardDataVal[$fieldId] ){
+                        $customName = ( $addName == 1 )? $dashboardDataVal[$fieldName].' ('. $dashboardDataVal[$fieldId] .')': $dashboardDataVal[$fieldName] ;
+                        $selected = ( $selecValue == $dashboardDataVal[$fieldId] )? "selected":"";
+                        $dealDropdown[] = '<option value="'. $dashboardDataVal[$fieldId] .'" '.  $selected .'>'. $customName .'</option>';
+                    }
+                }
+            }
+            return array_unique($dealDropdown);
+        }
+    }
+  
 }
 ?>

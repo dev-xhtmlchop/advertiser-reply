@@ -6,94 +6,57 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 card-main">
-                        <div class="filter-box card">
-                            <form method="post" id="dashboard_deal">
-                                <div class="row">
-                                    <div class="col-12 head d-flex justify-content-between align-items-center mb-4">
-                                        <h2 class="mb-0">Filter</h2>
-                                        <div class="d-flex align-items-center flight-range">
-                                            <div class="daterange d-flex align-items-center">
-                                                <div class="daterange-input">
-                                                    <input type="text" name="daterange" id="daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy" />
-                                                    <input type="hidden" name="start_daterange" id="start_daterange" value="" />
-                                                    <input type="hidden" name="end_daterange" id="end_daterange" value="" />
-                                                </div>
+                        <div class="filter-box card" id="dashboard_deal">
+                            <div class="row">
+                                <div class="col-12 head d-flex justify-content-between align-items-center mb-4">
+                                    <h2 class="mb-0">Filter</h2>
+                                    <div class="d-flex align-items-center flight-range">
+                                        <div class="daterange d-flex align-items-center">
+                                            <div class="daterange-input">
+                                                <input type="text" name="daterange" id="daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy" />
+                                                <input type="hidden" name="start_daterange" id="start_daterange" value="" />
+                                                <input type="hidden" name="end_daterange" id="end_daterange" value="" />
                                             </div>
-                                            <button class="btn btn-lg btn-secondary">Reset</button>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        @if( $dashboard['advertiserList'] )
-                                            <select name="deal_no" id="deal_no"  class="au-input au-input--full">
-                                                <option value="">Deal</option>
-                                                @foreach( $dashboard['advertiserList'] as $advertiserKey =>$advertiserValue )
-                                                    <option value="{{ $advertiserValue['deal_id'] }}">{{ $advertiserValue['name'] }}</option>
-                                                @endforeach
-                                            </select>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        @if( $dashboard['campaignList'] )
-                                            <select name="campaign" id="campaign"  class="au-input au-input--full">>
-                                                <option value="">Campaign</option>
-                                                @foreach( $dashboard['campaignList'] as $campaignKey =>$campaignValue )
-                                                    <option value="{{ $campaignValue['id'] }}">{{ $campaignValue['title'] }}({{ $campaignValue['id'] }})</option>
-                                                @endforeach
-                                            </select>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        @if( $dashboard['demographicsList'] )
-                                            <select name="demographics" id="demographics"  class="au-input au-input--full">>
-                                                <option value="">Demographics</option>
-                                                @foreach( $dashboard['demographicsList'] as $demographicsKey =>$demographicsValue )
-                                                    <option value="{{ $demographicsValue['id'] }}">{{ $demographicsValue['name'] }}</option>
-                                                @endforeach
-                                            </select>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        @if( $dashboard['outletList'] )
-                                            <select name="outlet" id="outlet"  class="au-input au-input--full">>
-                                                <option value="">Out Let</option>
-                                                @foreach( $dashboard['outletList'] as $outletKey =>$outletValue )
-                                                    <option value="{{ $outletValue['id'] }}">{{ $outletValue['outlet_type'] }}</option>
-                                                @endforeach
-                                            </select>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        @if( $dashboard['agencyList'] )
-                                            <select name="agency" id="agency"  class="au-input au-input--full">>
-                                                <option value="">Agency</option>
-                                                @foreach( $dashboard['agencyList'] as $agencyKey =>$agencyValue )
-                                                    <option value="{{ $agencyValue['id'] }}">{{ $agencyValue['name'] }}</option>
-                                                @endforeach
-                                            </select>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        @if( $dashboard['locationList'] )
-                                            <select name="location" id="location"  class="au-input au-input--full">>
-                                                <option value="">Location</option>
-                                                @foreach( $dashboard['locationList'] as $locationKey =>$locationValue )
-                                                    <option value="{{ $locationValue['id'] }}">{{ $locationValue['name'] }}</option>
-                                                @endforeach
-                                            </select>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 form-group">
-                                        @if( $dashboard['brandList'] )
-                                            <select name="brand" id="brand"  class="au-input au-input--full">>
-                                                <option value="">Brand</option>
-                                                @foreach( $dashboard['brandList'] as $brandKey =>$brandValue )
-                                                    <option value="{{ $brandValue['id'] }}">{{ $brandValue['product_name'] }}</option>
-                                                @endforeach
-                                            </select>
-                                        @endif
+                                        <button class="btn btn-lg btn-secondary" id="deal_reset">Reset</button>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="col-md-6 col-lg-4 col-xl-3 form-group">
+                                    <select name="deal_no" id="deal_no"  class="au-input au-input--full">
+                                        <option value="">Deal</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-lg-4 col-xl-3 form-group">
+                                    <select name="campaign" id="campaign"  class="au-input au-input--full">
+                                        <option value="">Campaign</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-lg-4 col-xl-3 form-group">
+                                    <select name="demographics" id="demographics"  class="au-input au-input--full">
+                                        <option value="">Demographics</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-lg-4 col-xl-3 form-group">
+                                    <select name="outlet" id="outlet"  class="au-input au-input--full">
+                                        <option value="">Out Let</option>    
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-lg-4 col-xl-3 form-group">
+                                    <select name="agency" id="agency"  class="au-input au-input--full">
+                                        <option value="">Agency</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-lg-4 col-xl-3 form-group">
+                                    <select name="location" id="location"  class="au-input au-input--full">
+                                        <option value="">Location</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-lg-4 col-xl-3 form-group">
+                                    <select name="brand" id="brand"  class="au-input au-input--full">
+                                        <option value="">Brand</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -131,14 +94,15 @@
                                 <div class="row">
                                     <div class="col-12 head d-flex justify-content-between align-items-center mb-4">
                                         <h2 class="mb-0">Advertiser Dashboard</h2>
-                                        <div class="daterange advertiser-filter">
-                                            <input type="text" name="advertiser_daterange"
-                                                id="advertiser_daterange" value=""
-                                                placeholder="mm/dd/yyyy - mm/dd/yyyy" />
-                                            <input type="hidden" name="advertiser_start_daterange"
-                                                id="advertiser_start_daterange" value="" />
-                                            <input type="hidden" name="advertiser_end_daterange"
-                                                id="advertiser_end_daterange" value="" />
+                                        <div class="d-flex align-items-center flight-range">
+                                            <div class="daterange d-flex align-items-center">
+                                                <div class="daterange-input">
+                                                    <input type="text" name="advertiser_daterange" id="advertiser_daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy" />
+                                                    <input type="hidden" name="advertiser_start_daterange" id="advertiser_start_daterange" value="" />
+                                                    <input type="hidden" name="advertiser_end_daterange" id="advertiser_end_daterange" value="" />
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-lg btn-secondary" id="advertiser_reset">Reset</button>
                                         </div>
                                     </div>
                                     @if( count( $dealStatus ) > 0 )

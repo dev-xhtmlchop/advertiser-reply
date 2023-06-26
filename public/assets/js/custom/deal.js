@@ -1,17 +1,15 @@
 $(document).ready(function(){
-    getDealDashboardData();
+    getDealViewData();
     $("#deal_status").change(function(){
         var dealStatus = $(this).val();
-        getDealDashboardData( dealStatus );
+        getDealViewData( dealStatus );
     });
     $('#deals_table').DataTable({
         "pageLength": 1,
         "ordering": false
     });
 });
-function getDealDashboardData( dealStatus = null){
-    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    var URL = $("meta[name='web-url']").attr('content');
+function getDealViewData( dealStatus = null){
     var url = URL+'/post-deal-status';
     $.ajax({
         url: url,

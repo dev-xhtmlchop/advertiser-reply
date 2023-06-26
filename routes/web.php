@@ -8,6 +8,7 @@ use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Logout\LogoutController;
 use App\Http\Controllers\Registration\RegistrationController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\View\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +54,6 @@ Route::get('/deal',[DealController::class, 'index'])->name('deal')->middleware('
 Route::post('/post-deal-status',[DealController::class, 'postStatus'])->name('deal.status')->middleware('auth');
 
 /* Campaign */
-Route::get('/campaign',[CampaignController::class, 'index'])->name('campaign')->middleware('auth');
+Route::get('/campaign',[CampaignController::class, 'index'])->name('campaign')->middleware('auth'); 
+Route::post('/get-campaign-detail',[CampaignController::class, 'getEditCampaignDetail'])->name('campaign.editdetail')->middleware('auth'); 
+Route::get('/campaign/edit/{id}',[CampaignController::class, 'getEditCampaignInfo'])->name('campaign.edit')->middleware('auth'); 

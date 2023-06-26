@@ -1,3 +1,6 @@
+var URL = $("meta[name='web-url']").attr('content');
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
 function nullNumber(number){
     if( number === null ){
         return 0;

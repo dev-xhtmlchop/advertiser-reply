@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-    <div class="main-content">
+    <div class="main-content campaign-list">
         <div class="section__content section__content--p10">
             <div class="container-fluid">
                 <div class="row">
@@ -9,7 +9,7 @@
                         <div class="deal-view-box card">
                             <div class="head d-flex justify-content-between align-items-center mb-4">
                                 <h2 class="mb-0">Campaign View</h2>
-                                <button class="btn btn-lg btn-secondary" id="edit_campaign" dealid="" autoincrementid="" disabled>Edit Campaign</button>
+                                <button class="btn btn-lg btn-secondary" >Create Campaign</button>    
                             </div>
                             <div class="row table-responsive table-responsive-data2">
                                 <table id="campaign_table" class="table custom-table table-borderless table-striped dataTable no-footer" style="width:100%" >
@@ -27,7 +27,7 @@
                                                     @if( $tableRowDetailKey == 'deal_auto_id' )
                                                     <td>
                                                         <label class="au-radio deal-number">
-                                                            <input type="radio" value="{{ $tableDetailRowVal['deal_id'] }}" name="deal_number" id="deal_number" autoid="{{ $tableRowDetailVal }}" >
+                                                            <input type="radio" value="{{ $tableDetailRowVal['campaign_id'] }}" name="deal_number" id="deal_number" autoid="" >
                                                         </label>
                                                     </td>
                                                     @else
@@ -40,7 +40,7 @@
                                 </table>
                             </div>
                             <div class="head d-flex justify-content-between align-items-center mb-4">
-                                <button class="btn btn-lg btn-secondary" >Create Campaign</button>    
+                                <button class="btn btn-lg btn-secondary" id="edit_campaign" dealid="" autoincrementid="" disabled>Edit Campaign</button>
                             </div>
                         </div>
                     </div>

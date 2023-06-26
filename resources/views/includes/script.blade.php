@@ -10,8 +10,17 @@
 <script src="{{ asset('public/assets/js/common/datatable/jquery.dataTables.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/datatable/dataTables.bootstrap5.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/common.js') }}" defer></script>
+@if( request()->is('login') ) 
 <script src="{{ asset('public/assets/js/custom/login.js') }}" defer></script>
+@endif
+@if( request()->is('/') ) 
 <script src="{{ asset('public/assets/js/custom/dashboard.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/custom/forgotpassword.js') }}" defer></script>  
+@endif
+
+@if( request()->is('deal') ) 
 <script src="{{ asset('public/assets/js/custom/deal.js') }}" defer></script>  
+@endif
+@if( request()->is('campaign/*') || request()->is('campaign') ) 
 <script src="{{ asset('public/assets/js/custom/campaign.js') }}" defer></script>  
+@endif

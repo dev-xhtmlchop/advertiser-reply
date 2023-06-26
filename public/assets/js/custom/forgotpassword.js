@@ -1,6 +1,4 @@
 $(document).ready(function(){
-    var CSRF_TOKEN = $("meta[name='csrf-token']").attr('content');
-    var URL = $("meta[name='web-url']").attr('content');
     var userId = $("#forgot_password #user_id").val();
     $("#current_password").on("keyup change", function(e){
         var curPass = $(this).val();
