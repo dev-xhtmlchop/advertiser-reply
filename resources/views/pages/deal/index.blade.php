@@ -1,22 +1,26 @@
 @extends('layouts.default')
 
 @section('content')
-    <div class="main-content">
+    <div class="main-content deal-view-sec">
         <div class="section__content section__content--p10">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 card-main">
                         <div class="deal-view-box card">
-                            <div class=" head d-flex justify-content-center align-items-center mb-4">
+                            <div class="head d-flex justify-content-center align-items-center mb-4">
                                 <h2 class="mb-0">Deal View</h2>
-                                <select name="deal_status" id="deal_status" class="au-input" >
-                                    <option value="">Deal Status</option>
-                                    @if( count( $dealStatus ) > 0 )
-                                        @foreach( $dealStatus as $dealStatusKey => $dealStatusVal )
-                                            <option value="{{ $dealStatusVal['slug'] }}">{{ $dealStatusVal['name'] }}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
+                                <div class="d-flex align-items-center flight-range">
+                                    <div class="daterange d-flex align-items-center">
+                                        <select name="deal_status" id="deal_status" class="au-input" >
+                                            <option value="">Deal Status</option>
+                                            @if( count( $dealStatus ) > 0 )
+                                                @foreach( $dealStatus as $dealStatusKey => $dealStatusVal )
+                                                    <option value="{{ $dealStatusVal['slug'] }}">{{ $dealStatusVal['name'] }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="row deal-view">
