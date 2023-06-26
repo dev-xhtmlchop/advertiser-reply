@@ -8,7 +8,7 @@
                     <div class="col-md-12 card-main">
                         <div class="filter-box card" id="dashboard_deal">
                             <div class="row">
-                                <div class="col-12 head d-flex justify-content-between align-items-center mb-4">
+                                <div class="col-12 head d-flex justify-content-center align-items-center mb-4">
                                     <h2 class="mb-0">Filter</h2>
                                     <div class="d-flex align-items-center flight-range">
                                         <div class="daterange d-flex align-items-center">
