@@ -362,8 +362,9 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="head d-flex justify-content-center align-items-center mb-4">
-                                                                    <a href="javascript:void(0);" class="btn btn-lg btn-secondary tab-btn" attr-active="cpm-imp" >Go To CPM/IPM</a>
-                                                                    <a href="javascript:void(0);" class="btn btn-lg btn-secondary ml-5 tab-btn" attr-active="summary" >Go To Summary</a>
+                                                                    <a href="javascript:void(0);" class="btn btn-lg btn-secondary" attr-active="cpm-imp" >Keep Original</a>
+                                                                    <a href="javascript:void(0);" class="btn btn-lg btn-secondary ml-5 tab-btn" attr-active="flighting" >Go To Flighting</a>
+                                                                    <a href="javascript:void(0);" class="btn btn-lg btn-secondary ml-5 tab-btn" >Send To Approval</a>
                                                                 </div>
                                                             </div>
                                                         </div>

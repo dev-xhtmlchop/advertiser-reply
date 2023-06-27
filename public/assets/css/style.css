@@ -90,8 +90,16 @@ div.dataTables_wrapper div.dataTables_length select{margin: 0 10px;}
 .responsive-tabs .tab-pane {display: block !important;opacity: 1;}
 }
 table.dataTable.table-striped>tbody>tr>td{ vertical-align: middle;}
-.custom-table tr th, .custom-table tr td{font-size: 12px;padding: 10px 5px;}
-
+.custom-table tr th, .custom-table tr td{font-size: 12px;padding: 10px 5px;text-align: center !important;}
+.form-check-input{border-color: #6455b3;}
+.form-check-input:checked{background-color: #6455b3;border-color: #6455b3;}
+#campaign_table tr th:first-child{padding-left: 10px;}
+.pagination {display: inline-block;}
+.pagination a {color: #000000;float: left;padding: 8px 16px;text-decoration: none;transition: background-color .5s;border: 1px solid #DDD;
+    margin: 0 4px;font-size: 20px;}
+.pagination li.active a {background-color: #343a40;color: #FFFFFF;border: 1px solid #343a40;}
+.pagination li:hover:not(.active) a {background-color: #DDD;}
+.btn{font-size: 1rem;}
 /*.alert{
     display:none;
     position: fixed;
