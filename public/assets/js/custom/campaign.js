@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    
+    getCampaignDetail();
     $('#campaign_table').DataTable({
         pageLength: 10,
         rowReorder: true,
@@ -41,73 +41,90 @@ $(document).ready(function(){
     $('#campaign_table input[name="deal_number"]').click(function(){
         var editCampaignDealId = $(this).val();
         var editCampaignId = $(this).attr('autoid');
-        $('#edit_campaign').attr('dealid',editCampaignDealId).attr('autoincrementid',editCampaignId).removeAttr("disabled");
+        $('#edit_campaign_id').attr('dealid',editCampaignDealId).attr('autoincrementid',editCampaignId).removeAttr("disabled");
     })
-    $('.campaign-view-sec #edit_campaign').click(function(){
+    $('.campaign-view-sec #edit_campaign_id').click(function(){
         var dealId = $(this).attr('dealid');
         var autoIncrementId = $(this).attr('autoincrementid');
         window.location.href = URL+'/campaign/edit/'+dealId;
     });
-    var url = URL+'/get-campaign-detail';
-    var currentUrl = window.location.href;
-    var splitArray = currentUrl.split('/');
-    var thirdLastVal = splitArray[splitArray.length - 3];
-    var secondLastVal = splitArray[splitArray.length - 2];
-    var firstLastVal = splitArray[splitArray.length - 1];
-    if( thirdLastVal == 'campaign' && secondLastVal == 'edit' ){
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: {_token: CSRF_TOKEN, campaignId: firstLastVal },
-            success: function(response){
-                console.log( response )
-                if( response.status == 1 ){
-                    var campaignArrayData = response.data.campaign_data;
-                    console.log( campaignArrayData )
-                    /* Step 1 General */
-                    $('input[name="campaign_number"]').val(campaignArrayData.campaign_id);
-                    $('input[name="campaign_name"]').val(campaignArrayData.name);
-                    $('input[name="brand_name"]').val(campaignArrayData.brand_name);
-                    $('input[name="media_line_name"]').val(campaignArrayData.media_name);
-                    $('input[name="dollar_rate"]').val(campaignArrayData.rate);
-                    $('input[name="agency_name"]').val(campaignArrayData.agency_name);
-                    $('input[name="demo_name"]').val(campaignArrayData.demo);
-                    $('input[name="ae_name"]').val(campaignArrayData.ae);
-                    $('input[name="outlet_name"]').val(campaignArrayData.outlets_name);
-                    $('input[name="market_place"]').val(campaignArrayData.market_place);
-                    $('input[name="realistic"]').val(campaignArrayData.realistic);
-                    $('input[name="agency_commision"]').val(campaignArrayData.agency_commission);
-                    $('input[name="revenue_risk"]').val(campaignArrayData.revenue);
-
-                    /* Step 2 Demographic */
-                    $('#edit_campaign select#demographic_name').prop("disabled", true);
-                    $('#edit_campaign select#demographic_name option').each(function(){
-                        var value = $(this).val();
-                        if( campaignArrayData.demographic_id == value ){
-                            $(this).prop('selected', true);
-                        }else{
-                            $(this).prop('selected', false);
-                        }
-                    })
-                    
-                    /* Step 3 Flighting */
-                    var campaignFlightStartDate = moment(campaignArrayData.flight_start_date).format('MM/DD/YYYY');
-                    $('input[name="campaign_flight_start_date"]').val(campaignFlightStartDate);
-                    var campaignFlightEndDate = moment(campaignArrayData.flight_end_date).format('MM/DD/YYYY');
-                    $('input[name="campaign_flight_end_date"]').val(campaignFlightEndDate);
-                    $('input[name="campaign_day_parts"]').val(campaignArrayData.day_parts_name);
-
-                    /* Step 4 Summary */
-                    $('#summary .campaign_number').empty().append(campaignArrayData.campaign_id);
-                    $('#summary .campaign_name').empty().append(campaignArrayData.name);
-                    $('#summary .brand_name').empty().append(campaignArrayData.brand_name);
-                    $('#summary .media_line_name').empty().append(campaignArrayData.media_name);
-                    $('#summary .demo_name').empty().append(campaignArrayData.demo);
-                    $('#summary .ae_name').empty().append(campaignArrayData.ae);
-                    $('#summary .outlet_name').empty().append(campaignArrayData.outlets_name);
-                    
-                }
-            }
+    $('.campaign-edit .tab-btn').click(function(e){
+        e.preventDefault();
+        var tabClass = $(this).attr('attr-active'); 
+        $('#nav-tabContent .tab-pane').each(function(){
+            $(this).removeClass('show').removeClass('active');
         });
+        $('#'+tabClass).addClass('show').addClass('active');
+
+        $('#nav-tab .nav-item').each(function(){
+            $(this).removeClass('active');
+        });
+        $('#'+tabClass+'-tab').addClass('active');
+        getCampaignDetail();
+    });
+    function getCampaignDetail(){
+        var url = URL+'/get-campaign-detail';
+        var currentUrl = window.location.href;
+        var splitArray = currentUrl.split('/');
+        var thirdLastVal = splitArray[splitArray.length - 3];
+        var secondLastVal = splitArray[splitArray.length - 2];
+        var firstLastVal = splitArray[splitArray.length - 1];
+        if( thirdLastVal == 'campaign' && secondLastVal == 'edit' ){
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {_token: CSRF_TOKEN, campaignId: firstLastVal },
+                success: function(response){
+                    console.log( response )
+                    if( response.status == 1 ){
+                        var campaignArrayData = response.data.campaign_data;
+                        console.log( campaignArrayData )
+                        /* Step 1 General */
+                        $('input[name="campaign_number"]').val(campaignArrayData.campaign_id);
+                        $('input[name="campaign_name"]').val(campaignArrayData.name);
+                        $('input[name="brand_name"]').val(campaignArrayData.brand_name);
+                        $('input[name="media_line_name"]').val(campaignArrayData.media_name);
+                        $('input[name="dollar_rate"]').val(campaignArrayData.rate);
+                        $('input[name="agency_name"]').val(campaignArrayData.agency_name);
+                        $('input[name="demo_name"]').val(campaignArrayData.demo);
+                        $('input[name="ae_name"]').val(campaignArrayData.ae);
+                        $('input[name="outlet_name"]').val(campaignArrayData.outlets_name);
+                        $('input[name="market_place"]').val(campaignArrayData.market_place);
+                        $('input[name="realistic"]').val(campaignArrayData.realistic);
+                        $('input[name="agency_commision"]').val(campaignArrayData.agency_commission);
+                        $('input[name="revenue_risk"]').val(campaignArrayData.revenue);
+
+                        /* Step 2 Demographic */
+                        $('#edit_campaign select#demographic_name').prop("disabled", true);
+                        $('#edit_campaign select#demographic_name option').each(function(){
+                            var value = $(this).val();
+                            if( campaignArrayData.demographic_id == value ){
+                                $(this).prop('selected', true);
+                            }else{
+                                $(this).prop('selected', false);
+                            }
+                        })
+                        
+                        /* Step 3 Flighting */
+                        var campaignFlightStartDate = moment(campaignArrayData.flight_start_date).format('MM/DD/YYYY');
+                        $('input[name="campaign_flight_start_date"]').val(campaignFlightStartDate);
+                        var campaignFlightEndDate = moment(campaignArrayData.flight_end_date).format('MM/DD/YYYY');
+                        $('input[name="campaign_flight_end_date"]').val(campaignFlightEndDate);
+                        $('input[name="campaign_day_parts"]').val(campaignArrayData.day_parts_name);
+
+                        /* Step 4 Summary */
+                        $('#summary .campaign_number').empty().append(campaignArrayData.campaign_id);
+                        $('#summary .campaign_name').empty().append(campaignArrayData.name);
+                        $('#summary .brand_name').empty().append(campaignArrayData.brand_name);
+                        $('#summary .media_line_name').empty().append(campaignArrayData.media_name);
+                        $('#summary .demo_name').empty().append(campaignArrayData.demo);
+                        $('#summary .ae_name').empty().append(campaignArrayData.ae);
+                        $('#summary .outlet_name').empty().append(campaignArrayData.outlets_name);
+                        
+                    }
+                }
+            });
+        }
     }
+   
 });

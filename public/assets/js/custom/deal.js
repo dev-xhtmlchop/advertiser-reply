@@ -20,12 +20,18 @@ function getDealViewData( dealStatus = null){
         type: 'POST',
         data: {_token: CSRF_TOKEN, data: dealStatus},
         success: function(response){
-            if( response ){
-                $('#deal_dollars').empty().append('$'+Number(nullNumber(response.rate)).toLocaleString('en'));
-                $('#deal_cpm').empty().append('$'+nullNumber(response.cpm));
-                $('#deal_deal_unit').empty().append(Number(nullNumber(response.deal_unit)).toLocaleString('en'));
-                $('#deal_grp').empty().append(nullNumber(response.grp));
-                $('#deal_impressions').empty().append(Number(nullNumber(response.impressions)).toLocaleString('en'));
+            console.log( response.deal_table_html );
+            /*$.each(response.deal_table_html.tableData,function( index, value ){
+                console.log( value.deal_id )
+            });*/
+            $('#deal_view_body').empty().append(response.deal_table_html)
+            if( response.deal_view_data ){
+                var dealViewData = response.deal_view_data;
+                $('#deal_dollars').empty().append('$'+Number(nullNumber(dealViewData.rate)).toLocaleString('en'));
+                $('#deal_cpm').empty().append('$'+nullNumber(dealViewData.cpm));
+                $('#deal_deal_unit').empty().append(Number(nullNumber(dealViewData.deal_unit)).toLocaleString('en'));
+                $('#deal_grp').empty().append(nullNumber(dealViewData.grp));
+                $('#deal_impressions').empty().append(Number(nullNumber(dealViewData.impressions)).toLocaleString('en'));
                 return true;
             }else{
                 return fasle;

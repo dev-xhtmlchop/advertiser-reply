@@ -1,7 +1,7 @@
 <script src="{{ asset('public/assets/js/common/jquery/jquery-3.7.0.min.js') }}" defer></script>
-<script src="{{ asset('public/assets/js/common/bootstrap-5.1/popper.min.js') }}" defer></script>
-<script src="{{ asset('public/assets/js/common/bootstrap-5.1/bootstrap.min.js') }}" defer></script>
-<script src="{{ asset('public/assets/js/common/bootstrap-5.1/bootstrap.bundle.min.js') }}" defer></script>
+<script src="{{ asset('public/assets/js/common/bootstrap/popper.min.js') }}" defer></script>
+<script src="{{ asset('public/assets/js/common/bootstrap/bootstrap.min.js') }}" defer></script>
+<script src="{{ asset('public/assets/js/common/bootstrap/bootstrap.bundle.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/select2/select2.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/jquery/jquery.validate.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/jquery/additional-methods.min.js') }}" defer></script>

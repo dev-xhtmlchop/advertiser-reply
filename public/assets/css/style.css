@@ -1,8 +1,8 @@
 @media (min-width: 992px){
-    .menu-sidebar{width: 250px;}
-    .page-container{padding-left: 250px;}
-    .main-content{padding-top: 100px;}
-    .header-desktop{left: 250px;}
+  .menu-sidebar{width: 250px;}
+  .page-container{padding-left: 250px;}
+  .main-content{padding-top: 100px;}
+  .header-desktop{left: 250px;}
 }
 a{text-decoration: none;}
 .au-input{height: 43px !important;}
@@ -59,11 +59,12 @@ a{text-decoration: none;}
 .card .deal-component{text-align: center; border-radius: 0.25rem;box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);display: block;padding: 30px;position: relative;overflow: hidden;}
 .card .deal-component h3, .card .advertiser-component h4{font-weight: 600;color: #ffffff;}
 .card .deal-component h5{color: #ffffff;font-weight: 400;font-size: 1.2rem;margin-top: 10px;}
-.card .deal-component .icon-box {display: inline-block;position: absolute;bottom: -10px;right: -7px;opacity: 0.3;}
+.card .deal-component .icon-box {display: inline-block;position: absolute;bottom: -10px;right: -7px;opacity: 0.9;}
 .card .advertiser-component h4{width: calc(100% - 60px);padding-left: 10px;font-size: 1rem;color: #000000;}
-.card .advertiser-component{box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);border-radius: 0.25rem;background: #e5e5e5;padding: 0.5rem;position: relative;width: 100%;}
+.card .advertiser-component{box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);border-radius: 0.25rem;background: #e5e5e5;padding: 10px;position: relative;width: 100%;}
 .advertiser-component .info-icon{border-radius: 0.25rem;-ms-flex-align: center;align-items: center;display: -ms-flexbox;display: flex;font-size: 1.5rem;-ms-flex-pack: center;justify-content: center;
-text-align: center;width: 60px;height: 60px;color: #ffffff;}
+text-align: center;width: 100px;height: 100px;color: #ffffff;}
+.advertiser-component .info-icon i{font-size: 30px;}
 .icon-box {display: inline-block;position: absolute;bottom: -50px;right: -7px;}
 .popup-form label{width: 100%;display: block;margin-bottom: 5px;font-size: 1rem;font-weight: 600;}
 .popup-form input{width: 100%;}
@@ -73,7 +74,24 @@ text-align: center;width: 60px;height: 60px;color: #ffffff;}
 .flight-range{ column-gap: 20px; position: absolute;top: 20px;right: 20px;}
 .card .dataTables_wrapper .row{margin: 10px 0 !important;}
 div.dataTables_wrapper div.dataTables_length select{margin: 0 10px;}
-.table-striped tbody tr:nth-of-type(odd) {background-color: rgba(0,0,0,.05) !important;}
+.table-striped tbody tr:nth-of-type(odd) {background-color: rgba(0,0,0,.10) !important;}
+.responsive-tabs {column-gap: 15px;}
+.responsive-tabs .nav-tabs {display: none;width: 25%;background: #ffffff;}
+.responsive-tabs .tab-content{width: 75%;}
+.responsive-tabs .nav-tabs .nav-link{border: none;padding: 1rem;color: #c6c6c6;font-weight: 600;}
+.responsive-tabs .nav-tabs .nav-link:hover, .responsive-tabs .nav-tabs .nav-link.active{color: #000000;}
+@media (min-width: 768px) {
+.responsive-tabs .nav-tabs {display: block;}
+.responsive-tabs .card {border: none;box-shadow: none;}
+.responsive-tabs .card .card-header {display: none;}
+.responsive-tabs .card .collapse {display: block;}
+}
+@media (max-width: 767px) {
+.responsive-tabs .tab-pane {display: block !important;opacity: 1;}
+}
+table.dataTable.table-striped>tbody>tr>td{ vertical-align: middle;}
+.custom-table tr th, .custom-table tr td{font-size: 12px;padding: 10px 5px;}
+
 /*.alert{
     display:none;
     position: fixed;

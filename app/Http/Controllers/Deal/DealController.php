@@ -12,47 +12,50 @@ use Illuminate\Support\Facades\DB;
 
 class DealController extends Controller
 {
-    public function index(){
-        
+
+    public function dealTableRecord( $status = '' ){
         $advertiserId = Session::get('advertiser_id');
-        $dealTableTitle = Helper::dealViewTableName();
         $dealList = Deals::join('deal_payloads', 'deals.id', '=', 'deal_payloads.deal_id')
-                            ->where('deals.advertiser_id', '=', $advertiserId)
-                            ->join('day_parts', 'deals.daypart_id', '=', 'day_parts.id')->where('day_parts.status','=', 1)
-                            ->join('brands', 'deals.brand_id', '=', 'brands.id')->where('brands.status','=', 1)
-                            ->orderBy('deals.id', 'asc');
+            ->when($status, function ($query) use ($status) {
+                return $query->where('deals.status','=', $status);
+            })
+            ->where('deals.advertiser_id', '=', $advertiserId)
+            ->join('day_parts', 'deals.daypart_id', '=', 'day_parts.id')->where('day_parts.status','=', 1)
+            ->join('brands', 'deals.brand_id', '=', 'brands.id')->where('brands.status','=', 1)
+            ->orderBy('deals.id', 'asc');
+
         $dealTableData =  $dealList->get([
-                        'deal_payloads.deal_id as deal_id',
-                        'deals.campaign_id as campaign_number', 
-                        'deal_payloads.name as deal_name', 
-                        'day_parts.name as day_time', 
-                        'brands.product_name as brand_name',
-                        'deal_payloads.inventory_type as inventory_type', 
-                        'deal_payloads.inventory_length as inventory_length', 
-                        'deal_payloads.rate as rate', 
-                        'deal_payloads.rc_rate as rc_rate', 
-                        'deal_payloads.rc_rate_percentage as rc_rate_percentage', 
-                        'deal_payloads.total_avil as total_avil', 
-                        'deal_payloads.total_unit as total_unit', 
-                        'deal_payloads.hh_rating as hh_rating', 
-                        'deal_payloads.hh_ss as hh_ss', 
-                        'deal_payloads.hh_cpm as hh_cpm', 
-                        'deal_payloads.hh_univ as hh_univ', 
-                        'deal_payloads.a25_49_rating as a25_49_rating', 
-                        'deal_payloads.a25_49_ss as a25_49_ss', 
-                        'deal_payloads.a25_49_cpm as a25_49_cpm', 
-                        'deal_payloads.a25_49_univ as a25_49_univ'
-                        ])->toArray();
+            'deal_payloads.deal_id as deal_id',
+            'deals.campaign_id as campaign_number', 
+            'deal_payloads.name as deal_name', 
+            'day_parts.name as day_time', 
+            'brands.product_name as brand_name',
+            'deal_payloads.inventory_type as inventory_type', 
+            'deal_payloads.inventory_length as inventory_length', 
+            'deal_payloads.rate as rate', 
+            'deal_payloads.rc_rate as rc_rate', 
+            'deal_payloads.rc_rate_percentage as rc_rate_percentage', 
+            'deal_payloads.total_avil as total_avil', 
+            'deal_payloads.total_unit as total_unit', 
+            'deal_payloads.hh_rating as hh_rating', 
+            'deal_payloads.hh_ss as hh_ss', 
+            'deal_payloads.hh_cpm as hh_cpm', 
+            'deal_payloads.hh_univ as hh_univ', 
+            'deal_payloads.a25_49_rating as a25_49_rating', 
+            'deal_payloads.a25_49_ss as a25_49_ss', 
+            'deal_payloads.a25_49_cpm as a25_49_cpm', 
+            'deal_payloads.a25_49_univ as a25_49_univ'
+            ])->toArray();
         
         $dealDayTableData =  $dealList->get([
-                        'deal_payloads.sunday as sunday', 
-                        'deal_payloads.monday as monday', 
-                        'deal_payloads.tuesday as tuesday', 
-                        'deal_payloads.wednesday as wednesday', 
-                        'deal_payloads.thursday as thursday', 
-                        'deal_payloads.friday as friday',
-                        'deal_payloads.saturday as saturday'
-                        ])->toArray();
+            'deal_payloads.sunday as sunday', 
+            'deal_payloads.monday as monday', 
+            'deal_payloads.tuesday as tuesday', 
+            'deal_payloads.wednesday as wednesday', 
+            'deal_payloads.thursday as thursday', 
+            'deal_payloads.friday as friday',
+            'deal_payloads.saturday as saturday'
+            ])->toArray();
         $dayOfArray = array( 'sunday' => 'S', 'monday' => 'M','tuesday' => 'T','wednesday' => 'W', 'thursday' => 'T', 'friday' => 'F', 'saturday' => 'S' );
         if( count ( $dealDayTableData ) > 0 ){
             foreach( $dealDayTableData as $dealDayTableKey => $dealDayTableVal ){
@@ -64,41 +67,52 @@ class DealController extends Controller
                 $dealDayTableData[$dealDayTableKey] = implode(" ", $dealDayTableVal);
             }
         }
-        $dealPagination = $dealList->paginate(1);
+        $dealTableArray = array(  'tableData' => $dealTableData, 'dayTableData' => $dealDayTableData );
+        return $dealTableArray;
+    }
+    public function index(){
+        $dealTableTitle = Helper::dealViewTableName();
         $dealStatusArray = Helper::dealStatusArray();
         $dealViewArray = Helper::dealViewArray();
-        $data = array( 
+        $dealResult = array( 
                 'title' => 'Deal',
                 'tableTitle' => $dealTableTitle,
-                'tableData' => $dealTableData, 
-                'dayTableData' => $dealDayTableData,
-                'pagination' => $dealPagination, 
                 'dealStatus' => $dealStatusArray,
-                'dealView' => $dealViewArray 
+                'dealView' => $dealViewArray,
             );
-        return view( 'pages.deal.index', $data );
+        $dealResult = array_merge( $dealResult, DealController::dealTableRecord() );
+        return view( 'pages.deal.index', $dealResult );
     }
 
     public function postStatus( Request $request ){
-        if( $request['data'] !== null ){
-            $advertiser = DealPayload::join('deals', 'deals.id', '=', 'deal_payloads.deal_id')
-            ->where('deals.status','=', $request['data'])->first( array(
-                DB::raw('SUM(deal_payloads.rate) as rate'),
-                DB::raw('SUM(deal_payloads.cpm) as cpm'),
-                DB::raw('SUM(deal_payloads.impressions) as impressions'),
-                DB::raw('SUM(deal_payloads.grp) as grp'),
-                DB::raw('SUM(deal_payloads.deal_unit) as deal_unit'),
-            ));
-            return response()->json($advertiser);  
-        }else{
-            $advertiser = DealPayload::join('deals', 'deals.id', '=', 'deal_payloads.deal_id')->first( array(
-                DB::raw('SUM(deal_payloads.rate) as rate'),
-                DB::raw('SUM(deal_payloads.cpm) as cpm'),
-                DB::raw('SUM(deal_payloads.impressions) as impressions'),
-                DB::raw('SUM(deal_payloads.grp) as grp'),
-                DB::raw('SUM(deal_payloads.deal_unit) as deal_unit'),
-            ));
-            return response()->json($advertiser);  
+        $advertiserId = Session::get('advertiser_id');
+
+        $dealView = DealPayload::join('deals', 'deals.id', '=', 'deal_payloads.deal_id')
+        ->where('deals.advertiser_id', '=', $advertiserId)
+        ->when($request['data'], function ($query) use ($request) {
+            return $query->where('deals.status','=', $request['data']);
+        })
+        ->first( array(
+            DB::raw('SUM(deal_payloads.rate) as rate'),
+            DB::raw('SUM(deal_payloads.cpm) as cpm'),
+            DB::raw('SUM(deal_payloads.impressions) as impressions'),
+            DB::raw('SUM(deal_payloads.grp) as grp'),
+            DB::raw('SUM(deal_payloads.deal_unit) as deal_unit'),
+        ))->toArray();
+
+        $dealViewTable = DealController::dealTableRecord( $request['data'] );
+        $dealViewTableHtml = '';
+        foreach( $dealViewTable['tableData'] as $key => $tableDetailRowVal ){
+            $dealViewTableHtml .= '<tr class="tr-shadow">';
+                foreach( $tableDetailRowVal as $tableRowDetailKey => $tableRowDetail ){
+                    if(  $tableRowDetailKey == 'day_time' ){
+                        $dealViewTableHtml .='<td class="'.  $tableRowDetailKey .'">'. $dealViewTable['dayTableData'][$key] . $tableRowDetail .'</td>';
+                    } else {
+                        $dealViewTableHtml .='<td class="'. $tableRowDetailKey .'">'. $tableRowDetail .'</td>';
+                    }
+                }    
+                $dealViewTableHtml .='</tr>';
         }
+        return response()->json(array( 'deal_view_data' => $dealView, 'deal_table_html' => $dealViewTableHtml ));  
     }
 }

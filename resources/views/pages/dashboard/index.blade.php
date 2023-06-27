@@ -8,7 +8,7 @@
                     <div class="col-md-12 card-main">
                         <div class="filter-box card" id="dashboard_deal">
                             <div class="head d-flex justify-content-center align-items-center mb-4">
-                                <h2 class="mb-0">Filter</h2>
+                                <!--<h2 class="mb-0">Filter</h2> -->
                                 <div class="d-flex align-items-center flight-range">
                                     <div class="daterange d-flex align-items-center">
                                         <div class="daterange-input">
@@ -107,7 +107,7 @@
                                 <div class="row">
                                     @if( count( $dealStatus ) > 0 )
                                         @foreach( $dealStatus as $dealStatusKey => $dealStatusVal )
-                                            <div class="col-md-6 col-lg-4 col-xl-4 form-group">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 form-group">
                                                 <div class="advertiser-component d-flex align-items-center">
                                                     <span class="info-icon {{ $dealStatusVal['background'] }}"><i class="{{ $dealStatusVal['icon'] }}"></i></span>
                                                     <h4 id="advertiser_{{ $dealStatusVal['slug'] }}" >0 {{ $dealStatusVal['name'] }}</h4>

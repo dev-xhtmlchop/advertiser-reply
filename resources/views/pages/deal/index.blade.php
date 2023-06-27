@@ -60,7 +60,7 @@
                                             @endforeach    
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="deal_view_body">
                                         @foreach( $tableData as $key => $tableDetailRowVal )
                                             <tr class="tr-shadow">
                                                 @foreach( $tableDetailRowVal as $tableRowDetailKey => $tableRowDetail )

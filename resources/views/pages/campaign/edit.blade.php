@@ -97,7 +97,9 @@
                                                                         <input type="text" id="budget" class="au-input au-input--full form-control" name="budget" value="" disabled />
                                                                     </div>
                                                                 </div>
-                                                                <button class="btn btn-lg btn-secondary" id="go_to_cpm_ipm">Go To CPM/IPM</button>
+                                                                <div class="head d-flex justify-content-center align-items-center mb-4">
+                                                                    <a href="javascript:void(0);" class="btn btn-lg btn-secondary tab-btn" attr-active="cpm-imp" >Go To CPM/IPM</a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -115,6 +117,10 @@
                                                                             @endif
                                                                         </select>
                                                                     </div>
+                                                                </div>
+                                                                <div class="head d-flex justify-content-center align-items-center mb-4">
+                                                                    <a href="javascript:void(0);" class="btn btn-lg btn-secondary tab-btn" attr-active="general" >Go To General</a>
+                                                                    <a href="javascript:void(0);" class="btn btn-lg btn-secondary ml-5 tab-btn" attr-active="flighting" >Go To Flighting</a>
                                                                 </div>
                                                             </div> 
                                                         </div>
@@ -188,6 +194,10 @@
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
+                                                                </div>
+                                                                <div class="head d-flex justify-content-center align-items-center mb-4">
+                                                                    <a href="javascript:void(0);" class="btn btn-lg btn-secondary tab-btn" attr-active="cpm-imp" >Go To CPM/IPM</a>
+                                                                    <a href="javascript:void(0);" class="btn btn-lg btn-secondary ml-5 tab-btn" attr-active="summary" >Go To Summary</a>
                                                                 </div>
                                                             </div> 
                                                         </div>
@@ -350,6 +360,10 @@
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
+                                                                </div>
+                                                                <div class="head d-flex justify-content-center align-items-center mb-4">
+                                                                    <a href="javascript:void(0);" class="btn btn-lg btn-secondary tab-btn" attr-active="cpm-imp" >Go To CPM/IPM</a>
+                                                                    <a href="javascript:void(0);" class="btn btn-lg btn-secondary ml-5 tab-btn" attr-active="summary" >Go To Summary</a>
                                                                 </div>
                                                             </div>
                                                         </div>

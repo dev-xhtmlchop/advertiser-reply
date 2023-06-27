@@ -34,8 +34,8 @@
                                                 @foreach( $tableDetailRowVal as $tableRowDetailKey => $tableRowDetailVal )
                                                     @if( $tableRowDetailKey == 'deal_auto_id' )
                                                     <td>
-                                                        <label class="au-radio deal-number">
-                                                            <input type="radio" value="{{ $tableDetailRowVal['campaign_id'] }}" name="deal_number" id="deal_number" autoid="" >
+                                                        <label class="form-check au-radio deal-number">
+                                                            <input class="form-check-input" type="radio" value="{{ $tableDetailRowVal['campaign_id'] }}" name="deal_number" id="deal_number" autoid="" >
                                                         </label>
                                                     </td>
                                                     @elseif( $tableRowDetailKey == 'day_time' )
@@ -50,7 +50,7 @@
                                 </table>
                             </div>
                             <div class="head d-flex justify-content-center align-items-center mb-4">
-                                <button class="btn btn-lg btn-secondary" id="edit_campaign" dealid="" autoincrementid="" disabled>Edit Campaign</button>
+                                <button class="btn btn-lg btn-secondary" id="edit_campaign_id" dealid="" autoincrementid="" disabled>Edit Campaign</button>
                             </div>
                         </div>
                     </div>
