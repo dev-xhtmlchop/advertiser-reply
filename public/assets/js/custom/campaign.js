@@ -9,12 +9,13 @@ $(document).ready(function(){
         ]
     });
     $('input[name="flight_start_date"], input[name="flight_end_date"]').daterangepicker({
+        autoUpdateInput: false,
         locale: {
             format: 'MM/DD/YYYY',
-      },
-      singleDatePicker: true
+        },
+        singleDatePicker: true
     });
-    $('input[name="sunday_split"], input[name="monday_split"], input[name="tuesday_split"], input[name="wednesday_split"], input[name="thursday_split"], input[name="friday_split"], input[name="saturday_split"]').keypress(function (e) {    
+    /*$('input[name="sunday_split"], input[name="monday_split"], input[name="tuesday_split"], input[name="wednesday_split"], input[name="thursday_split"], input[name="friday_split"], input[name="saturday_split"]').keypress(function (e) {    
         var charCode = (e.which) ? e.which : event.keyCode    
         if (String.fromCharCode(charCode).match(/[^0-9-%]/g)) {
             return false;
@@ -24,7 +25,7 @@ $(document).ready(function(){
         $(this).val(function(i, v) {
          return v.replace('%','') + '%';  
         });
-    });
+    });*/
 
     $('input[name="ad_length"]').daterangepicker({
         timePicker : true,
@@ -51,15 +52,16 @@ $(document).ready(function(){
     $('.campaign-edit .tab-btn').click(function(e){
         e.preventDefault();
         var tabClass = $(this).attr('attr-active'); 
-        $('#nav-tabContent .tab-pane').each(function(){
+        $('ul.nav-tabs li a').each(function(){
+            console.log( $(this).attr('class'));
+            $(this).removeClass('active').attr('aria-selected', false);
+        });
+        $('#'+tabClass).addClass('active').attr('aria-selected', true);;
+
+        $('#content .tab-pane').each(function(){
             $(this).removeClass('show').removeClass('active');
         });
-        $('#'+tabClass).addClass('show').addClass('active');
-
-        $('#nav-tab .nav-item').each(function(){
-            $(this).removeClass('active');
-        });
-        $('#'+tabClass+'-tab').addClass('active');
+        $('.'+tabClass+'-tab').addClass('show').addClass('active');
         getCampaignDetail();
     });
     function getCampaignDetail(){

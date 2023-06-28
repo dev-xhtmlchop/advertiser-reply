@@ -20,11 +20,9 @@ function getDealViewData( dealStatus = null){
         type: 'POST',
         data: {_token: CSRF_TOKEN, data: dealStatus},
         success: function(response){
-            console.log( response.deal_table_html );
-            /*$.each(response.deal_table_html.tableData,function( index, value ){
-                console.log( value.deal_id )
-            });*/
-            $('#deal_view_body').empty().append(response.deal_table_html)
+            $('#deals_table').DataTable().destroy();
+            $('#deal_view_body').empty().append(response.deal_table_html);
+            $('#deals_table').DataTable().draw();
             if( response.deal_view_data ){
                 var dealViewData = response.deal_view_data;
                 $('#deal_dollars').empty().append('$'+Number(nullNumber(dealViewData.rate)).toLocaleString('en'));

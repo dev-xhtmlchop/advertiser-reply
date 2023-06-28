@@ -62,11 +62,11 @@ $(document).ready(function(){
     });
     $('#deal_reset').click(function(){
         getDealDashboardData();
-        $('#daterange').val('');
+        $('#daterange').val('').datepicker('setDate', null);
     });
     $('#advertiser_reset').click(function(){
         getAdvertiserDashboardData();
-        $('#advertiser_daterange').val('');
+        $('#advertiser_daterange').val('').datepicker('setDate', null);
     });
 
    // $("#myModal").modal('show');

@@ -32,10 +32,10 @@ class DashboardController extends Controller
 
     public function filterAllDropdownData(){
         $advertiserId = Session::get('advertiser_id');
-        $dealData = Deals::join('deal_payloads', 'deal_payloads.deal_id', '=', 'deals.id')->where('advertiser_id', '=' , $advertiserId)
-                    ->get(['deal_payloads.name as deal_payloads_name','deal_payloads.deal_id as deal_payloads_id'])->toArray();
-        $campaignData = Campaigns::join('campaign_payloads', 'campaign_payloads.campaign_id', '=', 'campaigns.id')->where('advertiser_id', '=' , $advertiserId)
-                ->get(['campaign_payloads.campaign_id as campaign_id','campaign_payloads.name as campaign_name'])->toArray();
+        $dealData = Deals::join('deal_payloads', 'deal_payloads.id', '=', 'deals.deal_payload_id')->where('advertiser_id', '=' , $advertiserId)
+                    ->get(['deal_payloads.name as deal_payloads_name','deals.id as deal_payloads_id'])->toArray();
+        $campaignData = Campaigns::join('campaign_payloads', 'campaign_payloads.id', '=', 'campaigns.campaign_payload_id')->where('advertiser_id', '=' , $advertiserId)
+                ->get(['campaigns.id as campaign_id','campaign_payloads.name as campaign_name'])->toArray();
         $demographicsList = Demographic::where('status', '=' , 1)->get(['demographics.id as demographics_id','demographics.name as demographics_name'])->toArray();
         $outletList = Outlets::where('status', '=' , 1)->get(['outlets.id as outlets_id','outlets.outlet_type as outlets_name'])->toArray();
         $agencyList = Agencys::where('status', '=' , 1)->get(['agencys.id as agencys_id','agencys.name as agencys_name'])->toArray();
@@ -73,16 +73,17 @@ class DashboardController extends Controller
     }
 
     public function dashboardDealFilter( Request $request){
-        $advertiserId = Session::get('advertiser_id');
+       $advertiserId = Session::get('advertiser_id');
         if( $request->data !== null ){
             $data = $request->data;
-            $results = DealPayload::join('deals', 'deals.id', '=', 'deal_payloads.deal_id')
+            $results = Deals::join('deal_payloads','deal_payloads.id', '=', 'deals.deal_payload_id' )
+                ->join('campaigns', 'campaigns.deal_id', '=', 'deals.id')->where( 'campaigns.delete','=',0)
                 ->where('deals.advertiser_id','=', $advertiserId)
                 ->when($data['deal_no'], function ($query) use ($data) {
-                    return $query->where('deal_payloads.deal_id','=', $data['deal_no']);
+                    return $query->where('deals.id','=', $data['deal_no']);
                 })
                 ->when($data['campaign'], function ($query) use ($data) {
-                    return $query->where('deals.campaign_id','=', $data['campaign']);
+                    return $query->where('campaigns.id','=', $data['campaign']);
                 })
                 ->when($data['demographics'], function ($query) use ($data) {
                     return $query->where('deals.demographic_id','=', $data['demographics']);
@@ -107,11 +108,11 @@ class DashboardController extends Controller
                     DB::raw('SUM(deal_payloads.impressions) as impressions'),
                     DB::raw('SUM(deal_payloads.grp) as grp'),
                     DB::raw('SUM(deal_payloads.deal_unit) as deal_unit'),
-                  ))->toArray();
-              
-
-            $filterData = Deals::join('deal_payloads', 'deals.id', '=', 'deal_payloads.deal_id')
-                ->join('campaign_payloads', 'campaign_payloads.campaign_id', '=', 'deals.campaign_id')->where( 'campaign_payloads.delete','=',0)
+                  ));
+             
+            $filterData = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')
+                ->join('campaigns', 'campaigns.deal_id', '=', 'deals.id')->where( 'campaigns.delete','=',0)
+                ->join('campaign_payloads', 'campaign_payloads.id', '=', 'campaigns.campaign_payload_id')->where( 'campaigns.delete','=',0)
                 ->join('demographics', 'demographics.id', '=', 'deals.demographic_id')->where( 'demographics.status','=',1)
                 ->join('outlets', 'outlets.id', '=', 'deals.outlet_id')->where( 'outlets.status','=',1)
                 ->join('agencys', 'agencys.id', '=', 'deals.agency_id')->where( 'agencys.status','=',1)
@@ -121,7 +122,7 @@ class DashboardController extends Controller
                 ->when($data['deal_no'], function ($query) use ($data) {
                     return $query->where('deals.id','=', $data['deal_no']);
                 })->when($data['campaign'], function ($query) use ($data) {
-                    return $query->where('deals.campaign_id','=', $data['campaign']);
+                    return $query->where('campaigns.id','=', $data['campaign']);
                 })->when($data['demographics'], function ($query) use ($data) {
                     return $query->where('deals.demographic_id','=', $data['demographics']);
                 })->when($data['outlet'], function ($query) use ($data) {
@@ -136,8 +137,8 @@ class DashboardController extends Controller
                     return $query->whereDate('deal_payloads.flight_start_date', '>=', $data['start_daterange'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_daterange']);
                 })->get([
                     'deal_payloads.name as deal_payloads_name',
-                    'deal_payloads.deal_id as deal_payloads_id',
-                    'campaign_payloads.campaign_id as campaign_id',
+                    'deals.id as deal_payloads_id',
+                    'campaigns.id as campaign_id',
                     'campaign_payloads.name as campaign_name',
                     'demographics.id as demographics_id',
                     'demographics.name as demographics_name',
@@ -170,6 +171,7 @@ class DashboardController extends Controller
                     'brand' =>  $brandsDropdownOptions,
                 );
             }
+            
             $response = array(
                     'result' => $results, 
                     'dropdown' => $filterDropDownData
@@ -177,7 +179,8 @@ class DashboardController extends Controller
             return response()->json($response);  
 
         }else{
-            $results = DealPayload::join('deals', 'deals.id', '=', 'deal_payloads.deal_id')
+            $results = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')
+                ->join('campaigns', 'campaigns.deal_id', '=', 'deals.id')->where( 'campaigns.delete','=',0)
                 ->where('deals.advertiser_id','=', $advertiserId)->first( array(
                     DB::raw('SUM(deal_payloads.rate) as rate'),
                     DB::raw('SUM(deal_payloads.cpm) as cpm'),

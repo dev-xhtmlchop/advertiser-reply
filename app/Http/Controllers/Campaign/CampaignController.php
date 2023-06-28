@@ -21,17 +21,18 @@ class CampaignController extends Controller
     public function index(){
         $advertiserId = Session::get('advertiser_id');
         $campaignTableTitle = Helper::campaignViewTableName();
-        $campaignList = Campaigns::join('campaign_payloads', 'campaigns.id', '=', 'campaign_payloads.campaign_id')
+        $campaignList = Campaigns::join('campaign_payloads', 'campaigns.campaign_payload_id', '=', 'campaign_payloads.id')
             ->where('campaigns.advertiser_id', '=', $advertiserId)
             ->join('day_parts', 'campaigns.daypart_id', '=', 'day_parts.id')->where('day_parts.status','=', 1)
             ->join('brands', 'campaigns.brand_id', '=', 'brands.id')->where('brands.status','=', 1)
             ->join('medias', 'campaigns.media_id', '=', 'medias.id')->where('medias.status','=', 1)
-            ->join('deal_payloads', 'campaigns.id', '=', 'deal_payloads.campaign_id')
+            ->join('deals', 'campaigns.deal_id', '=', 'deals.id')
+            ->join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')
             ->orderBy('campaigns.id', 'asc');
         $campaignTableData =  $campaignList->get([
             'deal_payloads.id as deal_auto_id',
-            'deal_payloads.deal_id as deal_id', 
-            'campaign_payloads.campaign_id as campaign_id',
+            'campaigns.deal_id as deal_id', 
+            'campaigns.id as campaign_id',
             'campaign_payloads.name as campaign_payloads_name', 
             'deal_payloads.name as deal_payloads_name',
             'day_parts.name as day_time', 
@@ -47,7 +48,6 @@ class CampaignController extends Controller
             'deal_payloads.total_avil as total_avil', 
             'deal_payloads.total_unit as total_unit', 
         ])->toArray();
-        
         
         $campaignDayTableData =  $campaignList->get([
             'campaign_payloads.sunday as sunday', 
@@ -85,7 +85,7 @@ class CampaignController extends Controller
         if( $request['campaignId'] != '' ){
             $campaignID = $request['campaignId'];
             $advertiserId = Session::get('advertiser_id');
-            $campaignList = Campaigns::join('campaign_payloads', 'campaigns.id', '=', 'campaign_payloads.campaign_id')
+            $campaignList = Campaigns::join('campaign_payloads', 'campaigns.campaign_payload_id', '=', 'campaign_payloads.id')
                 ->join('brands', 'campaigns.brand_id', '=', 'brands.id')->where('brands.status','=', 1)
                 ->join('medias', 'campaigns.media_id', '=', 'medias.id')->where('medias.status','=', 1)
                 ->join('agencys', 'campaigns.agency_id', '=', 'agencys.id')->where('agencys.status','=', 1)
@@ -94,7 +94,7 @@ class CampaignController extends Controller
                 ->join('day_parts', 'campaigns.daypart_id', '=', 'day_parts.id')->where('day_parts.status','=', 1)
                 ->where('campaigns.advertiser_id', '=', $advertiserId)->where('campaigns.id','=',$campaignID)
                 ->first([
-                    'campaigns.id as campaign_payloads_id',
+                    'campaigns.id as campaign_id',
                     'campaigns.*',
                     'brands.product_name as brand_name',
                     'demographics.name as demographics_name',
@@ -126,7 +126,7 @@ class CampaignController extends Controller
 
     public function getEditCampaignInfo(Request $request, $campaignID){
         $advertiserId = Session::get('advertiser_id');
-        $campaignList = Campaigns::join('campaign_payloads', 'campaigns.id', '=', 'campaign_payloads.campaign_id')
+        $campaignList = Campaigns::join('campaign_payloads', 'campaigns.campaign_payload_id', '=', 'campaign_payloads.id')
             ->where('campaigns.advertiser_id', '=', $advertiserId)->where('campaigns.id','=',$campaignID)
             ->first([
                 'campaigns.id as campaign_payloads_id',

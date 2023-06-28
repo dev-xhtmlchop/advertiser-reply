@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->index('advertiser_id')->nullable();
             $table->foreignId('advertiser_id')->references('id')->on('advertisers');
+            $table->index('client_id')->nullable();
+            $table->foreignId('client_id')->references('id')->on('clients');
             $table->string('login_access_token')->unique();
             $table->enum('role', ['advertiser', 'broadcaster']);
             $table->string('user_name')->unique();
