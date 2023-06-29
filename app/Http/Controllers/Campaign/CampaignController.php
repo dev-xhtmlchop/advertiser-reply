@@ -29,6 +29,7 @@ class CampaignController extends Controller
             ->join('deals', 'campaigns.deal_id', '=', 'deals.id')
             ->join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')
             ->orderBy('campaigns.id', 'asc');
+
         $campaignTableData =  $campaignList->get([
             'deal_payloads.id as deal_auto_id',
             'campaigns.deal_id as deal_id', 
@@ -49,35 +50,16 @@ class CampaignController extends Controller
             'deal_payloads.total_unit as total_unit', 
         ])->toArray();
         
-        $campaignDayTableData =  $campaignList->get([
-            'campaign_payloads.sunday as sunday', 
-            'campaign_payloads.monday as monday', 
-            'campaign_payloads.tuesday as tuesday', 
-            'campaign_payloads.wednesday as wednesday', 
-            'campaign_payloads.thursday as thursday', 
-            'campaign_payloads.friday as friday',
-            'campaign_payloads.saturday as saturday'
-            ])->toArray();
-        $dayOfArray = array( 'sunday' => 'S', 'monday' => 'M','tuesday' => 'T','wednesday' => 'W', 'thursday' => 'T', 'friday' => 'F', 'saturday' => 'S' );
-        if( count ( $campaignDayTableData ) > 0 ){
-            foreach( $campaignDayTableData as $campaignDayTableKey => $campaignDayTableVal ){
-                foreach( $campaignDayTableVal as $campaignSingleDayKey => $campaignSingleDayVal ){
-                    if( ( $campaignSingleDayVal == 1 ) && ( array_key_exists( $campaignSingleDayKey, $dayOfArray ) ) ){
-                        $campaignDayTableVal[$campaignSingleDayKey] =  $dayOfArray[$campaignSingleDayKey];
-                    }
-                }
-                $campaignDayTableData[$campaignDayTableKey] = implode(" ", $campaignDayTableVal);
-            }
-        }
-        
-        $campaignPagination = $campaignList->paginate(2);
+        $campaignDayTableData = Helper::campaignDayTime( $campaignList, 'campaign_payloads' );
+        $campaignTableData = Helper::tableAddDaysAndTime( $campaignTableData, $campaignDayTableData, 1 ); 
+        $cahngeDateFormateFlightStart = Helper::changeDateFormate( $campaignTableData, 'campaign_payloads_flight_start_date', 1);
+        $finalAllCampaignData = Helper::changeDateFormate( $cahngeDateFormateFlightStart, 'campaign_payloads_flight_end_date', 1);
         $data = array( 
-                'title' => 'Campaign',
-                'tableTitle' => $campaignTableTitle,
-                'dayTableData' => $campaignDayTableData,
-                'tableData' => $campaignTableData, 
-                'pagination' => $campaignPagination,
-            );
+            'title' => 'Campaign',
+            'tableTitle' => $campaignTableTitle,
+            'dayTableData' => '',
+            'tableData' => $finalAllCampaignData, 
+        );
         return view( 'pages.campaign.index', $data );
     }
 
@@ -92,25 +74,35 @@ class CampaignController extends Controller
                 ->join('outlets', 'campaigns.outlet_id', '=', 'outlets.id')->where('outlets.status','=', 1)
                 ->join('demographics', 'campaigns.demographic_id', '=', 'demographics.id')->where('demographics.status','=', 1)
                 ->join('day_parts', 'campaigns.daypart_id', '=', 'day_parts.id')->where('day_parts.status','=', 1)
-                ->where('campaigns.advertiser_id', '=', $advertiserId)->where('campaigns.id','=',$campaignID)
-                ->first([
-                    'campaigns.id as campaign_id',
-                    'campaigns.*',
-                    'brands.product_name as brand_name',
-                    'demographics.name as demographics_name',
-                    'outlets.outlet_type as outlets_name',
-                    'day_parts.name as day_parts_name',
-                    'medias.name as media_name', 
-                    'agencys.name as agency_name',
-                    'agencys.agency_commission as agency_commission',
-                    'campaign_payloads.*'
-                ])->toArray();
+                ->join('deals', 'campaigns.deal_id', '=', 'deals.id')
+                ->join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')
+                ->where('campaigns.advertiser_id', '=', $advertiserId)->where('campaigns.id','=',$campaignID);
+
+            $campaignListArray = $campaignList ->first([
+                'campaigns.id as campaign_id',
+                'campaigns.*',
+                'day_parts.name as time_day_part',
+                'deal_payloads.name as deal_payloads_name',
+                'brands.product_name as brand_name',
+                'demographics.name as demographics_name',
+                'outlets.outlet_type as outlets_name',
+                'day_parts.name as day_time',
+                'medias.name as media_name', 
+                'agencys.name as agency_name',
+                'agencys.agency_commission as agency_commission',
+                'campaign_payloads.*'
+            ])->toArray();
         
+            $campaignDayTableData = Helper::campaignDayTime( $campaignList, 'campaign_payloads' );
+            $campaignTableData = Helper::tableAddDaysAndTime( $campaignListArray, $campaignDayTableData, 0 ); 
+            $cahngeDateFormateFlightStart = Helper::changeDateFormate( $campaignTableData, 'flight_start_date', 0);
+            $finalCampaignData = Helper::changeDateFormate( $cahngeDateFormateFlightStart, 'flight_end_date', 0);
+
             $response = array(
                 'status' => 1,
                 'message' => 'Data',
                 'data' => array(
-                    'campaign_data' => $campaignList, 
+                    'campaign_data' => $finalCampaignData 
                 )
             );
             return response()->json($response);  

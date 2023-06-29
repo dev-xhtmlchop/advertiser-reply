@@ -208,6 +208,79 @@ class Helper{
             return array_unique($dealDropdown);
         }
     }
-  
+    public static function tableAddDaysAndTime( $campainTableArray, $campainArray, $flag ){
+        $dayOfArray = array( 'sunday' => 'S', 'monday' => 'M','tuesday' => 'T','wednesday' => 'W', 'thursday' => 'T', 'friday' => 'F', 'saturday' => 'S' );
+        $newCampaingTableData = [];
+        if( count( $campainTableArray ) > 0 ){
+            if( count ( $campainArray ) > 0 ){
+                foreach( $campainArray as $campaignDayTableKey => $campaignDayTableVal ){
+                    foreach( $campaignDayTableVal as $campaignSingleDayKey => $campaignSingleDayVal ){
+                        if( ( $campaignSingleDayVal == 1 ) && ( array_key_exists( $campaignSingleDayKey, $dayOfArray ) ) ){
+                            $campaignDayTableVal[$campaignSingleDayKey] =  $dayOfArray[$campaignSingleDayKey];
+                        }
+                    }
+                    $campainArray[$campaignDayTableKey] = implode(" ", $campaignDayTableVal);
+                }
+            }
+            if( $flag == 1 ){
+                foreach( $campainTableArray as $campainSingleTableKey => $campainSingleTableValue ){
+                    foreach( $campainSingleTableValue as $campainTableKey => $campainTableValue ){
+                        if( $campainTableKey == 'day_time' ){
+                            //echo $campainArray[$campainSingleTableKey].' '.$campainTableValue;
+                            $campainSingleTableValue[$campainTableKey] = $campainArray[$campainSingleTableKey].' '.$campainTableValue;
+                        }
+                    }
+                    $newCampaingTableData[] = $campainSingleTableValue;
+                }
+            }else{
+                foreach( $campainTableArray as $campainTableKey => $campainTableValue ){
+                    if( $campainTableKey == 'day_time' ){
+                        $campainTableArray[$campainTableKey] = $campainArray[0].' '.$campainTableValue;
+                    }
+                }
+                $newCampaingTableData = $campainTableArray;
+            }
+        }
+        return $newCampaingTableData;
+    }
+
+    public static function campaignDayTime( $daytime, $tableName ){
+        return  $daytime->get([
+            $tableName.'.sunday as sunday', 
+            $tableName.'.monday as monday', 
+            $tableName.'.tuesday as tuesday', 
+            $tableName.'.wednesday as wednesday', 
+            $tableName.'.thursday as thursday', 
+            $tableName.'.friday as friday',
+            $tableName.'.saturday as saturday'
+        ])->toArray();
+    }
+
+    public static function changeDateFormate( $dataArray, $fieldName, $flag ){
+        $newDataArray = [];
+        if( $flag == 1 ){
+            if( count( $dataArray ) > 0){
+                foreach( $dataArray as $dataSingleArrayKey => $dataSingleArrayVal){
+                    foreach( $dataSingleArrayVal as $dataArrayKey => $dataArrayValue){
+                        if( $dataArrayKey == $fieldName ){
+                            $dataSingleArrayVal[$dataArrayKey] = date('m/d/Y', strtotime($dataArrayValue)); 
+                        }
+                    }
+                    $newDataArray[] = $dataSingleArrayVal;
+                }
+                
+            }
+        }else{
+            if( count( $dataArray ) > 0){
+                foreach( $dataArray as $dataArrayKey => $dataArrayValue){
+                    if( $dataArrayKey == $fieldName ){
+                        $dataArray[$dataArrayKey] = date('m/d/Y', strtotime($dataArrayValue)); 
+                    }
+                }
+                $newDataArray = $dataArray;
+            }
+        }
+        return $newDataArray;
+    }
 }
 ?>

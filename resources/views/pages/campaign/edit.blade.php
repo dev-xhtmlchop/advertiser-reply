@@ -33,9 +33,9 @@
                                         <a id="summary" href="#pane-D" class="nav-link" data-bs-toggle="tab" role="tab"><i class="fa fa-file-text" aria-hidden="true"></i>Summary</a>
                                     </li>
                                 </ul>
-                                <form method="post" id="edit_campaign">
-                                    <input type="hidden" name="campaign_id" id="campaign_id" value="" />
-                                    <div id="content" class="tab-content" role="tablist">
+                                <div id="content" class="tab-content" role="tablist">
+                                    <form method="post" id="edit_campaign">
+                                        <input type="hidden" name="campaign_id" id="campaign_id" value="" />
                                         <div id="pane-A" class="general-tab card tab-pane fade show active" role="tabpanel"
                                             aria-labelledby="general">
                                             <div class="card-header" role="tab" id="heading-A">
@@ -171,7 +171,7 @@
                                                                     <label for="revenue_risk">Ad Length</label>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
-                                                                    <input type="text" id="ad_length" class="au-input au-input--full form-control" name="ad_length" value="" disabled="">
+                                                                    <input type="text" id="ad_length" class="au-input au-input--full form-control" name="ad_length" value="" >
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -205,7 +205,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <table class="table custom-table table-borderless table-striped dataTable no-footer">
+                                                        <table class="table custom-table table-borderless table-striped dataTable no-footer" id="edit_flight">
                                                             <thead>
                                                                 <tr>
                                                                     <th></th>
@@ -221,23 +221,23 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td>Days</td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="sunday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="monday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="tuesday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="wednesday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="thursday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="friday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="saturday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="sunday" id="sunday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="monday" id="monday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="tuesday" id="tuesday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="wednesday" id="wednesday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="thursday" id="thursday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="friday" id="friday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="saturday" id="saturday"  /></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Split</td>
-                                                                    <td><input type="number" class="au-input form-control"  name="sunday_split" max="100" /></td>
-                                                                    <td><input type="text" class="au-input form-control" name="monday_split" value="" max="100" maxlength='3' pattern='^[0-9]$' /></td>
-                                                                    <td><input type="text" class="au-input form-control" name="tuesday_split" value="" max="100" maxlength='3' pattern='^[0-9]$' /></td>
-                                                                    <td><input type="text" class="au-input form-control" name="wednesday_split" value="" max="100" maxlength='2' pattern='^[0-9]$' /></td>
-                                                                    <td><input type="text" class="au-input form-control" name="thursday_split" value="" max="100" maxlength='2' pattern='^[0-9]$' /></td>
-                                                                    <td><input type="text" class="au-input form-control" name="friday_split" value="" max="100" maxlength='2' pattern='^[0-9]$' /></td>
-                                                                    <td><input type="text" class="au-input form-control" name="saturday_split" value="" max="100" maxlength='2' pattern='^[0-9]$' /></td>
+                                                                    <td><input type="number" class="au-input form-control" name="sunday_split" id="sunday_split" value="" max="100" /></td>
+                                                                    <td><input type="number" class="au-input form-control" name="monday_split" id="monday_split" value="" max="100" /></td>
+                                                                    <td><input type="number" class="au-input form-control" name="tuesday_split" id="tuesday_split" value="" max="100" /></td>
+                                                                    <td><input type="number" class="au-input form-control" name="wednesday_split" id="wednesday_split" value="" max="100" /></td>
+                                                                    <td><input type="number" class="au-input form-control" name="thursday_split" id="thursday_split" value="" max="100" /></td>
+                                                                    <td><input type="number" class="au-input form-control" name="friday_split" id="friday_split" value="" max="100" /></td>
+                                                                    <td><input type="number" class="au-input form-control" name="saturday_split" id="saturday_split" value="" max="100" /></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -249,7 +249,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="pane-D" class="summary-tab card tab-pane fade" role="tabpanel" aria-labelledby="summary">
+                                        <div id="pane-D" class="summary-tab card tab-pane fade " role="tabpanel" aria-labelledby="summary">
                                             <div class="card-header" role="tab" id="heading-D">
                                                 <h5 class="mb-0">
                                                     <a data-bs-toggle="collapse" href="#collapse-D"
@@ -260,7 +260,7 @@
                                             </div>
                                             <div id="collapse-D" class="collapse" data-bs-parent="#content"
                                                 role="tabpanel" aria-labelledby="heading-D">
-                                                <div class="card-body">
+                                                <div class="card-body" id="summary">
                                                     <div class="row mb-5">
                                                         <div class="col-md-6 form-group">
                                                             <label for="campaign_number">Campaign Number</label>
@@ -292,26 +292,27 @@
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label for="market_place">Market Place</label>
-                                                            <input type="text" id="market_place" class="au-input au-input--full form-control" name="market_place" value="" disabled="">
+                                                            <span class="market_place au-input au-input--full form-control"></span>
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label for="date_change">Date Change</label>
-                                                            <input type="text" id="date_change" class="au-input au-input--full form-control" name="date_change" value="" disabled="">
+                                                            <span class="date_change au-input au-input--full form-control"></span>
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label for="chnage_by">Change By</label>
-                                                            <input type="text" id="chnage_by"  class="au-input au-input--full form-control" name="chnage_by" value="" disabled="">
+                                                            <span class="chnage_by au-input au-input--full form-control"></span>
                                                         </div>
                                                     </div>
                                                     <div class="new-campaign-table mb-5">
+                                                    <h4>New Detail</h4>
                                                         <div class="flight-date row mb-4">
                                                             <div class="col-md-6 form-group flight-start-date">
                                                                 <span class="label">Flight Start Date</span>
-                                                                <span class="flight-stat-date-text au-input au-input--full form-control">MM/DD/YYYY</span>
+                                                                <span class="new-flight-stat-date-text au-input au-input--full form-control ">MM/DD/YYYY</span>
                                                             </div>
                                                             <div class="col-md-6 form-group flight-end-date">
                                                                 <span class="label">Flight End Date</span>
-                                                                <span class="flight-end-date-text au-input au-input--full form-control">MM/DD/YYYY</span>
+                                                                <span class="new-flight-end-date-text au-input au-input--full form-control">MM/DD/YYYY</span>
                                                             </div>
                                                         </div>
                                                         <div class="new-campaign-table">
@@ -337,27 +338,28 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr class="tr-shadow">
-                                                                        <td>110000003</td>
-                                                                        <td>WWE Abc</td>
-                                                                        <td>WWE Abc</td>
-                                                                        <td>PRIME</td>
-                                                                        <td>X3</td>
-                                                                        <td>2023-05-01 13:33:50</td>
-                                                                        <td>2024-06-30 13:33:50</td>
-                                                                        <td>Linear</td>
-                                                                        <td>NR</td>
-                                                                        <td>20</td>
-                                                                        <td>29</td>
-                                                                        <td>29</td>
-                                                                        <td>140</td>
-                                                                        <td>144</td>
-                                                                        <td>1</td>
+                                                                        <td class="new-campaign-id">110000003</td>
+                                                                        <td class="new-campaign-name" >WWE Abc</td>
+                                                                        <td class="new-campaign-deal-name" >WWE Abc</td>
+                                                                        <td class="new-campaign_day-time" >PRIME</td>
+                                                                        <td class="new-campaign-brand" >X3</td>
+                                                                        <td class="new-campaign-start-flight-date" >2023-05-01</td>
+                                                                        <td class="new-campaign-end-flight-date" >2024-06-30</td>
+                                                                        <td class="new-campaign-media-line" >Linear</td>
+                                                                        <td class="new-campaign-inv-type" >NR</td>
+                                                                        <td class="new-campaign-inv-length" >20</td>
+                                                                        <td class="new-campaign-rate" >29</td>
+                                                                        <td class="new-campaign-do-rate" >29</td>
+                                                                        <td class="new-campaign-per-rate" >140</td>
+                                                                        <td class="new-campaign-total-avail" >144</td>
+                                                                        <td class="new-campaign-total-unit" >1</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
                                                         </div>
                                                     </div>
                                                     <div class="old-campaign-table">
+                                                        <h4>Old Detail</h4>
                                                         <div class="flight-date row mb-4">
                                                             <div class="flight-start-date form-group col-md-6">
                                                                 <span class="label">Flight Start Date</span>
@@ -368,7 +370,7 @@
                                                                 <span class="flight-end-date-text au-input au-input--full form-control">MM/DD/YYYY</span>
                                                             </div>
                                                         </div>
-                                                        <div class="new-campaign-table">
+                                                        <div class="old-campaign-table">
                                                             <table id="old_campaign_table" class="table custom-table table-borderless table-striped dataTable no-footer" style="width:100%">
                                                                 <thead>
                                                                     <tr>
@@ -391,21 +393,21 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr class="tr-shadow">
-                                                                        <td>110000003</td>
-                                                                        <td>WWE Abc</td>
-                                                                        <td>WWE Abc</td>
-                                                                        <td>PRIME</td>
-                                                                        <td>X3</td>
-                                                                        <td>2023-05-01 13:33:50</td>
-                                                                        <td>2024-06-30 13:33:50</td>
-                                                                        <td>Linear</td>
-                                                                        <td>NR</td>
-                                                                        <td>20</td>
-                                                                        <td>29</td>
-                                                                        <td>29</td>
-                                                                        <td>140</td>
-                                                                        <td>144</td>
-                                                                        <td>1</td>
+                                                                        <td class="old-campaign-id">110000003</td>
+                                                                        <td class="old-campaign-name" >WWE Abc</td>
+                                                                        <td class="old-campaign-deal-name" >WWE Abc</td>
+                                                                        <td class="old-campaign_day-time" >PRIME</td>
+                                                                        <td class="old-campaign-brand" >X3</td>
+                                                                        <td class="old-campaign-start-flight-date" >2023-05-01</td>
+                                                                        <td class="old-campaign-end-flight-date" >2024-06-30</td>
+                                                                        <td class="old-campaign-media-line" >Linear</td>
+                                                                        <td class="old-campaign-inv-type" >NR</td>
+                                                                        <td class="old-campaign-inv-length" >20</td>
+                                                                        <td class="old-campaign-rate" >29</td>
+                                                                        <td class="old-campaign-do-rate" >29</td>
+                                                                        <td class="old-campaign-per-rate" >140</td>
+                                                                        <td class="old-campaign-total-avail" >144</td>
+                                                                        <td class="old-campaign-total-unit" >1</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -419,8 +421,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         @else

@@ -38,8 +38,6 @@
                                                             <input class="form-check-input" type="radio" value="{{ $tableDetailRowVal['campaign_id'] }}" name="deal_number" id="deal_number" autoid="" >
                                                         </label>
                                                     </td>
-                                                    @elseif( $tableRowDetailKey == 'day_time' )
-                                                    <td class="{{ $tableRowDetailKey }}">{{ $dayTableData[$tableDetailRowKey] }} {{ $tableRowDetailVal }}</td>
                                                     @else
                                                         <td key="{{ $tableRowDetailKey }}">{{ $tableRowDetailVal }}</td>    
                                                     @endif

@@ -195,19 +195,18 @@ class DashboardController extends Controller
             );
             return response()->json($response);        
         }
-
     }
 
     public function dashboardAdvertiserFilter( Request $request){
         if( $request->data !== null ){
             $data = $request->data;
-            $inflight = DealPayload::join('deals', 'deals.id', '=', 'deal_payloads.deal_id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','inflight')->count();
-            $approved = DealPayload::join('deals', 'deals.id', '=', 'deal_payloads.deal_id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','approved')->count();
-            $proposal = DealPayload::join('deals', 'deals.id', '=', 'deal_payloads.deal_id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','proposal')->count();
-            $ordered = DealPayload::join('deals', 'deals.id', '=', 'deal_payloads.deal_id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','ordered')->count();
-            $planning = DealPayload::join('deals', 'deals.id', '=', 'deal_payloads.deal_id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','planning')->count();
-            $ended = DealPayload::join('deals', 'deals.id', '=', 'deal_payloads.deal_id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','ended')->count();
-            $expired = DealPayload::join('deals', 'deals.id', '=', 'deal_payloads.deal_id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','expired')->count();
+            $inflight = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','inflight')->count();
+            $approved = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','approved')->count();
+            $proposal = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','proposal')->count();
+            $ordered = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','ordered')->count();
+            $planning = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','planning')->count();
+            $ended = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','ended')->count();
+            $expired = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','expired')->count();
         }else{
             $inflight = Deals::where('status','inflight')->count();
             $approved = Deals::where('status','approved')->count();
