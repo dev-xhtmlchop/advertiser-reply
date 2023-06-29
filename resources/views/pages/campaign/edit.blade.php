@@ -18,24 +18,24 @@
                                     <span>Deal Year {{ $campaign['campaigns_year'] }}</span>
                                 </div>
                             </div>
-                            <div class="responsive-tabs d-md-flex">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item">
-                                        <a id="general" href="#pane-A" class="nav-link active" data-bs-toggle="tab" role="tab"><i class="fa fa-wrench" aria-hidden="true"></i>General</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a id="cpm-imp" href="#pane-B" class="nav-link" data-bs-toggle="tab" role="tab"><i class="fa fa-users" aria-hidden="true"></i>CPM/IPM</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a id="flighting" href="#pane-C" class="nav-link" data-bs-toggle="tab" role="tab"><i class="fa fa-calendar-o" aria-hidden="true"></i>Flighting</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a id="summary" href="#pane-D" class="nav-link" data-bs-toggle="tab" role="tab"><i class="fa fa-file-text" aria-hidden="true"></i>Summary</a>
-                                    </li>
-                                </ul>
-                                <div id="content" class="tab-content" role="tablist">
-                                    <form method="post" id="edit_campaign">
-                                        <input type="hidden" name="campaign_id" id="campaign_id" value="" />
+                            <form method="post" id="edit_campaign">
+                            <input type="hidden" name="campaign_id" id="campaign_id" value="" />
+                                <div class="responsive-tabs d-md-flex">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a id="general" href="#pane-A" class="nav-link active" data-bs-toggle="tab" role="tab"><i class="fa fa-wrench" aria-hidden="true"></i>General</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="cpm-imp" href="#pane-B" class="nav-link" data-bs-toggle="tab" role="tab"><i class="fa fa-users" aria-hidden="true"></i>CPM/IPM</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="flighting" href="#pane-C" class="nav-link" data-bs-toggle="tab" role="tab"><i class="fa fa-calendar-o" aria-hidden="true"></i>Flighting</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="summary" href="#pane-D" class="nav-link" data-bs-toggle="tab" role="tab"><i class="fa fa-file-text" aria-hidden="true"></i>Summary</a>
+                                        </li>
+                                    </ul>
+                                    <div id="content" class="tab-content" role="tablist">
                                         <div id="pane-A" class="general-tab card tab-pane fade show active" role="tabpanel"
                                             aria-labelledby="general">
                                             <div class="card-header" role="tab" id="heading-A">
@@ -421,9 +421,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                         @else
                         <div class="deal-view-box card">
