@@ -265,7 +265,6 @@ $(document).ready(function(){
     /* Flight Section End */
 
 
-
     $('input[name="sunday_split"], input[name="monday_split"], input[name="tuesday_split"], input[name="wednesday_split"], input[name="thursday_split"], input[name="friday_split"], input[name="saturday_split"]').keypress(function (e) {    
         console.log( $(this).val() );
         var currentVal = $(this).val();
@@ -297,24 +296,6 @@ $(document).ready(function(){
         var checkDayVal = dayOfList.join(" ");
         dataAppend('#new_campaign_table .new-campaign_day-time', checkDayVal+' '+dayPartVal);
     });
-    /*$('input[name="sunday_split"], input[name="monday_split"], input[name="tuesday_split"], input[name="wednesday_split"], input[name="thursday_split"], input[name="friday_split"], input[name="saturday_split"]').keypress(function (e) {    
-        var charCode = (e.which) ? e.which : event.keyCode    
-        if (String.fromCharCode(charCode).match(/[^0-9-%]/g)) {
-            return false;
-        } 
-    }); 
-    $('input[name="sunday_split"], input[name="monday_split"], input[name="tuesday_split"], input[name="wednesday_split"], input[name="thursday_split"], input[name="friday_split"], input[name="saturday_split"]').on('input', function(e) {
-        $(this).val(function(i, v) {
-         return v.replace('%','') + '%';  
-        });
-    });*/
-   
-    /*$('#submit').click(function(){
-        $('#edit_campaign').find(':input:disabled').each(function(){
-            $(this).prop('disabled',false)
-       });
-       return true;
-    });*/
 
     $("#edit_campaign").validate({
         submitHandler: function(form) {
@@ -348,6 +329,10 @@ $(document).ready(function(){
             });
         }
     });
+
+    $('#summary .keep-original').click(function(){
+        window.location.href = URL+'/campaign';
+    })
     /* Edit Campaign page End  */
    
 });

@@ -172,7 +172,7 @@
                                             <div id="collapse-C" class="collapse" data-bs-parent="#content" role="tabpanel" aria-labelledby="heading-C">
                                                 <div class="card-body">
                                                     <div class="row mb-5">
-                                                        <div class="col-md-6 pl-md-3">
+                                                        <div class="col-md-6">
                                                             <div class="row">
                                                                 <div class="col-md-6 form-group date-field">
                                                                     <input type="text" placeholder="Flight Start Date" id="flight_start_date" class="au-input au-input--full form-control" name="flight_start_date">
@@ -182,7 +182,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6 pr-md-3">
+                                                        <div class="col-md-6">
                                                             <div class="row">
                                                                 <div class="col-md-6 form-group">
                                                                     <label for="revenue_risk">Ad Length</label>
@@ -221,7 +221,7 @@
                                                             
                                                         </div>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="flighting-table-box">
                                                         <table class="table custom-table table-borderless table-striped dataTable no-footer" id="edit_flight">
                                                             <thead>
                                                                 <tr>
@@ -238,13 +238,13 @@
                                                             <tbody>
                                                                 <tr class="day-checkbox-list">
                                                                     <td>Days</td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="S" id="sunday" value="sunday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="M" id="monday" value="monday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="T" id="tuesday" value="tuesday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="W" id="wednesday" value="wednesday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="T" id="thursday" value="thursday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="F" id="friday" value="friday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="S" id="saturday" value="saturday"  /></td>
+                                                                    <td><div class="form-check"><input type="checkbox" class="form-check-input" name="days[]" day="S" id="sunday" value="sunday"  /></div></td>
+                                                                    <td><div class="form-check"><input type="checkbox" class="form-check-input" name="days[]" day="M" id="monday" value="monday"  /></div></td>
+                                                                    <td><div class="form-check"><input type="checkbox" class="form-check-input" name="days[]" day="T" id="tuesday" value="tuesday"  /></div></td>
+                                                                    <td><div class="form-check"><input type="checkbox" class="form-check-input" name="days[]" day="W" id="wednesday" value="wednesday"  /></div></td>
+                                                                    <td><div class="form-check"><input type="checkbox" class="form-check-input" name="days[]" day="T" id="thursday" value="thursday"  /></div></td>
+                                                                    <td><div class="form-check"><input type="checkbox" class="form-check-input" name="days[]" day="F" id="friday" value="friday"  /></div></td>
+                                                                    <td><div class="form-check"><input type="checkbox" class="form-check-input" name="days[]" day="S" id="saturday" value="saturday"  /></div></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Split</td>
@@ -336,7 +336,7 @@
                                                                 <span class="new-flight-end-date-text au-input au-input--full form-control">MM/DD/YYYY</span>
                                                             </div>
                                                         </div>
-                                                        <div class="new-campaign-table">
+                                                        <div class="new-campaign-table-box">
                                                             <table id="new_campaign_table"  class="table custom-table table-borderless table-striped dataTable no-footer"  style="width:100%">
                                                                 <thead>
                                                                     <tr>
@@ -391,7 +391,7 @@
                                                                 <span class="flight-end-date-text au-input au-input--full form-control">MM/DD/YYYY</span>
                                                             </div>
                                                         </div>
-                                                        <div class="old-campaign-table">
+                                                        <div class="old-campaign-table-box">
                                                             <table id="old_campaign_table" class="table custom-table table-borderless table-striped dataTable no-footer" style="width:100%">
                                                                 <thead>
                                                                     <tr>
@@ -435,7 +435,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="btn-row mt-3 text-center">
-                                                        <a href="javascript:void(0);" class="btn btn-lg btn-secondary" attr-active="cpm-imp" >Keep Original</a>
+                                                        <a href="javascript:void(0);" class="btn btn-lg btn-secondary keep-original" attr-active="cpm-imp" >Keep Original</a>
                                                         <a href="javascript:void(0);" class="btn btn-lg btn-secondary ml-md-3 tab-btn" attr-active="flighting" >Go To Flighting</a>
                                                         <input type="submit" class="btn btn-lg btn-secondary ml-md-3" name="submit" id="submit" value="Send To Approval">
                                                     </div>

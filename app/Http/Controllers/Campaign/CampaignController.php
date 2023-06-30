@@ -57,7 +57,6 @@ class CampaignController extends Controller
         $campaignTableData = Helper::tableAddDaysAndTime( $campaignTableData, $campaignDayTableData, 1 ); 
         $cahngeDateFormateFlightStart = Helper::changeDateFormate( $campaignTableData, 'campaign_payloads_flight_start_date', 1);
         $finalAllCampaignData = Helper::changeDateFormate( $cahngeDateFormateFlightStart, 'campaign_payloads_flight_end_date', 1);
-
         return $finalAllCampaignData;
     }
     public function index(){
@@ -92,25 +91,26 @@ class CampaignController extends Controller
             DB::raw('SUM(campaign_payloads.deal_unit) as deal_unit'),
         ))->toArray();
 
-        $dealViewTable = CampaignController::campaignTableRecord( $request['data'] );
-        $dealViewTableHtml = '';
-        foreach( $dealViewTable as $key => $tableDetailRowVal ){
-            $dealViewTableHtml .= '<tr class="tr-shadow">';
-            //print_r($tableDetailRowVal);
-                foreach( $tableDetailRowVal as $tableRowDetailKey => $tableRowDetail ){
-                    if( $tableRowDetailKey == 'deal_auto_id' ) {
-                        $dealViewTableHtml .='<td>
-                        <label class="form-check au-radio deal-number">
-                            <input class="form-check-input" type="radio" value="'.$tableRowDetail['campaign_id'].'" name="deal_number" id="deal_number" autoid="" >
-                        </label>
-                    </td>';
-                    }else {
-                        $dealViewTableHtml .='<td class="'. $tableRowDetailKey .'">'. $tableRowDetail .'</td>';
-                    }
-                }    
-                $dealViewTableHtml .='</tr>';
+        $campaignViewTable = CampaignController::campaignTableRecord( $request['data'] );
+        $campaignViewTableHtml = '';
+        if( count( $campaignViewTable ) > 0 ){
+            foreach( $campaignViewTable as $key => $tableDetailRowVal ){
+                $campaignViewTableHtml .= '<tr class="tr-shadow">';
+                    foreach( $tableDetailRowVal as $tableRowDetailKey => $tableRowDetail ){
+                        if( $tableRowDetailKey == 'deal_auto_id' ) {
+                            $campaignViewTableHtml .='<td>
+                            <label class="form-check au-radio deal-number">
+                                <input class="form-check-input" type="radio" value="'.$tableDetailRowVal['campaign_id'].'" name="deal_number" id="deal_number" autoid="" >
+                            </label>
+                        </td>';
+                        }else {
+                            $campaignViewTableHtml .='<td class="'. $tableRowDetailKey .'">'. $tableRowDetail .'</td>';
+                        }
+                    }    
+                    $campaignViewTableHtml .='</tr>';
+            }
         }
-        return response()->json(array( 'deal_view_data' => $dealView, 'deal_table_html' => $dealViewTableHtml ));  
+        return response()->json(array( 'deal_view_data' => $dealView, 'deal_table_html' => $campaignViewTableHtml ));  
     }
 
     public function getEditCampaignDetail(Request $request){

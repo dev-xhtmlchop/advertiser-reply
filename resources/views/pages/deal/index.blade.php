@@ -55,7 +55,7 @@
                                                 @if( $tableTitleKey == 1 )
                                                     <th class="reorder">{{ $tableTitleRow }}</th>
                                                 @else
-                                                    <th>{{ $tableTitleRow }}</th>
+                                                    <th class="no-sort">{{ $tableTitleRow }}</th>
                                                 @endif
                                             @endforeach    
                                         </tr>
