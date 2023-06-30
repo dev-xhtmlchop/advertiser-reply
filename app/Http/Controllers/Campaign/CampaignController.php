@@ -18,11 +18,14 @@ use Illuminate\Support\Facades\Storage;
 
 class CampaignController extends Controller
 {
-    public function index(){
+    public function campaignTableRecord( $status = '' ){
         $advertiserId = Session::get('advertiser_id');
         $campaignTableTitle = Helper::campaignViewTableName();
         $campaignList = Campaigns::join('campaign_payloads', 'campaigns.campaign_payload_id', '=', 'campaign_payloads.id')
             ->where('campaigns.advertiser_id', '=', $advertiserId)
+            ->when($status, function ($query) use ($status) {
+                return $query->where('campaigns.status','=', $status);
+            })
             ->join('day_parts', 'campaigns.daypart_id', '=', 'day_parts.id')->where('day_parts.status','=', 1)
             ->join('brands', 'campaigns.brand_id', '=', 'brands.id')->where('brands.status','=', 1)
             ->join('medias', 'campaigns.media_id', '=', 'medias.id')->where('medias.status','=', 1)
@@ -54,13 +57,60 @@ class CampaignController extends Controller
         $campaignTableData = Helper::tableAddDaysAndTime( $campaignTableData, $campaignDayTableData, 1 ); 
         $cahngeDateFormateFlightStart = Helper::changeDateFormate( $campaignTableData, 'campaign_payloads_flight_start_date', 1);
         $finalAllCampaignData = Helper::changeDateFormate( $cahngeDateFormateFlightStart, 'campaign_payloads_flight_end_date', 1);
+
+        return $finalAllCampaignData;
+    }
+    public function index(){
+        $advertiserId = Session::get('advertiser_id');
+        $campaignTableTitle = Helper::campaignViewTableName();
+        $dealStatusArray = Helper::dealStatusArray();
+        $dealViewArray = Helper::dealViewArray();
         $data = array( 
             'title' => 'Campaign',
             'tableTitle' => $campaignTableTitle,
             'dayTableData' => '',
-            'tableData' => $finalAllCampaignData, 
+            'tableData' => CampaignController::campaignTableRecord(), 
+            'dealStatus' => $dealStatusArray,
+            'dealView' => $dealViewArray,
         );
         return view( 'pages.campaign.index', $data );
+    }
+
+    public function postStatus( Request $request ){
+        $advertiserId = Session::get('advertiser_id');
+
+        $dealView = Campaigns::join('campaign_payloads', 'campaigns.campaign_payload_id', '=', 'campaign_payloads.id')
+        ->where('campaigns.advertiser_id', '=', $advertiserId)
+        ->when($request['data'], function ($query) use ($request) {
+            return $query->where('campaigns.status','=', $request['data']);
+        })
+        ->first( array(
+            DB::raw('SUM(campaign_payloads.rate) as rate'),
+            DB::raw('SUM(campaign_payloads.cpm) as cpm'),
+            DB::raw('SUM(campaign_payloads.impressions) as impressions'),
+            DB::raw('SUM(campaign_payloads.grp) as grp'),
+            DB::raw('SUM(campaign_payloads.deal_unit) as deal_unit'),
+        ))->toArray();
+
+        $dealViewTable = CampaignController::campaignTableRecord( $request['data'] );
+        $dealViewTableHtml = '';
+        foreach( $dealViewTable as $key => $tableDetailRowVal ){
+            $dealViewTableHtml .= '<tr class="tr-shadow">';
+            //print_r($tableDetailRowVal);
+                foreach( $tableDetailRowVal as $tableRowDetailKey => $tableRowDetail ){
+                    if( $tableRowDetailKey == 'deal_auto_id' ) {
+                        $dealViewTableHtml .='<td>
+                        <label class="form-check au-radio deal-number">
+                            <input class="form-check-input" type="radio" value="'.$tableRowDetail['campaign_id'].'" name="deal_number" id="deal_number" autoid="" >
+                        </label>
+                    </td>';
+                    }else {
+                        $dealViewTableHtml .='<td class="'. $tableRowDetailKey .'">'. $tableRowDetail .'</td>';
+                    }
+                }    
+                $dealViewTableHtml .='</tr>';
+        }
+        return response()->json(array( 'deal_view_data' => $dealView, 'deal_table_html' => $dealViewTableHtml ));  
     }
 
     public function getEditCampaignDetail(Request $request){
@@ -145,12 +195,116 @@ class CampaignController extends Controller
             );
             return view( 'pages.campaign.edit', $data );
         }
-        /*$data = [
-            "name" => 'test1',
-            "title" => '123789'
-        ];
-        Storage::put('/public/campaign/test-new.json', json_encode($data));
-        $path = Storage::path('public\campaign\test-new.json');
-        return response()->download( $path);*/
+    }
+
+    public function postEditCampaign( Request $request ){
+        $advertiserId = Session::get('advertiser_id');
+        $userId = Session::get('user_id');
+        if( $request->data != null ){
+            $newCampaignArray = [];
+            $newDayArray = [];
+            foreach( $request->data as $value ){
+                if( $value['name'] == 'days[]'){
+                    $newDayArray[] = $value['value'];
+                }else{
+                    $newCampaignArray[$value['name']] = $value['value'];
+                }
+            }
+            $newCampaignArray['day_parts'] = $newDayArray;
+            if( count( $newCampaignArray ) > 0 ){
+                $campaignFlightStartDate = '';
+                if( $newCampaignArray['flight_start_date'] != ''){
+                    $campaignFlightStartDate = date('Y-m-d', strtotime($newCampaignArray['flight_start_date']));
+                }else{
+                    $campaignFlightStartDate = date('Y-m-d', strtotime($newCampaignArray['campaign_flight_start_date']));
+                }
+
+                $campaignFlightEndDate = '';
+                if( $newCampaignArray['flight_end_date'] != ''){
+                    $campaignFlightEndDate = date('Y-m-d', strtotime($newCampaignArray['flight_end_date']));
+                }else{
+                    $campaignFlightEndDate = date('Y-m-d', strtotime($newCampaignArray['campaign_flight_end_date']));
+                }
+
+                $dayOfArray = Helper::daySmallArray();
+                $dayOfData = [];
+                $dayOfDbData = [];
+                foreach( $dayOfArray as $dayPartsKey => $dayPartsValue ){
+                    if(in_array( $dayPartsKey, $newCampaignArray['day_parts'] )){
+                        $dayOfDbData[$dayPartsKey] = 1;
+                    }else{
+                        $dayOfDbData[$dayPartsKey] = null;
+                    }
+                }
+                
+                foreach( $newCampaignArray['day_parts'] as $dayPartsKey => $dayPartsValue ){
+                    if( array_key_exists( $dayPartsValue, $dayOfArray ) ){
+                        $dayOfData[] = $dayOfArray[$dayPartsValue];
+                    }
+                }
+                $currentDate = date('Y-m-d H:i:s');
+                
+                $updateCampaign = Campaigns::join('campaign_payloads', 'campaigns.campaign_payload_id', '=', 'campaign_payloads.id')
+                    ->where('campaigns.advertiser_id', '=', $advertiserId)
+                    ->where('campaigns.delete', '=', 0)
+                    ->where('campaign_payloads.delete', '=', 0)
+                    ->where('campaign_payloads.id','=',$newCampaignArray['campaign_payload_id'])
+                    ->where('campaigns.id','=',$newCampaignArray['campaign_id'])
+                    ->where('campaigns.deal_id','=',$newCampaignArray['campaign_deal_id'])
+                    ->update([
+                        'campaign_payloads.flight_start_date' => $campaignFlightStartDate,
+                        'campaign_payloads.flight_end_date' => $campaignFlightEndDate,
+                        'campaign_payloads.sunday' => $dayOfDbData['sunday'],
+                        'campaign_payloads.monday' => $dayOfDbData['monday'],
+                        'campaign_payloads.tuesday' => $dayOfDbData['tuesday'],
+                        'campaign_payloads.wednesday' => $dayOfDbData['wednesday'],
+                        'campaign_payloads.thursday' => $dayOfDbData['thursday'],
+                        'campaign_payloads.friday' => $dayOfDbData['friday'],
+                        'campaign_payloads.saturday' => $dayOfDbData['saturday'],
+                        'campaign_payloads.sunday_split' => $newCampaignArray['sunday_split'],
+                        'campaign_payloads.monday_split' => $newCampaignArray['monday_split'],
+                        'campaign_payloads.tuesday_split' => $newCampaignArray['tuesday_split'],
+                        'campaign_payloads.wednesday_split' => $newCampaignArray['wednesday_split'],
+                        'campaign_payloads.thursday_split' => $newCampaignArray['thursday_split'],
+                        'campaign_payloads.friday_split' => $newCampaignArray['friday_split'],
+                        'campaign_payloads.saturday_split' => $newCampaignArray['saturday_split'],
+                        'campaigns.daypart_id' => $newCampaignArray['day_parts_id'],
+                        'campaigns.updated_by' => $userId,
+                        'campaign_payloads.updated_by' => $userId,
+                        'campaigns.updated_at' => $currentDate,
+                        'campaign_payloads.updated_at' =>$currentDate,
+                    ]);
+
+
+                $json_array = array(
+                    'campaign_id' => $newCampaignArray['campaign_id'],
+                    'deal_id' => $newCampaignArray['campaign_deal_id'],
+                    'campaign_name' => $newCampaignArray['campaign_name'],
+                    'deal_title' => $newCampaignArray['deal_payloads_name'],
+                    'day_time' => implode(" ", $dayOfData).' '.$newCampaignArray['campaign_day_parts'],
+                    'brand_name' => $newCampaignArray['brand_name'],
+                    'flight_start_date' => $campaignFlightStartDate,
+                    'flight_end_date' => $campaignFlightEndDate,
+                    'media_line' => $newCampaignArray['media_line_name'],
+                    'inventory_type' => $newCampaignArray['inv_type'],
+                    'inventory_length' => $newCampaignArray['inv_length'],
+                    'dollar_rate' => $newCampaignArray['dollar_rate'],
+                    'dollar_rates' => $newCampaignArray['dollar_rates'],
+                    'percentage_rate' => $newCampaignArray['per_rate'],
+                    'total_avails' => $newCampaignArray['total_avails'],
+                    'total_unit' => $newCampaignArray['total_unit'],
+                );
+                $fileName = $newCampaignArray['campaign_id'];
+                Storage::put('/public/campaign/'.$fileName.'.json', json_encode($json_array));
+
+                if( $updateCampaign == 0 ){
+                    $data = array( 'status' => 0 , 'message' => 'Record was not Updated.');
+                }else{
+                    $data = array( 'status' => 1 , 'message' => 'Success');
+                }
+                
+                return response()->json($data);  
+            }
+        }
     }
 }

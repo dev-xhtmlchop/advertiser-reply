@@ -19,7 +19,18 @@
                                 </div>
                             </div>
                             <form method="post" id="edit_campaign">
-                            <input type="hidden" name="campaign_id" id="campaign_id" value="" />
+                            @csrf
+                                <input type="hidden" name="campaign_id" id="campaign_id" value="" />
+                                <input type="hidden" name="campaign_deal_id" id="campaign_deal_id" value="" />
+                                <input type="hidden" name="deal_payloads_name" id="deal_payloads_name" value="" />
+                                <input type="hidden" name="campaign_payload_id" id="campaign_payload_id" value="" />
+                                <input type="hidden" name="campaign_day_time" id="campaign_day_time" value="" />
+                                <input type="hidden" name="inv_type" id="inv_type" value="" />
+                                <input type="hidden" name="inv_length" id="inv_length" value="" />
+                                <input type="hidden" name="dollar_rates" id="dollar_rates" value="" />
+                                <input type="hidden" name="per_rate" id="per_rate" value="" />
+                                <input type="hidden" name="total_avails" id="total_avails" value="" />
+                                <input type="hidden" name="total_unit" id="total_unit" value="" />
                                 <div class="responsive-tabs d-md-flex">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item">
@@ -91,21 +102,27 @@
                                                         </div>
                                                         <div class="col-lg-4 form-group">
                                                             <label for="realistic">Realistic</label>
-                                                            <input type="text" id="realistic"class="au-input au-input--full form-control"name="realistic" value="" disabled="">
+                                                            <div class="number-field">
+                                                                <input type="text" id="realistic"class="au-input au-input--full form-control"name="realistic" value="" disabled="">
+                                                            </div>
                                                         </div>
                                                         <div class="col-lg-4 form-group">
                                                             <label for="agency_commision">Agency Commision</label>
-                                                            <input type="text" id="agency_commision"class="au-input au-input--full form-control"name="agency_commision" value="" disabled="">
+                                                            <div class="number-field">
+                                                                <input type="text" id="agency_commision"class="au-input au-input--full form-control"name="agency_commision" value="" disabled="">
+                                                            </div>
                                                         </div>
                                                         <div class="col-lg-4 form-group">
                                                             <label for="revenue_risk">Revenue Risk</label>
-                                                            <input type="text" id="revenue_risk"class="au-input au-input--full form-control"name="revenue_risk" value="" disabled="">
+                                                            <div class="number-field">
+                                                                <input type="text" id="revenue_risk"class="au-input au-input--full form-control"name="revenue_risk" value="" disabled="">
+                                                            </div>
                                                         </div>
                                                         <div class="col-lg-4 form-group">
                                                             <label for="budget">Budget</label>
                                                             <input type="text" id="budget"class="au-input au-input--full form-control"name="budget" value="" disabled="">
                                                         </div>
-                                                        <div class="col-md-12">
+                                                        <div class="btn-row mt-3 text-center">
                                                             <a href="javascript:void(0);" class="btn btn-lg btn-secondary tab-btn" attr-active="cpm-imp" >Go To CPM/IPM</a>
                                                         </div>
                                                     </div>
@@ -135,7 +152,7 @@
                                                                 @endif
                                                             </select>
                                                         </div>
-                                                        <div class="col-md-12">
+                                                        <div class="btn-row mt-3 text-center">
                                                             <a href="javascript:void(0);" class="btn btn-lg btn-secondary tab-btn" attr-active="general" >Go To General</a>
                                                             <a href="javascript:void(0);" class="btn btn-lg btn-secondary ml-md-3 tab-btn" attr-active="flighting" >Go To Flighting</a>
                                                         </div>
@@ -157,7 +174,7 @@
                                                     <div class="row mb-5">
                                                         <div class="col-md-6 pl-md-3">
                                                             <div class="row">
-                                                                <div class="col-md-6 form-group">
+                                                                <div class="col-md-6 form-group date-field">
                                                                     <input type="text" placeholder="Flight Start Date" id="flight_start_date" class="au-input au-input--full form-control" name="flight_start_date">
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
@@ -177,7 +194,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="row">
-                                                                <div class="col-md-6 form-group">
+                                                                <div class="col-md-6 form-group date-field">
                                                                     <input type="text" placeholder="Flight End Date" id="flight_end_date" class="au-input au-input--full form-control" name="flight_end_date">
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
@@ -188,7 +205,7 @@
                                                         <div class="col-md-6">
                                                             <div class="row">
                                                                 <div class="col-md-6 form-group">
-                                                                    <select name="day_parts"class="au-input au-input--full" id="day_parts">
+                                                                    <select name="day_parts_id"class="au-input au-input--full" id="day_parts_id">
                                                                     <option value="">Time / Day Part</option>
                                                                                 @if( count( $dayPartList ) > 0 )
                                                                                     @foreach( $dayPartList as $dayPartListKey => $dayPartListVal )
@@ -219,30 +236,34 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
+                                                                <tr class="day-checkbox-list">
                                                                     <td>Days</td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="sunday" id="sunday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="monday" id="monday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="tuesday" id="tuesday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="wednesday" id="wednesday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="thursday" id="thursday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="friday" id="friday"  /></td>
-                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" value="saturday" id="saturday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="S" id="sunday" value="sunday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="M" id="monday" value="monday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="T" id="tuesday" value="tuesday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="W" id="wednesday" value="wednesday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="T" id="thursday" value="thursday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="F" id="friday" value="friday"  /></td>
+                                                                    <td><input type="checkbox" class="form-check-input" name="days[]" day="S" id="saturday" value="saturday"  /></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Split</td>
-                                                                    <td><input type="number" class="au-input form-control" name="sunday_split" id="sunday_split" value="" max="100" /></td>
-                                                                    <td><input type="number" class="au-input form-control" name="monday_split" id="monday_split" value="" max="100" /></td>
-                                                                    <td><input type="number" class="au-input form-control" name="tuesday_split" id="tuesday_split" value="" max="100" /></td>
-                                                                    <td><input type="number" class="au-input form-control" name="wednesday_split" id="wednesday_split" value="" max="100" /></td>
-                                                                    <td><input type="number" class="au-input form-control" name="thursday_split" id="thursday_split" value="" max="100" /></td>
-                                                                    <td><input type="number" class="au-input form-control" name="friday_split" id="friday_split" value="" max="100" /></td>
-                                                                    <td><input type="number" class="au-input form-control" name="saturday_split" id="saturday_split" value="" max="100" /></td>
+                                                                    <td>
+                                                                        <div class="number-field">    
+                                                                            <input type="number" class="au-input form-control" name="sunday_split" id="sunday_split" value="" max="100" />
+                                                                        </div>
+                                                                    </td>
+                                                                    <td><div class="number-field"><input type="number" class="au-input form-control" name="monday_split" id="monday_split" value="" max="100" /></div></td>
+                                                                    <td><div class="number-field"><input type="number" class="au-input form-control" name="tuesday_split" id="tuesday_split" value="" max="100" /></div></td>
+                                                                    <td><div class="number-field"><input type="number" class="au-input form-control" name="wednesday_split" id="wednesday_split" value="" max="100" /></div></td>
+                                                                    <td><div class="number-field"><input type="number" class="au-input form-control" name="thursday_split" id="thursday_split" value="" max="100" /></div></td>
+                                                                    <td><div class="number-field"><input type="number" class="au-input form-control" name="friday_split" id="friday_split" value="" max="100" /></div></td>
+                                                                    <td><div class="number-field"><input type="number" class="au-input form-control" name="saturday_split" id="saturday_split" value="" max="100" /></div></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
                                                     </div> 
-                                                    <div class="col-md-12">
+                                                    <div class="btn-row mt-3 text-center">
                                                         <a href="javascript:void(0);" class="btn btn-lg btn-secondary tab-btn" attr-active="cpm-imp" >Go To CPM/IPM</a>
                                                         <a href="javascript:void(0);" class="btn btn-lg btn-secondary ml-md-3 tab-btn" attr-active="summary" >Go To Summary</a>
                                                     </div>     
@@ -264,43 +285,43 @@
                                                     <div class="row mb-5">
                                                         <div class="col-md-6 form-group">
                                                             <label for="campaign_number">Campaign Number</label>
-                                                            <span class="campaign_number au-input au-input--full form-control"></span>
+                                                            <span class="campaign_number au-input au-input--full form-control disable-bg "></span>
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label for="campaign_name">Campaign Name</label>
-                                                            <span class="campaign_name au-input au-input--full form-control"></span>
+                                                            <span class="campaign_name au-input au-input--full form-control disable-bg "></span>
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label for="brand_name">Brand</label>
-                                                            <span class="brand_name au-input au-input--full form-control"></span>
+                                                            <span class="brand_name au-input au-input--full form-control disable-bg "></span>
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label for="media_line">Media Line</label>
-                                                            <span class="media_line_name au-input au-input--full form-control"></span>
+                                                            <span class="media_line_name au-input au-input--full form-control disable-bg "></span>
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label for="demo_name">Demo</label>
-                                                            <span class="demo_name au-input au-input--full form-control"></span>
+                                                            <span class="demo_name au-input au-input--full form-control disable-bg "></span>
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label for="ae_name">AE</label>
-                                                            <span class="ae_name au-input au-input--full form-control"></span>
+                                                            <span class="ae_name au-input au-input--full form-control disable-bg "></span>
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label for="outlet_name">Outlet</label>
-                                                            <span class="outlet_name au-input au-input--full form-control"></span>
+                                                            <span class="outlet_name au-input au-input--full form-control disable-bg "></span>
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label for="market_place">Market Place</label>
-                                                            <span class="market_place au-input au-input--full form-control"></span>
+                                                            <span class="market_place au-input au-input--full form-control disable-bg "></span>
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label for="date_change">Date Change</label>
-                                                            <span class="date_change au-input au-input--full form-control"></span>
+                                                            <span class="date_change au-input au-input--full form-control disable-bg "></span>
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label for="chnage_by">Change By</label>
-                                                            <span class="chnage_by au-input au-input--full form-control"></span>
+                                                            <span class="chnage_by au-input au-input--full form-control disable-bg "></span>
                                                         </div>
                                                     </div>
                                                     <div class="new-campaign-table mb-5">
@@ -338,21 +359,21 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr class="tr-shadow">
-                                                                        <td class="new-campaign-id">110000003</td>
-                                                                        <td class="new-campaign-name" >WWE Abc</td>
-                                                                        <td class="new-campaign-deal-name" >WWE Abc</td>
-                                                                        <td class="new-campaign_day-time" >PRIME</td>
-                                                                        <td class="new-campaign-brand" >X3</td>
-                                                                        <td class="new-campaign-start-flight-date" >2023-05-01</td>
-                                                                        <td class="new-campaign-end-flight-date" >2024-06-30</td>
-                                                                        <td class="new-campaign-media-line" >Linear</td>
-                                                                        <td class="new-campaign-inv-type" >NR</td>
-                                                                        <td class="new-campaign-inv-length" >20</td>
-                                                                        <td class="new-campaign-rate" >29</td>
-                                                                        <td class="new-campaign-do-rate" >29</td>
-                                                                        <td class="new-campaign-per-rate" >140</td>
-                                                                        <td class="new-campaign-total-avail" >144</td>
-                                                                        <td class="new-campaign-total-unit" >1</td>
+                                                                        <td class="new-campaign-id"></td>
+                                                                        <td class="new-campaign-name" ></td>
+                                                                        <td class="new-campaign-deal-name" ></td>
+                                                                        <td class="new-campaign_day-time" ></td>
+                                                                        <td class="new-campaign-brand" ></td>
+                                                                        <td class="new-campaign-start-flight-date" ></td>
+                                                                        <td class="new-campaign-end-flight-date" ></td>
+                                                                        <td class="new-campaign-media-line" ></td>
+                                                                        <td class="new-campaign-inv-type" ></td>
+                                                                        <td class="new-campaign-inv-length" ></td>
+                                                                        <td class="new-campaign-rate" ></td>
+                                                                        <td class="new-campaign-do-rate" ></td>
+                                                                        <td class="new-campaign-per-rate" ></td>
+                                                                        <td class="new-campaign-total-avail" ></td>
+                                                                        <td class="new-campaign-total-unit" ></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -393,30 +414,30 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr class="tr-shadow">
-                                                                        <td class="old-campaign-id">110000003</td>
-                                                                        <td class="old-campaign-name" >WWE Abc</td>
-                                                                        <td class="old-campaign-deal-name" >WWE Abc</td>
-                                                                        <td class="old-campaign_day-time" >PRIME</td>
-                                                                        <td class="old-campaign-brand" >X3</td>
-                                                                        <td class="old-campaign-start-flight-date" >2023-05-01</td>
-                                                                        <td class="old-campaign-end-flight-date" >2024-06-30</td>
-                                                                        <td class="old-campaign-media-line" >Linear</td>
-                                                                        <td class="old-campaign-inv-type" >NR</td>
-                                                                        <td class="old-campaign-inv-length" >20</td>
-                                                                        <td class="old-campaign-rate" >29</td>
-                                                                        <td class="old-campaign-do-rate" >29</td>
-                                                                        <td class="old-campaign-per-rate" >140</td>
-                                                                        <td class="old-campaign-total-avail" >144</td>
-                                                                        <td class="old-campaign-total-unit" >1</td>
+                                                                        <td class="old-campaign-id"></td>
+                                                                        <td class="old-campaign-name" ></td>
+                                                                        <td class="old-campaign-deal-name" ></td>
+                                                                        <td class="old-campaign_day-time" ></td>
+                                                                        <td class="old-campaign-brand" ></td>
+                                                                        <td class="old-campaign-start-flight-date" ></td>
+                                                                        <td class="old-campaign-end-flight-date" ></td>
+                                                                        <td class="old-campaign-media-line" ></td>
+                                                                        <td class="old-campaign-inv-type" ></td>
+                                                                        <td class="old-campaign-inv-length" ></td>
+                                                                        <td class="old-campaign-rate" ></td>
+                                                                        <td class="old-campaign-do-rate" ></td>
+                                                                        <td class="old-campaign-per-rate" ></td>
+                                                                        <td class="old-campaign-total-avail" ></td>
+                                                                        <td class="old-campaign-total-unit" ></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12">
+                                                    <div class="btn-row mt-3 text-center">
                                                         <a href="javascript:void(0);" class="btn btn-lg btn-secondary" attr-active="cpm-imp" >Keep Original</a>
                                                         <a href="javascript:void(0);" class="btn btn-lg btn-secondary ml-md-3 tab-btn" attr-active="flighting" >Go To Flighting</a>
-                                                        <a href="javascript:void(0);" class="btn btn-lg btn-secondary ml-md-3 tab-btn" >Send To Approval</a>
+                                                        <input type="submit" class="btn btn-lg btn-secondary ml-md-3" name="submit" id="submit" value="Send To Approval">
                                                     </div>
                                                 </div>
                                             </div>

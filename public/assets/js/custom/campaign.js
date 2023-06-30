@@ -1,6 +1,47 @@
 $(document).ready(function(){
     /* Campaign page Start  */
-
+    function campaignGetId(){
+        $('#campaign_table input[name="deal_number"]').click(function(){
+            var editCampaignDealId = $(this).val();
+            var editCampaignId = $(this).attr('autoid');
+            $('#edit_campaign_id').attr('dealid',editCampaignDealId).attr('autoincrementid',editCampaignId).removeAttr("disabled");
+        });
+        $('.campaign-view-sec #edit_campaign_id').click(function(){
+            var dealId = $(this).attr('dealid');
+            var autoIncrementId = $(this).attr('autoincrementid');
+            window.location.href = URL+'/campaign/edit/'+dealId;
+        });
+    }
+    function getCampaginViewData( dealStatus = null){
+        var url = URL+'/post-campaign-status';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {_token: CSRF_TOKEN, data: dealStatus},
+            success: function(response){
+                $('#campaign_table').DataTable().destroy();
+                $('#campaign_view_body').empty().append(response.deal_table_html);
+                $('#campaign_table').DataTable().draw();
+                if( response.deal_view_data ){
+                    var dealViewData = response.deal_view_data;
+                    $('#deal_dollars').empty().append('$'+Number(nullNumber(dealViewData.rate)).toLocaleString('en'));
+                    $('#deal_cpm').empty().append('$'+nullNumber(dealViewData.cpm));
+                    $('#deal_deal_unit').empty().append(Number(nullNumber(dealViewData.deal_unit)).toLocaleString('en'));
+                    $('#deal_grp').empty().append(nullNumber(dealViewData.grp));
+                    $('#deal_impressions').empty().append(Number(nullNumber(dealViewData.impressions)).toLocaleString('en'));
+                    campaignGetId();
+                    return true;
+                }else{
+                    return fasle;
+                }
+            }
+        });
+    }
+    getCampaginViewData();
+    $("#deal_status").change(function(){
+        var dealStatus = $(this).val();
+        getCampaginViewData( dealStatus );
+    });
     $('#campaign_table').DataTable({
         pageLength: 10,
         rowReorder: true,
@@ -9,25 +50,16 @@ $(document).ready(function(){
             { orderable: false, targets: '_all' }
         ]
     });
-    $('#campaign_table input[name="deal_number"]').click(function(){
-        var editCampaignDealId = $(this).val();
-        var editCampaignId = $(this).attr('autoid');
-        $('#edit_campaign_id').attr('dealid',editCampaignDealId).attr('autoincrementid',editCampaignId).removeAttr("disabled");
-    })
-    $('.campaign-view-sec #edit_campaign_id').click(function(){
-        var dealId = $(this).attr('dealid');
-        var autoIncrementId = $(this).attr('autoincrementid');
-        window.location.href = URL+'/campaign/edit/'+dealId;
-    });
+    campaignGetId();
 
     /* Campaign page End  */
 
     /* Edit Campaign page Start */
     function checkedCheckbox( fieldName, fieldValue ){
         if( fieldValue == 1 ){
-            $(fieldName).prop('checked',true);
+            $(fieldName).attr('checked',true);
         }else{
-            $(fieldName).prop('checked',false);
+            $(fieldName).attr('checked',false);
         }
     }
 
@@ -70,6 +102,17 @@ $(document).ready(function(){
                         dataValue('input[name="realistic"]', campaignArrayData.realistic );
                         dataValue('input[name="agency_commision"]', campaignArrayData.agency_commission );
                         dataValue('input[name="revenue_risk"]', campaignArrayData.revenue );
+                        dataValue('input[name="campaign_day_time"]', campaignArrayData.time_day_part );
+                        dataValue('input[name="campaign_id"]', campaignArrayData.campaign_id );
+                        dataValue('input[name="campaign_deal_id"]', campaignArrayData.deal_id );
+                        dataValue('input[name="campaign_payload_id"]', campaignArrayData.id );
+                        dataValue('input[name="inv_type"]', campaignArrayData.inventory_type );
+                        dataValue('input[name="inv_length"]', campaignArrayData.inventory_length );
+                        dataValue('input[name="dollar_rates"]', campaignArrayData.rc_rate );
+                        dataValue('input[name="per_rate"]', campaignArrayData.rc_rate_percentage );
+                        dataValue('input[name="total_avails"]', campaignArrayData.total_avil );
+                        dataValue('input[name="total_unit"]', campaignArrayData.total_unit );
+                        dataValue('input[name="deal_payloads_name"]', campaignArrayData.deal_payloads_name );
 
                         /* Step 1 End */
 
@@ -94,7 +137,14 @@ $(document).ready(function(){
                         dataValue('input[name="campaign_flight_start_date"]', campaignFlightStartDate );
                         dataValue('input[name="campaign_flight_end_date"]', campaignFlightEndDate );
                         dataValue('input[name="campaign_day_parts"]', campaignArrayData.time_day_part );
-
+                        $('select#day_parts_id option').each(function(){
+                            var value = $(this).text();
+                            if( value == campaignArrayData.time_day_part ){
+                                $(this).prop('selected', true);
+                            }else{
+                                $(this).prop('selected', false);
+                            }
+                        })
                         /* Flight Table Section */
                         checkedCheckbox('#edit_flight #sunday', campaignArrayData.sunday);
                         checkedCheckbox('#edit_flight #monday', campaignArrayData.monday);
@@ -161,7 +211,7 @@ $(document).ready(function(){
             $(this).removeClass('show').removeClass('active');
         });
         $('.'+tabClass+'-tab').addClass('show').addClass('active');
-        getCampaignDetail();
+       // getCampaignDetail();
     });
 
     /* Flight & Ad Length Section Start */ 
@@ -200,14 +250,16 @@ $(document).ready(function(){
     /** Flight Change Event  */
     $('#flight_start_date').on('apply.daterangepicker', function(){
         var startDate = $(this).val();
+        console.log( startDate ) 
         $('#summary .new-flight-stat-date-text').empty().text(startDate);
-        $('#new_campaign_table td.new-campaign-start-flight-date').empty().text(startDate);
+        dataAppend('#new_campaign_table .new-campaign-start-flight-date', startDate);
     });
 
     $('#flight_end_date').on('apply.daterangepicker', function(){
         var endDate = $(this).val();
+        console.log( endDate )
         $('#summary .new-flight-end-date-text').empty().text(endDate)
-        $('#new_campaign_table td.new-campaign-end-flight-date').empty().text(endDate);
+        dataAppend('#new_campaign_table .new-campaign-end-flight-date', endDate);
     });
 
     /* Flight Section End */
@@ -223,6 +275,28 @@ $(document).ready(function(){
             return false;
         }
     });
+    $('input[name="days[]"]').change(function(){
+        var dayOfList = [];
+        $('#edit_flight tr.day-checkbox-list .form-check-input').each(function(){
+            if( $(this).is(":checked") ) {
+                dayOfList.push($(this).attr('day'));
+            }
+        });
+        var dayTimeVal = $('#campaign_day_time').val();
+        var checkDayVal = dayOfList.join(" ");
+        dataAppend('#new_campaign_table .new-campaign_day-time', checkDayVal+' '+dayTimeVal);
+    });
+    $('select:input[name="day_parts_id"]').change(function(){
+        var dayPartVal = $(this).find('option:selected').text();
+        var dayOfList = [];
+        $('#edit_flight tr.day-checkbox-list .form-check-input').each(function(){
+            if( $(this).is(":checked") ) {
+                dayOfList.push($(this).attr('day'));
+            }
+        });
+        var checkDayVal = dayOfList.join(" ");
+        dataAppend('#new_campaign_table .new-campaign_day-time', checkDayVal+' '+dayPartVal);
+    });
     /*$('input[name="sunday_split"], input[name="monday_split"], input[name="tuesday_split"], input[name="wednesday_split"], input[name="thursday_split"], input[name="friday_split"], input[name="saturday_split"]').keypress(function (e) {    
         var charCode = (e.which) ? e.which : event.keyCode    
         if (String.fromCharCode(charCode).match(/[^0-9-%]/g)) {
@@ -234,9 +308,46 @@ $(document).ready(function(){
          return v.replace('%','') + '%';  
         });
     });*/
+   
+    /*$('#submit').click(function(){
+        $('#edit_campaign').find(':input:disabled').each(function(){
+            $(this).prop('disabled',false)
+       });
+       return true;
+    });*/
 
-    
-
+    $("#edit_campaign").validate({
+        submitHandler: function(form) {
+           // var disabled = form.find(':input:disabled').removeAttr('disabled');
+           var fileName = $('#campaign_id').val();
+           $(form).find(':input:disabled').each(function(){
+                $(this).prop('disabled',false)
+           });
+           //console.log( $(form).find(':input:disabled').attr('name') )
+            var getFormAllData = $(form).serializeArray();
+            console.log( getFormAllData )
+            var url = URL+'/campaign/post-campaign-edit';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {_token: CSRF_TOKEN, data: getFormAllData},
+                success: function(response){
+                    $(form).find(':input:disabled').each(function(){
+                         $(this).prop('disabled',true)
+                    });
+                    const data = response;
+                    const link = document.createElement('a');
+                    link.setAttribute('href', URL+'/storage/app/public/campaign/'+fileName+'.json');
+                    link.setAttribute('download', fileName+'.json'); // Need to modify filename ...
+                    link.click();
+                    setTimeout(function(){
+                        window.location.href = URL+'/campaign';
+                    },2000)
+                    return true;
+                }
+            });
+        }
+    });
     /* Edit Campaign page End  */
    
 });

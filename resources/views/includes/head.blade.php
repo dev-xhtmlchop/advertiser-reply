@@ -5,7 +5,9 @@
    
     <meta name="description" content="@yield('meta_description', 'Laravel Starter')">
     <meta name="author" content="@yield('meta_author', 'FasTrax Infotech')">
-    <meta name="web-url" content="{{ url('') }}";
+    <meta name="web-url" content="{{ url('') }}" />
+    <meta name="storage-path" content="{{ storage_path() }}" />
+
     @yield('meta')
     
     <!-- Fontfaces CSS-->

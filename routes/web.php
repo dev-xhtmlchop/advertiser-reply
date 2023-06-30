@@ -56,7 +56,11 @@ Route::post('/post-deal-status',[DealController::class, 'postStatus'])->name('de
 
 /* Campaign */
 Route::get('/campaign',[CampaignController::class, 'index'])->name('campaign')->middleware('auth'); 
+Route::post('/post-campaign-status',[CampaignController::class, 'postStatus'])->name('campaign.status')->middleware('auth');
 Route::post('/get-campaign-detail',[CampaignController::class, 'getEditCampaignDetail'])->name('campaign.editdetail')->middleware('auth'); 
-Route::get('/campaign/edit/{id}',[CampaignController::class, 'getEditCampaignInfo'])->name('campaign.edit')->middleware('auth'); 
+
+/* Campaign Edit */
+Route::get('/campaign/edit/{id}',[CampaignController::class, 'getEditCampaignInfo'])->name('campaign.edit')->middleware('auth');
+Route::post('/campaign/post-campaign-edit',[CampaignController::class, 'postEditCampaign'])->name('post.campaign.edit')->middleware('auth'); 
 
 Route::get('/no-page',[NoPageController::class, 'index'])->name('nopage')->middleware('auth');

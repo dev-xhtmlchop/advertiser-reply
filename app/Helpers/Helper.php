@@ -190,6 +190,7 @@ class Helper{
                     );
         return  $campaignTableArray;
     }
+
     public static function dashboardInterconnectDropdownHtml( $dashboardData, $field, $defaultName, $selecValue, $addName = 0 ){
         if( !empty( $field ) ){
             $fieldName = $field.'_name';
@@ -208,8 +209,13 @@ class Helper{
             return array_unique($dealDropdown);
         }
     }
+    
+    public static function daySmallArray(){
+        return array( 'sunday' => 'S', 'monday' => 'M','tuesday' => 'T','wednesday' => 'W', 'thursday' => 'T', 'friday' => 'F', 'saturday' => 'S' );
+    }
+
     public static function tableAddDaysAndTime( $campainTableArray, $campainArray, $flag ){
-        $dayOfArray = array( 'sunday' => 'S', 'monday' => 'M','tuesday' => 'T','wednesday' => 'W', 'thursday' => 'T', 'friday' => 'F', 'saturday' => 'S' );
+        $dayOfArray = Helper::daySmallArray();
         $newCampaingTableData = [];
         if( count( $campainTableArray ) > 0 ){
             if( count ( $campainArray ) > 0 ){

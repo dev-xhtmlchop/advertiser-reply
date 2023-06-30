@@ -11,6 +11,45 @@
                                 <h2 class="mb-0">Campaign View</h2>
                                 <div class="d-flex align-items-center flight-range">
                                     <div class="daterange d-flex align-items-center">
+                                        <select name="deal_status" id="deal_status" class="au-input" >
+                                            <option value="">Deal Status</option>
+                                            @if( count( $dealStatus ) > 0 )
+                                                @foreach( $dealStatus as $dealStatusKey => $dealStatusVal )
+                                                    <option value="{{ $dealStatusVal['slug'] }}">{{ $dealStatusVal['name'] }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row deal-view">
+                                @if( count( $dealView ) > 0 )
+                                    @foreach( $dealView as $dealViewKey => $dealViewVal )
+                                        @php
+                                            $imageUrl = "public/images/dashboard/".$dealViewVal['image'];
+                                        @endphp
+                                        <div class="col form-group">
+                                            <div class="deal-component {{ $dealViewVal['background'] }}">
+                                                <h3>{{ $dealViewVal['name'] }}</h3>
+                                                <h5 id="deal_{{ $dealViewVal['slug'] }}">{{ $dealViewVal['value'] }}</h5>
+                                                <div class="icon-box">
+                                                <img src="{{ asset($imageUrl) }}" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 card-main">
+                        <div class="deal-view-box card">
+                            <div class="head d-flex justify-content-center align-items-center mb-4">
+                                <div class="d-flex align-items-center flight-range">
+                                    <div class="daterange d-flex align-items-center">
                                         <button class="btn btn-lg btn-secondary" >Create Campaign</button>    
                                     </div>
                                 </div>
@@ -28,7 +67,7 @@
                                             @endforeach    
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="campaign_view_body">
                                         @foreach( $tableData as $tableDetailRowKey => $tableDetailRowVal )
                                             <tr class="tr-shadow">
                                                 @foreach( $tableDetailRowVal as $tableRowDetailKey => $tableRowDetailVal )
