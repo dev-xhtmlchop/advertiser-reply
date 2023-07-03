@@ -12,7 +12,7 @@
                                 <div class="d-flex align-items-center flight-range">
                                     <div class="daterange d-flex align-items-center">
                                         <select name="deal_status" id="deal_status" class="au-input" >
-                                            <option value="">Deal Status</option>
+                                            <option value="">Status</option>
                                             @if( count( $dealStatus ) > 0 )
                                                 @foreach( $dealStatus as $dealStatusKey => $dealStatusVal )
                                                     <option value="{{ $dealStatusVal['slug'] }}">{{ $dealStatusVal['name'] }}</option>

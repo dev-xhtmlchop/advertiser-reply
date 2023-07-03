@@ -35,7 +35,7 @@
                                             <a id="general" href="#pane-A" class="nav-link active" data-bs-toggle="tab" role="tab"><i class="fa fa-wrench" aria-hidden="true"></i>General</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a id="cpm-imp" href="#pane-B" class="nav-link" data-bs-toggle="tab" role="tab"><i class="fa fa-users" aria-hidden="true"></i>CPM/IPM</a>
+                                            <a id="cpm-imp" href="#pane-B" class="nav-link" data-bs-toggle="tab" role="tab"><i class="fa fa-eye" aria-hidden="true"></i>CPM/IPM</a>
                                         </li>
                                         <li class="nav-item">
                                             <a id="flighting" href="#pane-C" class="nav-link" data-bs-toggle="tab" role="tab"><i class="fa fa-calendar-o" aria-hidden="true"></i>Flighting</a>
