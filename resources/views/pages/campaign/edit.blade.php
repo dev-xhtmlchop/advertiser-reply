@@ -8,7 +8,7 @@
                     <div class="col-md-12 card-main">
                         @if( !empty( $campaign ) )
                         <div class="deal-view-box">
-                            <div class="campaign-number-time-sec mb-5">
+                            <div class="campaign-number-time-sec mb-3">
                                 <div class="campaign-number text-center">
                                     <h4>Editing Campaign : {{ $campaign['campaign_payloads_id'] }} {{ $campaign['campaign_payloads_name'] }}</h4>
                                 </div>
