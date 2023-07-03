@@ -244,7 +244,7 @@
                                                                     <td><div class="form-check"><input type="checkbox" class="form-check-input" name="days[]" day="F" id="friday" value="friday"  /></div></td>
                                                                     <td><div class="form-check"><input type="checkbox" class="form-check-input" name="days[]" day="S" id="saturday" value="saturday"  /></div></td>
                                                                 </tr>
-                                                                <tr>
+                                                                <tr class="day-split-checkbox-list">
                                                                     <td>Split</td>
                                                                     <td>
                                                                         <div class="number-field">    

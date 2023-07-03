@@ -36,7 +36,27 @@ function dataAppend( fieldName, fieldValue ){
 function dataValue( fieldName, fieldValue ){
   $(fieldName).val(fieldValue);
 }
+function sucessNotification( message ){
+  $(".alert-notification-success .success-message").empty().text(message);
+  $(".alert-notification-success").show('medium');
+  setTimeout(function(){
+    $(".alert-notification-success").hide('medium');
+  }, 5000);
+  $(".sendButton .close").click(function(){
+      $(".alert-notification-success").hide('medium');
+  });
+}
 
+function errorNotification( message ){
+  $(".alert-notification-error .error-message").empty().text(message);
+  $(".alert-notification-error").show('medium');
+  setTimeout(function(){
+    $(".alert-notification-error").hide('medium');
+  }, 5000);
+  $(".sendButton .close").click(function(){
+      $(".alert-notification-error").hide('medium');
+  });
+}
 $(document).ready(function(){
     var menu = $('.js-item-menu');
     var sub_menu_is_showed = -1;
@@ -68,20 +88,7 @@ $(document).ready(function(){
       }
       sub_menu_is_showed = -1;
     });
-    $('.campaign-edit .tab-btn').click(function(e){
-      e.preventDefault();
-      var tabClass = $(this).attr('attr-active'); 
-      $('ul.nav-tabs li a').each(function(){
-          $(this).removeClass('active').attr('aria-selected', false);
-      });
-      $('#'+tabClass).addClass('active').attr('aria-selected', true);;
-
-      $('#content .tab-pane').each(function(){
-          $(this).removeClass('show').removeClass('active');
-      });
-      $('.'+tabClass+'-tab').addClass('show').addClass('active');
-     // getCampaignDetail();
-    });
+    
     $('.bars-icon').click(function() {
       $('body').toggleClass('header-resize');
       $('body').toggleClass('body-resize');

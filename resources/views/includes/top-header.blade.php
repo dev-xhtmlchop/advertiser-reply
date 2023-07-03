@@ -49,11 +49,16 @@
             </div>
         </div>
     </div>
-
-    <!--<div class="alert alert-notification text-center mb-3" role="alert">
+    <div class="alert alert-notification-success text-center mb-3 alert-success" role="alert">
         <button type="button" class="close" aria-label="Close">
             <i class="fa fa-times" aria-hidden="true"></i>
         </button>
-        <p><i class="fa fa-wrong-circle"></i>Thanks for sending message! I will get back to you shortly.</p>
-    </div>-->
+        <p><i class="fa fa-check"></i><span class="success-message">Success</span></p>
+    </div>
+    <div class="alert alert-notification-error text-center mb-3 alert-danger" role="alert">
+        <button type="button" class="close" aria-label="Close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <p><i class="fa fa-warning"></i><span class="error-message">Error</span></p>
+    </div>
 </header>

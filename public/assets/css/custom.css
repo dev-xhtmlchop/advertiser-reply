@@ -378,6 +378,9 @@
     color: #fff;
 }*/
 .login-logo img{ position: relative; }
-.login-wrap {
-    padding-top: 14vh !important;
-}
+.login-wrap { padding-top: 14vh !important; }
+.alert-notification-success{ display:none; position: fixed; top: 80px; right: 20px; }
+.alert-notification-success .fa {margin-right:.5em; }
+
+.alert-notification-error{ display:none; position: fixed; top: 80px; right: 20px; }
+.alert-notification-error .fa {margin-right:.5em; }

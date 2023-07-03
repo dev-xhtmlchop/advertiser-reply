@@ -44,6 +44,33 @@ $(document).ready(function(){
             }
         });
     }
+    function getFlightSplitCheck(current){
+        var getClass = $(current).parent().parent().parent().parent().parent().find('.active').attr('id');
+        var response = true;
+        if( $('#'+getClass).hasClass('flighting-tab') ){
+            $('#edit_flight tr.day-checkbox-list .form-check-input').each(function(){
+                var day = $(this).val();
+                var checkboxChecked = $(this).is(":checked");
+                var splitVal = $('#edit_flight tr.day-split-checkbox-list .number-field input[name="'+day+'_split"]').val();
+                if( ( splitVal != '' && checkboxChecked == false ) || ( splitVal == '' && checkboxChecked == true ) ) {
+                    //var checkedVal = day+'_split';
+                    //var splitVal = $('#edit_flight tr.day-split-checkbox-list input[name="'+checkedVal+'"]').val();
+                    if( splitVal ==  ''){
+                        var uppercashDay = day.charAt(0).toUpperCase() + day.slice(1);
+                        errorNotification('Please Enter '+ uppercashDay +' Split Number.');
+                        response = false;
+                    }
+                    if( checkboxChecked ==  false){
+                        var uppercashDay = day.charAt(0).toUpperCase() + day.slice(1);
+                        errorNotification('Please Select '+ uppercashDay +' Checkbox.');
+                        response = false;
+                    }
+                }
+            });
+        } 
+        return response;
+
+      }
     getCampaginViewData();
     $("#deal_status").change(function(){
         var dealStatus = $(this).val();
@@ -238,7 +265,6 @@ $(document).ready(function(){
         $('#summary .new-flight-end-date-text').empty().text(endDate)
         dataAppend('#new_campaign_table .new-campaign-end-flight-date', endDate);
     });
-
     /* Flight Section End */
 
 
@@ -290,6 +316,7 @@ $(document).ready(function(){
                 type: 'POST',
                 data: {_token: CSRF_TOKEN, data: getFormAllData},
                 success: function(response){
+                    sucessNotification('Sucessfully Data Update.');
                     $(form).find(':input:disabled').each(function(){
                          $(this).prop('disabled',true)
                     });
@@ -300,7 +327,7 @@ $(document).ready(function(){
                     link.click();
                     setTimeout(function(){
                         window.location.href = URL+'/campaign';
-                    },2000)
+                    },3000)
                     return true;
                 }
             });
@@ -311,5 +338,22 @@ $(document).ready(function(){
         window.location.href = URL+'/campaign';
     })
     /* Edit Campaign page End  */
-   
+    $('.campaign-edit .tab-btn').click(function(e){
+        e.preventDefault();
+
+        var tabClass = $(this).attr('attr-active'); 
+
+        if( getFlightSplitCheck( this ) ){
+            $('ul.nav-tabs li a').each(function(){
+                $(this).removeClass('active').attr('aria-selected', false);
+            });
+            $('#'+tabClass).addClass('active').attr('aria-selected', true);;
+      
+            $('#content .tab-pane').each(function(){
+                $(this).removeClass('show').removeClass('active');
+            });
+            $('.'+tabClass+'-tab').addClass('show').addClass('active');
+        }
+       // getCampaignDetail();
+      });
 });
