@@ -13,9 +13,7 @@
                                     <h4>Editing Campaign : {{ $campaign['campaign_payloads_id'] }} {{ $campaign['campaign_payloads_name'] }}</h4>
                                 </div>
                                 <div class="campaign-date text-center">
-                                    <span>Deal Valid Till Date</span>
-                                    <span>{{ date('m-d-Y', strtotime($campaign['campaigns_valid_from'])) }}</span>
-                                    <span>Deal Year {{ $campaign['campaigns_year'] }}</span>
+                                    <span>Deal Valid Till Date {{ date('m-d-Y', strtotime($campaign['campaigns_valid_to'])) }} Deal Year {{ $campaign['campaigns_year'] }}</span>
                                 </div>
                             </div>
                             <form method="post" id="edit_campaign">

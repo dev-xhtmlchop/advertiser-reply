@@ -47,7 +47,7 @@ class LoginController extends Controller
             }else if (  ( $mediaCount === 1 ) && ( Auth::attempt(['user_name' => $request['user_name'] , 'password' => $request['password'], 'delete' => 0, 'status' => 1]) ) ) {
                 $userId = Auth::id();
                 $getUserData = User::join('advertisers', 'advertisers.id', '=', 'users.advertiser_id')->where('users.id', '=' , $userId)->first();
-                $currentDate = date('Y-m-d H:i:s');
+                $currentDate = date('m-d-Y H:i:s');
                 if( $getUserData ){
                     Session::put('user_id', $userId);
                     Session::put('advertiser_id', $getUserData->id);

@@ -170,7 +170,6 @@ class Helper{
     }
     public static function campaignViewTableName(){
         $campaignTableArray = array(
-                        "Select",
                         "Deal ID", 
                         "Campaign Number", 
                         "Campaign Name",
@@ -187,6 +186,7 @@ class Helper{
                         "% Rate", 
                         "Total Avails", 
                         "Total Unit", 
+                        "Action",
                     );
         return  $campaignTableArray;
     }
@@ -262,13 +262,14 @@ class Helper{
         ])->toArray();
     }
 
-    public static function changeDateFormate( $dataArray, $fieldName, $flag ){
+    public static function changeDateFormate( $dataArray, $fieldName = array() , $flag ){
         $newDataArray = [];
         if( $flag == 1 ){
             if( count( $dataArray ) > 0){
                 foreach( $dataArray as $dataSingleArrayKey => $dataSingleArrayVal){
                     foreach( $dataSingleArrayVal as $dataArrayKey => $dataArrayValue){
-                        if( $dataArrayKey == $fieldName ){
+                       
+                        if( in_array( $dataArrayKey, $fieldName ) ){
                             $dataSingleArrayVal[$dataArrayKey] = date('m/d/Y', strtotime($dataArrayValue)); 
                         }
                     }
@@ -279,7 +280,7 @@ class Helper{
         }else{
             if( count( $dataArray ) > 0){
                 foreach( $dataArray as $dataArrayKey => $dataArrayValue){
-                    if( $dataArrayKey == $fieldName ){
+                    if( in_array( $dataArrayKey, $fieldName ) ){
                         $dataArray[$dataArrayKey] = date('m/d/Y', strtotime($dataArrayValue)); 
                     }
                 }

@@ -21,7 +21,14 @@ $(document).ready(function(){
             success: function(response){
                 $('#campaign_table').DataTable().destroy();
                 $('#campaign_view_body').empty().append(response.deal_table_html);
-                $('#campaign_table').DataTable().draw();
+                $('#campaign_table').DataTable({
+                    pageLength: 10,
+                    rowReorder: true,
+                    columnDefs: [
+                        { orderable: true, className: 'reorder', targets: 0 },
+                        { orderable: false, targets: '_all' }
+                    ]
+                });
                 if( response.deal_view_data ){
                     var dealViewData = response.deal_view_data;
                     $('#deal_dollars').empty().append('$'+Number(nullNumber(dealViewData.rate)).toLocaleString('en'));
@@ -55,21 +62,6 @@ $(document).ready(function(){
     /* Campaign page End  */
 
     /* Edit Campaign page Start */
-    function checkedCheckbox( fieldName, fieldValue ){
-        if( fieldValue == 1 ){
-            $(fieldName).attr('checked',true);
-        }else{
-            $(fieldName).attr('checked',false);
-        }
-    }
-
-    function dataAppend( fieldName, fieldValue ){
-        $(fieldName).empty().append(fieldValue);
-    }
-
-    function dataValue( fieldName, fieldValue ){
-        $(fieldName).val(fieldValue);
-    }
 
     function getCampaignDetail(){
         var url = URL+'/get-campaign-detail';
@@ -198,21 +190,6 @@ $(document).ready(function(){
 
     /* All Tab add Active Class */
 
-    $('.campaign-edit .tab-btn').click(function(e){
-        e.preventDefault();
-        var tabClass = $(this).attr('attr-active'); 
-        $('ul.nav-tabs li a').each(function(){
-            console.log( $(this).attr('class'));
-            $(this).removeClass('active').attr('aria-selected', false);
-        });
-        $('#'+tabClass).addClass('active').attr('aria-selected', true);;
-
-        $('#content .tab-pane').each(function(){
-            $(this).removeClass('show').removeClass('active');
-        });
-        $('.'+tabClass+'-tab').addClass('show').addClass('active');
-       // getCampaignDetail();
-    });
 
     /* Flight & Ad Length Section Start */ 
     $('input[name="flight_start_date"]').daterangepicker({

@@ -8,7 +8,14 @@ $(document).ready(function(){
             success: function(response){
                 $('#deals_table').DataTable().destroy();
                 $('#deal_view_body').empty().append(response.deal_table_html);
-                $('#deals_table').DataTable().draw();
+                $('#deals_table').DataTable({
+                    pageLength: 10,
+                    rowReorder: true,
+                    columnDefs: [
+                        { orderable: true, className: 'reorder', targets: 0 },
+                        { orderable: false, targets: '_all' }
+                    ]
+                });
                 if( response.deal_view_data ){
                     var dealViewData = response.deal_view_data;
                     $('#deal_dollars').empty().append('$'+Number(nullNumber(dealViewData.rate)).toLocaleString('en'));

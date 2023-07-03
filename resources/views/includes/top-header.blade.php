@@ -33,7 +33,7 @@
                             </div>
                             <div class="account-dropdown__body">
                                 <div class="account-dropdown__item">
-                                    <p><strong>Number: </strong>@if(Session::has('advertiser_id')){{ Session::get('advertiser_id')}}@endif</p>
+                                    <p><strong>Advertiser ID: </strong>@if(Session::has('advertiser_id')){{ Session::get('advertiser_id')}}@endif</p>
                                 </div>
                                 <div class="account-dropdown__item">
                                     <p><strong>Login Time: </strong>@if(Session::has('advertiser_logintime')){{ Session::get('advertiser_logintime')}}@endif</p>

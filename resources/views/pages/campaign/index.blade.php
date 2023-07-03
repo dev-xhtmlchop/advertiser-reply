@@ -72,10 +72,11 @@
                                             <tr class="tr-shadow">
                                                 @foreach( $tableDetailRowVal as $tableRowDetailKey => $tableRowDetailVal )
                                                     @if( $tableRowDetailKey == 'deal_auto_id' )
+                                                    @php 
+                                                        $url = url('/campaign/edit/'.$tableDetailRowVal['campaign_id']);
+                                                    @endphp
                                                     <td>
-                                                        <label class="form-check au-radio deal-number">
-                                                            <input class="form-check-input" type="radio" value="{{ $tableDetailRowVal['campaign_id'] }}" name="deal_number" id="deal_number" autoid="" >
-                                                        </label>
+                                                        <a href="{{ $url }}"><i class="fa fa-pencil-alt fa-lg"></i></a>
                                                     </td>
                                                     @else
                                                         <td key="{{ $tableRowDetailKey }}">{{ $tableRowDetailVal }}</td>    
@@ -86,9 +87,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="head d-flex justify-content-center align-items-center mb-4">
+                            <!-- <div class="head d-flex justify-content-center align-items-center mb-4">
                                 <button class="btn btn-lg btn-secondary" id="edit_campaign_id" dealid="" autoincrementid="" disabled>Edit Campaign</button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
