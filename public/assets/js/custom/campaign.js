@@ -52,12 +52,17 @@ $(document).ready(function(){
                 var day = $(this).val();
                 var checkboxChecked = $(this).is(":checked");
                 var splitVal = $('#edit_flight tr.day-split-checkbox-list .number-field input[name="'+day+'_split"]').val();
-                if( ( splitVal != '' && checkboxChecked == false ) || ( splitVal == '' && checkboxChecked == true ) ) {
+                if( ( splitVal != '' && splitVal != 0 && checkboxChecked == false ) || ( splitVal == '' && checkboxChecked == true ) || ( splitVal == 0 && checkboxChecked == true ) ) {
                     //var checkedVal = day+'_split';
                     //var splitVal = $('#edit_flight tr.day-split-checkbox-list input[name="'+checkedVal+'"]').val();
                     if( splitVal ==  ''){
                         var uppercashDay = day.charAt(0).toUpperCase() + day.slice(1);
                         errorNotification('Please Enter '+ uppercashDay +' Split Number.');
+                        response = false;
+                    }
+                    if( splitVal ==  0 ){
+                        var uppercashDay = day.charAt(0).toUpperCase() + day.slice(1);
+                        errorNotification('Please Enter '+ uppercashDay +' Number Greater then 0.');
                         response = false;
                     }
                     if( checkboxChecked ==  false){
