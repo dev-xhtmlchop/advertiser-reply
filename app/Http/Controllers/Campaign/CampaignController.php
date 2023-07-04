@@ -50,6 +50,7 @@ class CampaignController extends Controller
             'campaign_payloads.rc_rate_percentage as rc_rate_percentage', 
             'campaign_payloads.total_avil as total_avil', 
             'campaign_payloads.total_unit as total_unit', 
+            'campaigns.status as status',
             'campaign_payloads.id as deal_auto_id',
         ])->toArray();
         

@@ -164,7 +164,8 @@ class Helper{
                         "A25-49 Rating", 
                         "A25-49 (000)", 
                         "A25-49 CPM", 
-                        "A25-49 Univ"
+                        "A25-49 Univ",
+                        "Status"
                     );
         return  $dealTableArray;
     }
@@ -186,6 +187,7 @@ class Helper{
                         "% Rate", 
                         "Total Avails", 
                         "Total Unit", 
+                        "Status",
                         "Action",
                     );
         return  $campaignTableArray;

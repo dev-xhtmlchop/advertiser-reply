@@ -45,7 +45,8 @@ class DealController extends Controller
             'deal_payloads.a25_49_rating as a25_49_rating', 
             'deal_payloads.a25_49_ss as a25_49_ss', 
             'deal_payloads.a25_49_cpm as a25_49_cpm', 
-            'deal_payloads.a25_49_univ as a25_49_univ'
+            'deal_payloads.a25_49_univ as a25_49_univ',
+            'deals.status as status',
             ])->toArray();
         
         $dealDayTableData =  $dealList->get([

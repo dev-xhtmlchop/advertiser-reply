@@ -150,6 +150,18 @@
                                                                 @endif
                                                             </select>
                                                         </div>
+                                                        <div class="col-md-4 form-group">
+                                                            <span class="cpm_ipm_demo_population au-input au-input--full form-control disable-bg ">Demo Population</span>
+                                                        </div>
+                                                        <div class="col-md-4 form-group">
+                                                            <span class="cpm_ipm_impressions au-input au-input--full form-control disable-bg ">Impressions</span>
+                                                        </div>
+                                                        <div class="col-md-4 form-group">
+                                                            <span class="cpm_ipm_grp au-input au-input--full form-control disable-bg ">GRP</span>
+                                                        </div>
+                                                        <div class="col-md-4 form-group">
+                                                            <span class="cpm_ipm_cpm au-input au-input--full form-control disable-bg ">CPM</span>
+                                                        </div>
                                                         <div class="btn-row mt-3 text-center">
                                                             <a href="javascript:void(0);" class="btn btn-lg btn-secondary tab-btn" attr-active="general" >Go To General</a>
                                                             <a href="javascript:void(0);" class="btn btn-lg btn-secondary ml-md-3 tab-btn" attr-active="flighting" >Go To Flighting</a>
@@ -173,7 +185,7 @@
                                                         <div class="col-md-6">
                                                             <div class="row">
                                                                 <div class="col-md-6 form-group date-field">
-                                                                    <input type="text" placeholder="Flight Start Date" id="flight_start_date" class="au-input au-input--full form-control" name="flight_start_date">
+                                                                    <input type="text" placeholder="Flight Start Date" id="flight_start_date" class="au-input au-input--full form-control" name="flight_start_date" disabled>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <input type="text" id="campaign_flight_start_date" placeholder="MM/DD/YYYY" class="au-input au-input--full form-control" name="campaign_flight_start_date" value=""disabled="">
@@ -186,14 +198,14 @@
                                                                     <label for="revenue_risk">Ad Length</label>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
-                                                                    <input type="text" id="ad_length" class="au-input au-input--full form-control" name="ad_length" value="" >
+                                                                    <input type="text" id="ad_length" class="au-input au-input--full form-control" name="ad_length" value="" disabled>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="row">
                                                                 <div class="col-md-6 form-group date-field">
-                                                                    <input type="text" placeholder="Flight End Date" id="flight_end_date" class="au-input au-input--full form-control" name="flight_end_date">
+                                                                    <input type="text" placeholder="Flight End Date" id="flight_end_date" class="au-input au-input--full form-control" name="flight_end_date" disabled>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <input type="text" id="campaign_flight_end_date" placeholder="MM/DD/YYYY" class="au-input au-input--full form-control" name="campaign_flight_end_date" value=""disabled="">
