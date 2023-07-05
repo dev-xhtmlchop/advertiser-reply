@@ -208,7 +208,7 @@ class Helper{
                     }
                 }
             }
-            return array_unique($dealDropdown);
+            return $dealDropdown;
         }
     }
     

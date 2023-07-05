@@ -10,6 +10,7 @@
 
     @yield('meta')
     
+    <link rel="shortcut icon" href="{{ asset('public/favicon.ico') }}">
     <!-- Fontfaces CSS-->
     <link href="{{ asset('public/assets/css/font-face.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('public/assets/css/common/font-awesome-4.7/css/font-awesome.min.css') }}" rel="stylesheet" media="all">

@@ -1,7 +1,8 @@
 <aside class="menu-sidebar dark_sidebar d-none d-lg-block">
     <div class="logo">
         <a href="{{ route('dashboard') }}">
-            <img src="{{ asset('public/images/logo/logo.png') }}" alt="logo" />
+            <img src="{{ asset('public/images/logo/logo.svg') }}" class="main-bar" alt="logo" />
+            <img src="{{ asset('public/images/logo/logo-small.svg') }}" class="side-bar" alt="logo" />
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">

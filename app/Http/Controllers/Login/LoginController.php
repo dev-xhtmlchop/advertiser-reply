@@ -46,14 +46,28 @@ class LoginController extends Controller
                 return response()->json($data);
             }else if (  ( $mediaCount === 1 ) && ( Auth::attempt(['user_name' => $request['user_name'] , 'password' => $request['password'], 'delete' => 0, 'status' => 1]) ) ) {
                 $userId = Auth::id();
-                $getUserData = User::join('advertisers', 'advertisers.id', '=', 'users.advertiser_id')->where('users.id', '=' , $userId)->first();
+                $getUserData = User::join('advertisers', 'advertisers.id', '=', 'users.advertiser_id')
+                        ->join('clients', 'clients.id', '=', 'users.client_id')
+                        ->join('medias', 'medias.id', '=', 'advertisers.media_id')
+                        ->where('users.id', '=' , $userId)
+                        ->first([
+                            'advertisers.id as advertisers_id', 
+                            'advertisers.name as advertisers_name', 
+                            'users.*', 
+                            'clients.name as clients_name', 
+                            'clients.id as clients_id',
+                            'medias.name as medias_name',
+                        ]);
                 $currentDate = date('m-d-Y H:i:s');
                 if( $getUserData ){
                     Session::put('user_id', $userId);
-                    Session::put('advertiser_id', $getUserData->id);
-                    Session::put('advertiser_name', $getUserData->name);
+                    Session::put('clients_id', $getUserData->clients_id);
+                    Session::put('clent_name', $getUserData->clients_name );
+                    Session::put('advertiser_id', $getUserData->advertisers_id);
+                    Session::put('advertiser_name', $getUserData->advertisers_name);
                     Session::put('advertiser_email_address', $getUserData->email_address);
                     Session::put('advertiser_logintime', $currentDate);
+                    Session::put('media_line', $getUserData->medias_name);
                 }
                 
                 Helper::activityLog('Create Login');

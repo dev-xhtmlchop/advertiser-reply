@@ -14,7 +14,7 @@ a{text-decoration: none;}
 .navbar-sidebar .navbar__list li a i{width: 20px;text-align: center;}
 .navbar-sidebar .navbar__list li a{padding: 1rem;color: #ffffff;border-radius: 0.25rem;margin-bottom: 0.2rem;}
 .navbar-sidebar .navbar__list li a:hover, .navbar-sidebar .navbar__list li.active a{background-color: rgba(255,255,255,.1);color: #fff;}
-.header-wrap{column-gap: 30px;}
+.header-wrap{width: 100%; display: block !important;}
 .account-info-main{column-gap: 30px;}
 .account-info .account-info-box{font-size: 14px;color: #ffffff;background: #17a2b8;padding: 5px 10px;border-radius: 5px;}
 .account-log a{font-size: 14px;color: #333333;font-weight: 500;}
@@ -112,6 +112,9 @@ table.dataTable.table-striped>tbody>tr>td{ vertical-align: middle;}
 .date-field:after{content: "\f073";position: absolute;right: 20px;font: normal normal normal 14px/1 FontAwesome;font-size: 14px;top: 50%; -webkit-transform: translate(0, -50%);
   -moz-transform: translate(0, -50%);-ms-transform: translate(0, -50%);-o-transform: translate(0, -50%);transform: translate(0, -50%);}
 span.disable-bg{ background-color: #e9ecef;opacity: 1;}
+.header-wrap ul li{ list-style: none;}
+.header-wrap ul{column-gap: 20px; padding-left: 0px; }
+.side-bar{display: none;}
 
 @media (min-width: 992px){
   .menu-sidebar{width: 250px;}
@@ -125,8 +128,12 @@ span.disable-bg{ background-color: #e9ecef;opacity: 1;}
   .header-resize:not(.hover-resize) .navbar-sidebar .navbar__list li a { font-size: 0; }
   .header-resize .navbar-sidebar .navbar__list li a i{ font-size: 16px; }
   /*.header-resize .menu-sidebar .logo{ display: none; }*/
-  .header-resize .menu-sidebar .logo{ padding: 0px 25px; }
+  .header-resize .menu-sidebar .logo{ padding: 0px 10px; }
   .body-resize .header-desktop {left: 82px;}
+  .hover-resize.header-resize .side-bar{display: none;}
+  .hover-resize.header-resize .main-bar{display: block; padding: 0 35px;}
+  .header-resize .side-bar{display: block;}
+  .header-resize .main-bar{display: none;}
 }
 @media (min-width: 768px) {
   .responsive-tabs .nav-tabs {display: block;}

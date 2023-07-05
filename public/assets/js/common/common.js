@@ -57,6 +57,13 @@ function errorNotification( message ){
       $(".alert-notification-error").hide('medium');
   });
 }
+function uniqueArray(list) {
+  var result = [];
+  $.each(list, function(i, e) {
+      if ($.inArray(e, result) == -1) result.push(e);
+  });
+  return result;
+}
 $(document).ready(function(){
     var menu = $('.js-item-menu');
     var sub_menu_is_showed = -1;

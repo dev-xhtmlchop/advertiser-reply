@@ -32,15 +32,15 @@ class DashboardController extends Controller
 
     public function filterAllDropdownData(){
         $advertiserId = Session::get('advertiser_id');
-        $dealData = Deals::join('deal_payloads', 'deal_payloads.id', '=', 'deals.deal_payload_id')->where('advertiser_id', '=' , $advertiserId)
+        $dealData = Deals::join('deal_payloads', 'deal_payloads.id', '=', 'deals.deal_payload_id')->where('deals.advertiser_id', '=' , $advertiserId)
                     ->get(['deal_payloads.name as deal_payloads_name','deals.id as deal_payloads_id'])->toArray();
-        $campaignData = Campaigns::join('campaign_payloads', 'campaign_payloads.id', '=', 'campaigns.campaign_payload_id')->where('advertiser_id', '=' , $advertiserId)
+        $campaignData = Campaigns::join('campaign_payloads', 'campaign_payloads.id', '=', 'campaigns.campaign_payload_id')->where('campaigns.advertiser_id', '=' , $advertiserId)
                 ->get(['campaigns.id as campaign_id','campaign_payloads.name as campaign_name'])->toArray();
         $demographicsList = Demographic::where('status', '=' , 1)->get(['demographics.id as demographics_id','demographics.name as demographics_name'])->toArray();
         $outletList = Outlets::where('status', '=' , 1)->get(['outlets.id as outlets_id','outlets.outlet_type as outlets_name'])->toArray();
         $agencyList = Agencys::where('status', '=' , 1)->get(['agencys.id as agencys_id','agencys.name as agencys_name'])->toArray();
         $locationList = Locations::where('status', '=' , 1)->get(['locations.id as locations_id','locations.name as locations_name'])->toArray();
-        $brandList = Brands::where('status', '=' , 1)->get(['brands.id as brands_id','brands.product_name as brands_name'])->toArray();
+        $brandList = Brands::where('status', '=' , 1)->where('advertiser_id', '=', $advertiserId)->get(['brands.id as brands_id','brands.product_name as brands_name'])->toArray();
        
         $dealDropdownOptions = Helper::dashboardInterconnectDropdownHtml( $dealData , 'deal_payloads', 'Deal', '', 0);
         $campaignDropdownOptions = Helper::dashboardInterconnectDropdownHtml( $campaignData , 'campaign', 'Campaign', '', 1);

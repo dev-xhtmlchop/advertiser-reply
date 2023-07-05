@@ -141,7 +141,11 @@ class CampaignController extends Controller
                 'medias.name as media_name', 
                 'agencys.name as agency_name',
                 'agencys.agency_commission as agency_commission',
-                'campaign_payloads.*'
+                'campaign_payloads.*',
+                'demographics.demo_population as demographics_demo_population',
+                'demographics.grp as demographics_grp',
+                'demographics.cpm as demographics_cpm',
+                'demographics.impression as demographics_impression',
             ])->toArray();
         
             $campaignDayTableData = Helper::campaignDayTime( $campaignList, 'campaign_payloads' );
@@ -175,6 +179,7 @@ class CampaignController extends Controller
                 'campaigns.id as campaign_payloads_id',
                 'campaign_payloads.name as campaign_payloads_name',
                 'campaigns.valid_to as campaigns_valid_to', 
+                'campaigns.valid_from as campaigns_valid_from', 
                 'campaigns.deal_year as campaigns_year',
             ]);
             $demographicList = Demographic::where('status','=',1)->get(['id','name'])->toArray();

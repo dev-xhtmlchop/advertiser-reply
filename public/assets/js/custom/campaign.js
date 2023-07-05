@@ -74,8 +74,19 @@ $(document).ready(function(){
             });
         } 
         return response;
+    }
 
-      }
+    function changeDetailNewTable(dayTimeVal){
+        var dayOfList = [];
+        $('#edit_flight tr.day-checkbox-list .form-check-input').each(function(){
+            if( $(this).is(":checked") ) {
+                dayOfList.push($(this).attr('day'));
+            }
+        });
+        var checkDayVal = dayOfList.join(" ");
+        dataAppend('#new_campaign_table .new-campaign_day-time', checkDayVal+' '+dayTimeVal);
+    }
+
     getCampaginViewData();
     $("#deal_status").change(function(){
         var dealStatus = $(this).val();
@@ -137,6 +148,11 @@ $(document).ready(function(){
                         dataValue('input[name="total_avails"]', campaignArrayData.total_avil );
                         dataValue('input[name="total_unit"]', campaignArrayData.total_unit );
                         dataValue('input[name="deal_payloads_name"]', campaignArrayData.deal_payloads_name );
+
+                        dataAppend('.cpm-imp-tab .cpm_ipm_demo_population', campaignArrayData.demographics_demo_population );
+                        dataAppend('.cpm-imp-tab .cpm_ipm_grp ', campaignArrayData.demographics_grp );
+                        dataAppend('.cpm-imp-tab .cpm_ipm_cpm ', campaignArrayData.demographics_cpm );
+                        dataAppend('.cpm-imp-tab .cpm_ipm_impressions', campaignArrayData.demographics_impression );
 
                         /* Step 1 End */
 
@@ -201,8 +217,8 @@ $(document).ready(function(){
                         dataAppend('#new_campaign_table .new-campaign-deal-name, #old_campaign_table .old-campaign-deal-name', campaignArrayData.deal_payloads_name);
                         dataAppend('#new_campaign_table .new-campaign_day-time, #old_campaign_table .old-campaign_day-time', campaignArrayData.day_time );
                         dataAppend('#summary .brand_name, #new_campaign_table .new-campaign-brand, #old_campaign_table .old-campaign-brand', campaignArrayData.brand_name);
-                        dataAppend('#new_campaign_table .new-campaign-start-flight-date, #old_campaign_table .old-campaign-start-flight-date, .old-campaign-table .flight-stat-date-text', campaignArrayData.flight_start_date);
-                        dataAppend('#new_campaign_table .new-campaign-end-flight-date, #old_campaign_table .old-campaign-end-flight-date, .old-campaign-table .flight-end-date-text', campaignArrayData.flight_end_date);
+                        dataAppend('.new-campaign-table .new-flight-stat-date-text, #new_campaign_table .new-campaign-start-flight-date, #old_campaign_table .old-campaign-start-flight-date, .old-campaign-table .flight-stat-date-text', campaignArrayData.flight_start_date);
+                        dataAppend('.new-campaign-table .new-flight-end-date-text, #new_campaign_table .new-campaign-end-flight-date, #old_campaign_table .old-campaign-end-flight-date, .old-campaign-table .flight-end-date-text', campaignArrayData.flight_end_date);
                         dataAppend('#summary .media_line_name, #new_campaign_table .new-campaign-media-line, #old_campaign_table .old-campaign-media-line', campaignArrayData.media_name);
                         dataAppend('#new_campaign_table .new-campaign-inv-type, #old_campaign_table .old-campaign-inv-type', campaignArrayData.inventory_type );
                         dataAppend('#new_campaign_table .new-campaign-inv-type, #old_campaign_table .old-campaign-inv-type', campaignArrayData.inventory_type );
@@ -258,18 +274,31 @@ $(document).ready(function(){
 
     /** Flight Change Event  */
     $('#flight_start_date').on('apply.daterangepicker', function(){
-        var startDate = $(this).val();
-        console.log( startDate ) 
+        var startDate = $(this).val(); 
         $('#summary .new-flight-stat-date-text').empty().text(startDate);
         dataAppend('#new_campaign_table .new-campaign-start-flight-date', startDate);
     });
 
     $('#flight_end_date').on('apply.daterangepicker', function(){
         var endDate = $(this).val();
-        console.log( endDate )
         $('#summary .new-flight-end-date-text').empty().text(endDate)
         dataAppend('#new_campaign_table .new-campaign-end-flight-date', endDate);
     });
+    $('#edit_flight .day-split-checkbox-list .number-field input[type="number"]').change(function(){
+        var getDayOfSplit = $(this).val(); 
+        var onlyDay = $(this).attr('id').split("_split");
+        console.log( getDayOfSplit );
+        if( ( getDayOfSplit == 0 ) || ( getDayOfSplit == '' ) ){
+            console.log( 1 );
+            $('#edit_flight .day-checkbox-list .form-check input[id="'+onlyDay[0]+'"]').attr('checked',false);
+        }else{
+            console.log( 2 );
+            $('#edit_flight .day-checkbox-list .form-check input[id="'+onlyDay[0]+'"]').attr('checked',true);
+        }
+        var dayTime = $('#day_parts_id option:selected').text();
+        changeDetailNewTable(dayTime)
+    });
+
     /* Flight Section End */
 
 
@@ -283,26 +312,13 @@ $(document).ready(function(){
         }
     });
     $('input[name="days[]"]').change(function(){
-        var dayOfList = [];
-        $('#edit_flight tr.day-checkbox-list .form-check-input').each(function(){
-            if( $(this).is(":checked") ) {
-                dayOfList.push($(this).attr('day'));
-            }
-        });
         var dayTimeVal = $('#campaign_day_time').val();
-        var checkDayVal = dayOfList.join(" ");
-        dataAppend('#new_campaign_table .new-campaign_day-time', checkDayVal+' '+dayTimeVal);
+        changeDetailNewTable(dayTimeVal)
     });
+    
     $('select:input[name="day_parts_id"]').change(function(){
         var dayPartVal = $(this).find('option:selected').text();
-        var dayOfList = [];
-        $('#edit_flight tr.day-checkbox-list .form-check-input').each(function(){
-            if( $(this).is(":checked") ) {
-                dayOfList.push($(this).attr('day'));
-            }
-        });
-        var checkDayVal = dayOfList.join(" ");
-        dataAppend('#new_campaign_table .new-campaign_day-time', checkDayVal+' '+dayPartVal);
+        changeDetailNewTable(dayTimeVal)
     });
 
     $("#edit_campaign").validate({

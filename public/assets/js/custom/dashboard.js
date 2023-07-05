@@ -97,14 +97,15 @@ function getDealDashboardData( selectOptionObject = null){
         type: 'POST',
         data: {_token: CSRF_TOKEN, data: selectOptionObject},
         success: function(response){
+            console.log( response );
             if( response.dropdown !== '' ){
-                $('#deal_no').empty().append(response.dropdown.deal);
-                $('#campaign').empty().append(response.dropdown.campaign);
-                $('#demographics').empty().append(response.dropdown.demographic);
-                $('#outlet').empty().append(response.dropdown.outlet);
-                $('#agency').empty().append(response.dropdown.agency);
-                $('#location').empty().append(response.dropdown.location);
-                $('#brand').empty().append(response.dropdown.brand);
+                $('#deal_no').empty().append(uniqueArray(response.dropdown.deal));
+                $('#campaign').empty().append(uniqueArray(response.dropdown.campaign));
+                $('#demographics').empty().append(uniqueArray(response.dropdown.demographic));
+                $('#outlet').empty().append(uniqueArray(response.dropdown.outlet));
+                $('#agency').empty().append(uniqueArray(response.dropdown.agency));
+                $('#location').empty().append(uniqueArray(response.dropdown.location));
+                $('#brand').empty().append(uniqueArray(response.dropdown.brand));
             }
             if( response.result ){
                 var dealData = response.result;
