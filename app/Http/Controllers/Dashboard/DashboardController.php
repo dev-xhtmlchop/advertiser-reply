@@ -62,6 +62,8 @@ class DashboardController extends Controller
     }
     public function index( Request $request ){
         
+       // $medias = Campaigns::with('medias')->with('brands')->get()->toArray();
+
         $dealStatusArray = Helper::dealStatusArray();
         $dealViewArray = Helper::dealViewArray();
         $dashboardData = array( 
@@ -174,7 +176,7 @@ class DashboardController extends Controller
             
             $response = array(
                     'result' => $results, 
-                    'dropdown' => $filterDropDownData
+                    'dropdown' => ''
             );
             return response()->json($response);  
 

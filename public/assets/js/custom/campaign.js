@@ -148,16 +148,55 @@ $(document).ready(function(){
                         dataValue('input[name="total_avails"]', campaignArrayData.total_avil );
                         dataValue('input[name="total_unit"]', campaignArrayData.total_unit );
                         dataValue('input[name="deal_payloads_name"]', campaignArrayData.deal_payloads_name );
+                        dataValue('input[name="demo_name"]', campaignArrayData.demographics_name)
+                        dataValue('input[name="ad_length"]', campaignArrayData.inventory_length)
+                        $('input[name="ad_length"]').daterangepicker({
+                            timePicker : true,
+                            singleDatePicker:true,
+                            timePicker24Hour : true,
+                            timePickerIncrement : 1,
+                            timePickerSeconds : true,
+                            locale : {
+                                format : 'HH:mm:ss'
+                        }}, (from_date) => {
+                            $('input[name="ad_length"]').val(campaignArrayData.inventory_length);
+                        }).on('show.daterangepicker', function (ev, picker) {
+                            picker.container.find(".calendar-table").hide();
+                        });
+                        $('input[name="flight_start_date"]').daterangepicker({
+                            autoUpdateInput: false,
+                            minDate:campaignArrayData.valid_from,
+                            maxDate:campaignArrayData.valid_to,
+                            locale: {
+                                format: 'MM/DD/YYYY',
+                            },
+                            singleDatePicker: true
+                        }, (from_date) => {
+                            $('input[name="flight_start_date"]').val(from_date.format('MM/DD/YYYY'));
+                        });
 
-                        dataAppend('.cpm-imp-tab .cpm_ipm_demo_population', campaignArrayData.demographics_demo_population );
-                        dataAppend('.cpm-imp-tab .cpm_ipm_grp ', campaignArrayData.demographics_grp );
-                        dataAppend('.cpm-imp-tab .cpm_ipm_cpm ', campaignArrayData.demographics_cpm );
-                        dataAppend('.cpm-imp-tab .cpm_ipm_impressions', campaignArrayData.demographics_impression );
+                        
+                        $('input[name="flight_end_date"]').daterangepicker({
+                            autoUpdateInput: false,
+                            minDate:campaignArrayData.valid_from,
+                            maxDate:campaignArrayData.valid_to,
+                            locale: {
+                                format: 'MM/DD/YYYY',
+                            },
+                            singleDatePicker: true
+                        }, (from_date) => {
+                            $('input[name="flight_end_date"]').val(from_date.format('MM/DD/YYYY'));
+                        });
+                        
+                        dataValue('input[name="cpm_ipm_demo_population"]', campaignArrayData.demo_population)
+                        dataValue('input[name="cpm_ipm_grp"]', campaignArrayData.grp)
+                        dataValue('input[name="cpm_ipm_cpm"]', campaignArrayData.cpm)
+                        dataValue('input[name="cpm_ipm_impressions"]', campaignArrayData.impressions)
 
                         /* Step 1 End */
 
                         /* Step 2 Demographic */
-                        $('#edit_campaign select#demographic_name').prop("disabled", true);
+                        //$('#edit_campaign select#demographic_name').prop("disabled", true);
                         $('#edit_campaign select#demographic_name option').each(function(){
                             var value = $(this).val();
                             if( campaignArrayData.demographic_id == value ){
@@ -165,6 +204,10 @@ $(document).ready(function(){
                             }else{
                                 $(this).prop('selected', false);
                             }
+                        })
+                        $('.cpm-imp-tab #demographic_name').change(function(){
+                            var demoName =  $(this).find('option:selected').text()
+                            dataAppend('#summary .demo_name', demoName);
                         })
                         /* Step 2 End */
 
@@ -185,6 +228,7 @@ $(document).ready(function(){
                                 $(this).prop('selected', false);
                             }
                         })
+                        
                         /* Flight Table Section */
                         checkedCheckbox('#edit_flight #sunday', campaignArrayData.sunday);
                         checkedCheckbox('#edit_flight #monday', campaignArrayData.monday);
@@ -207,11 +251,12 @@ $(document).ready(function(){
                         /* Step 4 Summary */
                         
                         
-                        dataAppend('#summary .demo_name', campaignArrayData.demo);
+                        dataAppend('#summary .demo_name', campaignArrayData.demographics_name);
                         dataAppend('#summary .ae_name', campaignArrayData.ae);
                         dataAppend('#summary .outlet_name', campaignArrayData.outlets_name);
                         dataAppend('#summary .new-campaign-id', campaignArrayData.campaign_id);
                         dataAppend('#summary .change_by', campaignArrayData.change_by);
+                        dataAppend('#summary .market_place', campaignArrayData.market_place);
                         dataAppend('#summary .campaign_number, #new_campaign_table .new-campaign-id, #old_campaign_table .old-campaign-id', campaignArrayData.campaign_id );
                         dataAppend('#summary .campaign_name, #new_campaign_table .new-campaign-name, #old_campaign_table .old-campaign-name', campaignArrayData.name);
                         dataAppend('#new_campaign_table .new-campaign-deal-name, #old_campaign_table .old-campaign-deal-name', campaignArrayData.deal_payloads_name);
@@ -240,26 +285,8 @@ $(document).ready(function(){
 
 
     /* Flight & Ad Length Section Start */ 
-    $('input[name="flight_start_date"]').daterangepicker({
-        autoUpdateInput: false,
-        locale: {
-            format: 'MM/DD/YYYY',
-        },
-        singleDatePicker: true
-    }, (from_date) => {
-        $('input[name="flight_start_date"]').val(from_date.format('MM/DD/YYYY'));
-    });
-
-    $('input[name="flight_end_date"]').daterangepicker({
-        autoUpdateInput: false,
-        locale: {
-            format: 'MM/DD/YYYY',
-        },
-        singleDatePicker: true
-    }, (from_date) => {
-        $('input[name="flight_end_date"]').val(from_date.format('MM/DD/YYYY'));
-    });
-    $('input[name="ad_length"]').daterangepicker({
+    
+  /*  $('input[name="ad_length"]').daterangepicker({
         timePicker : true,
         singleDatePicker:true,
         timePicker24Hour : true,
@@ -271,7 +298,11 @@ $(document).ready(function(){
     }).on('show.daterangepicker', function (ev, picker) {
         picker.container.find(".calendar-table").hide();
     });
-
+*/
+    $('input[name="ad_length"]').on('apply.daterangepicker', function(){
+        var startDate = $(this).val(); 
+        dataAppend('#new_campaign_table .new-campaign-inv-length', startDate);
+    });
     /** Flight Change Event  */
     $('#flight_start_date').on('apply.daterangepicker', function(){
         var startDate = $(this).val(); 
@@ -303,7 +334,6 @@ $(document).ready(function(){
 
 
     $('input[name="sunday_split"], input[name="monday_split"], input[name="tuesday_split"], input[name="wednesday_split"], input[name="thursday_split"], input[name="friday_split"], input[name="saturday_split"]').keypress(function (e) {    
-        console.log( $(this).val() );
         var currentVal = $(this).val();
         if( currentVal >= 100 ){
             var changeValue = currentVal.substring(0,currentVal.length - 1);
@@ -346,10 +376,10 @@ $(document).ready(function(){
                     link.setAttribute('href', URL+'/storage/app/public/campaign/'+fileName+'.json');
                     link.setAttribute('download', fileName+'.json'); // Need to modify filename ...
                     link.click();
-                    setTimeout(function(){
+                    /*setTimeout(function(){
                         window.location.href = URL+'/campaign';
                     },3000)
-                    return true;
+                    return true;*/
                 }
             });
         }

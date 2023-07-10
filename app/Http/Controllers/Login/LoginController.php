@@ -61,6 +61,7 @@ class LoginController extends Controller
                 $currentDate = date('m-d-Y H:i:s');
                 if( $getUserData ){
                     Session::put('user_id', $userId);
+                    Session::put('user_name', $getUserData->name);
                     Session::put('clients_id', $getUserData->clients_id);
                     Session::put('clent_name', $getUserData->clients_name );
                     Session::put('advertiser_id', $getUserData->advertisers_id);
@@ -76,8 +77,8 @@ class LoginController extends Controller
                 $data = array( 'status' => 1 , 'message' => 'Sucessfully Login.');
                 return response()->json($data);  
             } else {
-                $message = 'Please check Detail is incorrect.';
-                $data = array( 'status' => 0 , 'class' => '', 'message' => $message );
+                $message = 'Please check Password is incorrect.';
+                $data = array( 'status' => 0 , 'class' => 'password', 'message' => $message );
                 return response()->json($data);
             }   
         }else{

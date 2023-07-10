@@ -36,8 +36,8 @@
                                         <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
                                     </div>
                                     <div class="content">
-                                        @if(Session::has('advertiser_name'))
-                                            <a class="js-acc-btn" href="/">{{ Session::get('advertiser_name')}}</a>
+                                        @if(Session::has('user_name'))
+                                            <a class="js-acc-btn" href="/">{{ Session::get('user_name')}}</a>
                                         @endif
                                     </div>
                                     <div class="account-dropdown js-dropdown">
@@ -47,8 +47,8 @@
                                             </div>
                                             <div class="content">
                                                 <h5 class="name">
-                                                    @if(Session::has('advertiser_name'))
-                                                        <a href="/">{{ Session::get('advertiser_name')}}</a>
+                                                    @if(Session::has('user_name'))
+                                                        <a href="/">{{ Session::get('user_name')}}</a>
                                                     @endif
                                                 </h5>
                                                 @if(Session::has('advertiser_email_address'))

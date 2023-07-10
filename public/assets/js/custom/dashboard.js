@@ -97,7 +97,6 @@ function getDealDashboardData( selectOptionObject = null){
         type: 'POST',
         data: {_token: CSRF_TOKEN, data: selectOptionObject},
         success: function(response){
-            console.log( response );
             if( response.dropdown !== '' ){
                 $('#deal_no').empty().append(uniqueArray(response.dropdown.deal));
                 $('#campaign').empty().append(uniqueArray(response.dropdown.campaign));

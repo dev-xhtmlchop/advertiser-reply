@@ -15,9 +15,12 @@ use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
 
 class CampaignController extends Controller
 {
+    /************************************* Campaign List  **************************************************/
+    
     public function campaignTableRecord( $status = '' ){
         $advertiserId = Session::get('advertiser_id');
         $campaignTableTitle = Helper::campaignViewTableName();
@@ -57,7 +60,7 @@ class CampaignController extends Controller
         $campaignDayTableData = Helper::campaignDayTime( $campaignList, 'campaign_payloads' );
         $campaignTableData = Helper::tableAddDaysAndTime( $campaignTableData, $campaignDayTableData, 1 ); 
         $cahngeDateFormateFlightStart = Helper::changeDateFormate( $campaignTableData, array('campaign_payloads_flight_start_date','campaign_payloads_flight_end_date'), 1);
-        
+
         return $cahngeDateFormateFlightStart;
     }
     public function index(){
@@ -99,8 +102,10 @@ class CampaignController extends Controller
                 $campaignViewTableHtml .= '<tr class="tr-shadow">';
                     foreach( $tableDetailRowVal as $tableRowDetailKey => $tableRowDetail ){
                         if( $tableRowDetailKey == 'deal_auto_id' ) {
-                            $path = '/campaign/edit/'.$tableDetailRowVal['campaign_id'];
+                            $encryptId = base64_encode($tableDetailRowVal['campaign_id']);
+                            $path = '/campaign/edit/'.$encryptId;
                             $campaignURL = url($path); 
+                            
                             $campaignViewTableHtml .='<td>
                                 <a href="'.$campaignURL.'"><i class="fa fa-pencil-alt fa-lg"></i></a>
                         </td>';
@@ -114,9 +119,11 @@ class CampaignController extends Controller
         return response()->json(array( 'deal_view_data' => $dealView, 'deal_table_html' => $campaignViewTableHtml ));  
     }
 
+    /************************************* Edit Campaign Detail  **************************************************/
+
     public function getEditCampaignDetail(Request $request){
         if( $request['campaignId'] != '' ){
-            $campaignID = $request['campaignId'];
+            $campaignID = base64_decode( $request['campaignId']);
             $advertiserId = Session::get('advertiser_id');
             $campaignList = Campaigns::join('campaign_payloads', 'campaigns.campaign_payload_id', '=', 'campaign_payloads.id')
                 ->join('brands', 'campaigns.brand_id', '=', 'brands.id')->where('brands.status','=', 1)
@@ -150,14 +157,14 @@ class CampaignController extends Controller
         
             $campaignDayTableData = Helper::campaignDayTime( $campaignList, 'campaign_payloads' );
             $campaignTableData = Helper::tableAddDaysAndTime( $campaignListArray, $campaignDayTableData, 0 ); 
-            $cahngeDateFormateFlightStart = Helper::changeDateFormate( $campaignTableData, array( 'flight_start_date' ), 0);
-            $finalCampaignData = Helper::changeDateFormate( $cahngeDateFormateFlightStart, array( 'flight_end_date' ), 0);
+            $cahngeDateFormateFlightStart = Helper::changeDateFormate( $campaignTableData, array( 'flight_start_date', 'flight_end_date', 'valid_from', 'valid_to' ), 0);
+            //$finalCampaignData = Helper::changeDateFormate( $cahngeDateFormateFlightStart, array( 'flight_end_date' ), 0);
 
             $response = array(
                 'status' => 1,
                 'message' => 'Data',
                 'data' => array(
-                    'campaign_data' => $finalCampaignData 
+                    'campaign_data' => $cahngeDateFormateFlightStart 
                 )
             );
             return response()->json($response);  
@@ -172,6 +179,7 @@ class CampaignController extends Controller
     }
 
     public function getEditCampaignInfo(Request $request, $campaignID){
+        $campaignID = base64_decode($campaignID);
         $advertiserId = Session::get('advertiser_id');
         $campaignList = Campaigns::join('campaign_payloads', 'campaigns.campaign_payload_id', '=', 'campaign_payloads.id')
             ->where('campaigns.advertiser_id', '=', $advertiserId)->where('campaigns.id','=',$campaignID)
@@ -288,6 +296,7 @@ class CampaignController extends Controller
                 $currentDate = date('Y-m-d H:i:s');
                 
                 $updateCampaign = Campaigns::join('campaign_payloads', 'campaigns.campaign_payload_id', '=', 'campaign_payloads.id')
+                    ->join('demographics', 'campaigns.demographic_id', '=', 'demographics.id')->where('demographics.status','=', 1)
                     ->where('campaigns.advertiser_id', '=', $advertiserId)
                     ->where('campaigns.delete', '=', 0)
                     ->where('campaign_payloads.delete', '=', 0)
@@ -312,10 +321,18 @@ class CampaignController extends Controller
                         'campaign_payloads.friday_split' => $newCampaignArray['friday_split'],
                         'campaign_payloads.saturday_split' => $newCampaignArray['saturday_split'],
                         'campaigns.daypart_id' => $newCampaignArray['day_parts_id'],
+                        'campaigns.demographic_id' => $newCampaignArray['demographic_name'],
+                        'campaign_payloads.demo_population' => $newCampaignArray['cpm_ipm_demo_population'],
+                        'campaign_payloads.impressions' => $newCampaignArray['cpm_ipm_impressions'],
+                        'campaign_payloads.grp' => $newCampaignArray['cpm_ipm_grp'],
+                        'campaign_payloads.cpm' => $newCampaignArray['cpm_ipm_cpm'],
+                        'campaign_payloads.inventory_length' => $newCampaignArray['ad_length'],
                         'campaigns.status' => 'proposal',
+                        'demographics.updated_by' => $userId,
+                        'demographics.updated_at' => $currentDate,
                         'campaigns.updated_by' => $userId,
-                        'campaign_payloads.updated_by' => $userId,
                         'campaigns.updated_at' => $currentDate,
+                        'campaign_payloads.updated_by' => $userId,
                         'campaign_payloads.updated_at' =>$currentDate,
                     ]);
  
@@ -323,7 +340,7 @@ class CampaignController extends Controller
                 $fileName = $newCampaignArray['campaign_id'];
                 Storage::put('/public/campaign/'.$fileName.'.json', json_encode($jsonData));
                 Helper::activityLog('Update Campaign');
-                if( 0 == 0 ){
+                if( $updateCampaign == 0 ){
                     $data = array( 'status' => 0 , 'message' => 'Record was not Updated.');
                 }else{
                     $data = array( 'status' => 1 , 'message' => 'Success');

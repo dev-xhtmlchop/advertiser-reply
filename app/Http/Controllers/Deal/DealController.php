@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 
 class DealController extends Controller
 {
+    
+    /************************************* Deal List  **************************************************/
 
     public function dealTableRecord( $status = '' ){
         $advertiserId = Session::get('advertiser_id');

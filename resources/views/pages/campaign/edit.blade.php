@@ -130,9 +130,7 @@
                                         <div id="pane-B" class="cpm-imp-tab card tab-pane fade" role="tabpanel" aria-labelledby="cpm-imp">
                                             <div class="card-header" role="tab" id="heading-B">
                                                 <h5 class="mb-0">
-                                                    <a class="collapsed" data-bs-toggle="collapse"
-                                                        href="#collapse-B" aria-expanded="false"
-                                                        aria-controls="collapse-B">
+                                                    <a class="collapsed" data-bs-toggle="collapse" href="#collapse-B" aria-expanded="false" aria-controls="collapse-B">
                                                         CPM/IPM
                                                     </a>
                                                 </h5>
@@ -140,32 +138,62 @@
                                             <div id="collapse-B" class="collapse" data-bs-parent="#content" role="tabpanel" aria-labelledby="heading-B">
                                                 <div class="card-body">
                                                     <div class="row">
-                                                        <div class="col-md-4 form-group">
-                                                            <label for="realistic">Demographics</label>
-                                                            <select name="demographic_name" class="au-input au-input--full" id="demographic_name" disabled>
-                                                                <option value="">Demographic</option>
-                                                                @if( count( $demographicList ) > 0 )
-                                                                    @foreach( $demographicList as $demographicListKey => $demographicListVal )
-                                                                        <option value="{{ $demographicListVal['id'] }}">{{ $demographicListVal['name'] }}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </select>
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-6 form-group">
+                                                                    <label for="realistic">Demographics</label>
+                                                                </div>
+                                                                <div class="col-md-6 form-group">
+                                                                    <select name="demographic_name" class="au-input au-input--full" id="demographic_name" >
+                                                                    <option value="">Demographic</option>
+                                                                    @if( count( $demographicList ) > 0 )
+                                                                        @foreach( $demographicList as $demographicListKey => $demographicListVal )
+                                                                            <option value="{{ $demographicListVal['id'] }}">{{ $demographicListVal['name'] }}</option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-4 form-group">
-                                                            <label for="demo_population">Demo Population</label>
-                                                            <span class="cpm_ipm_demo_population au-input au-input--full form-control disable-bg ">Demo Population</span>
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-6 form-group">
+                                                                    <label for="demo_population">Demo Population</label>
+                                                                </div>
+                                                                <div class="col-md-6 form-group">
+                                                                    <input type="number" name="cpm_ipm_demo_population" max="1" min="0" class="au-input--full form-control" value="" >
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-4 form-group">
-                                                            <label for="impressions">Impressions</label>
-                                                            <span class="cpm_ipm_impressions au-input au-input--full form-control disable-bg ">Impressions</span>
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-6 form-group">
+                                                                    <label for="demo_population">Impressions</label>
+                                                                </div>
+                                                                <div class="col-md-6 form-group">
+                                                                    <input type="number" name="cpm_ipm_impressions" max="1" min="0" class="au-input--full form-control" value="" >
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-4 form-group">
-                                                            <label for="grp">GRP</label>
-                                                            <span class="cpm_ipm_grp au-input au-input--full form-control disable-bg ">GRP</span>
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-6 form-group">
+                                                                    <label for="demo_population">GRP</label>
+                                                                </div>
+                                                                <div class="col-md-6 form-group">
+                                                                    <input type="number" name="cpm_ipm_grp" max="1" min="0" class="au-input--full form-control" value="" >
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-4 form-group">
-                                                            <label for="cpm">CPM</label>
-                                                            <span class="cpm_ipm_cpm au-input au-input--full form-control disable-bg ">CPM</span>
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-6 form-group">
+                                                                    <label for="demo_population">CPM</label>
+                                                                </div>
+                                                                <div class="col-md-6 form-group">
+                                                                    <input type="number" name="cpm_ipm_cpm" max="1" min="0" class="au-input--full form-control" value="" >
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="btn-row mt-3 text-center">
                                                             <a href="javascript:void(0);" class="btn btn-lg btn-secondary tab-btn" attr-active="general" >Go To General</a>

@@ -73,7 +73,8 @@
                                                 @foreach( $tableDetailRowVal as $tableRowDetailKey => $tableRowDetailVal )
                                                     @if( $tableRowDetailKey == 'deal_auto_id' )
                                                     @php 
-                                                        $url = url('/campaign/edit/'.$tableDetailRowVal['campaign_id']);
+                                                        $campaignId = base64_encode( $tableDetailRowVal['campaign_id'] );
+                                                        $url = url('/campaign/edit/'. $campaignId);
                                                     @endphp
                                                     <td>
                                                         <a href="{{ $url }}"><i class="fa fa-pencil-alt fa-lg"></i></a>
