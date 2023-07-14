@@ -9,7 +9,7 @@
                 <div class="login-wrap">
                     <div class="login-content">
                         <div class="login-logo">
-                            <a href="/">
+                            <a href="{{ route('dashboard') }}">
                                 <img src="{{ asset('public/images/logo/logo.png') }}" alt="CoolAdmin">
                             </a>
                         </div>
@@ -18,29 +18,88 @@
                             <div class="alert alert-notification text-center mb-3" role="alert"></div>
                             <form id="login_form" method="post">   
                                 @csrf
-                                <div class="form-group">
-                                    <label for="user_name">User Name</label>
-                                    <input type="text" id="user_name" class="au-input au-input--full form-control" name="user_name" value="{{ old('user_name') }}"  autofocus>
+                                <div class="col-md-12 user-sec">
+                                    <div class="row">
+                                        <div class="col-md-4 form-group">
+                                            <label for="user_name">User Name</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="text" id="user_name" class="au-input au-input--full form-control" name="user_name" value="{{ old('user_name') }}"  autofocus>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" id="password" class="au-input au-input--full form-control" name="password" value="{{ old('password') }}" >
+                                <div class="col-md-12 password-sec">
+                                    <div class="row">
+                                        <div class="col-md-4 form-group">
+                                            <label for="password">Password</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <input type="password" id="password" class="au-input au-input--full form-control" name="password" value="{{ old('password') }}" >
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="password">Media Line</label>
-                                    <select name="media" id="media" class="au-input au-input--full form-control">
-                                        <option value="">Select Option</option>
-                                        @if( $data['mediaList'] )
-                                            @foreach( $data['mediaList'] as $mediaKey => $mediaValue)
-                                            <option value="{{ $mediaValue['id'] }}" 
-                                                @if ( $mediaValue['id'] == old('media') ) selected="selected" @endif>{{ $mediaValue['name'] }}</option>
-                                            @endforeach;
-                                        @endif;
-                                </select>
+                                <div class="col-md-12 media-sec">
+                                    <div class="row">
+                                        <div class="col-md-4 form-group">
+                                            <label for="password">Media Line</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <select name="media" id="media" class="au-input au-input--full form-control">
+                                                    <option value="">Select Option</option>
+                                                    @if( $data['mediaList'] )
+                                                        @foreach( $data['mediaList'] as $mediaKey => $mediaValue)
+                                                        <option value="{{ $mediaValue['id'] }}" 
+                                                            @if ( $mediaValue['id'] == old('media') ) selected="selected" @endif>{{ $mediaValue['name'] }}</option>
+                                                        @endforeach;
+                                                    @endif;
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-        
-                                <div class="text-center">
-                                    <input type="submit" class="au-btn au-btn--block au-btn--green" value="AdvertiserReplay Login" />
+                                <div class="text-center submit-sec">
+                                    <span class="spinner spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                                    <input type="submit" class="au-btn au-btn--block au-btn--green advertiser-login-btn" value="AdvertiserReplay Login" />
+                                </div>
+                            </form>
+                        </div>
+                        <div class="verify-account-form" style="display: none;">
+                            <h3 class="text-center mb-3">Verify Account</h3>
+                            <div class="alert alert-notification text-center mb-3" role="alert"></div>
+                            <form id="verify_account_form" method="post">   
+                                @csrf
+                                <div class="col-md-12 email-otp-sec">
+                                    <div class="row">
+                                        <div class="col-md-4 form-group">
+                                            <label for="password">Email OTP</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <div class="col-md-12">
+                                                <div class="row ">
+                                                    <div class="email-otp-number d-flex">
+                                                        <input class="form-control rounded mr-2" type="number" id="first" name="first" data-next="second"  maxlength="1" /> 
+                                                        <input class="form-control rounded mr-2" type="number" id="second"  name="second" data-next="third" data-previous="second" maxlength="1" /> 
+                                                        <input class="form-control rounded mr-2" type="number" id="third"  name="third" data-next="fourth"  data-previous="third" maxlength="1" /> 
+                                                        <input class="form-control rounded mr-2" type="number" id="fourth" name="fourth" data-next="fifth"  data-previous="fourth" maxlength="1" /> 
+                                                        <input class="form-control rounded mr-2" type="number" id="fifth" name="fifth" data-next="sixth" data-previous="fifth" maxlength="1" /> 
+                                                        <input class="form-control rounded mr-2" type="number" id="sixth" name="sixth" data-previous="sixth" maxlength="1" /> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mt-3">
+                                                <div class="row">
+                                                    <div class="col-md-6 email-time">
+                                                        <span>Time: <b class="counter">2:00</b></span>
+                                                    </div>
+                                                    <div class="col-md-6 send-email-otp">
+                                                        <button id="email_send_otp">Resend OTP</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center submit-sec">
+                                    <input type="submit" class="au-btn au-btn--block au-btn--green verify-otp-btn" value="Verify OTP" />
                                 </div>
                             </form>
                         </div>

@@ -384,3 +384,9 @@
 
 .alert-notification-error{ display:none; position: fixed; top: 80px; right: 20px; }
 .alert-notification-error .fa {margin-right:.5em; }
+
+#login_form .rounded::-webkit-outer-spin-button, #login_form .rounded::-webkit-inner-spin-button,
+.email-otp-number input[type="number"]::-webkit-outer-spin-button, .email-otp-number input[type="number"]::-webkit-inner-spin-button,
+.email-otp-number label#first-error, .email-otp-number label#second-error, .email-otp-number label#third-error, .email-otp-number label#fourth-error, .email-otp-number label#fifth-error, .email-otp-number label#sixth-error{ display: none !important; }
+.submit-sec .spinner-border-sm { width: 1rem; height: 1rem; border-width: 0.2em; position: absolute; left: auto; top: 15px; margin-left: -123px; color: #796149; }
+.submit-sec { position: relative; }

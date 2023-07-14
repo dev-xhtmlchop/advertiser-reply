@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    /* Campaign page Start  */
+    /******************************************************** Campaign page Start  ************************************************/
     function campaignGetId(){
         $('#campaign_table input[name="deal_number"]').click(function(){
             var editCampaignDealId = $(this).val();
@@ -102,9 +102,9 @@ $(document).ready(function(){
     });
     campaignGetId();
 
-    /* Campaign page End  */
+    /*************************************************** Campaign page End  ***************************************************/
 
-    /* Edit Campaign page Start */
+    /***********************************************  Edit Campaign page Start ***********************************************/
 
     function getCampaignDetail(){
         var url = URL+'/get-campaign-detail';
@@ -119,7 +119,6 @@ $(document).ready(function(){
                 type: 'POST',
                 data: {_token: CSRF_TOKEN, campaignId: firstLastVal },
                 success: function(response){
-                    console.log( response )
                     if( response.status == 1 ){
                         var campaignArrayData = response.data.campaign_data;
                         console.log( campaignArrayData )
@@ -318,12 +317,9 @@ $(document).ready(function(){
     $('#edit_flight .day-split-checkbox-list .number-field input[type="number"]').change(function(){
         var getDayOfSplit = $(this).val(); 
         var onlyDay = $(this).attr('id').split("_split");
-        console.log( getDayOfSplit );
         if( ( getDayOfSplit == 0 ) || ( getDayOfSplit == '' ) ){
-            console.log( 1 );
             $('#edit_flight .day-checkbox-list .form-check input[id="'+onlyDay[0]+'"]').attr('checked',false);
         }else{
-            console.log( 2 );
             $('#edit_flight .day-checkbox-list .form-check input[id="'+onlyDay[0]+'"]').attr('checked',true);
         }
         var dayTime = $('#day_parts_id option:selected').text();
@@ -331,7 +327,6 @@ $(document).ready(function(){
     });
 
     /* Flight Section End */
-
 
     $('input[name="sunday_split"], input[name="monday_split"], input[name="tuesday_split"], input[name="wednesday_split"], input[name="thursday_split"], input[name="friday_split"], input[name="saturday_split"]').keypress(function (e) {    
         var currentVal = $(this).val();
@@ -406,5 +401,6 @@ $(document).ready(function(){
             $('.'+tabClass+'-tab').addClass('show').addClass('active');
         }
        // getCampaignDetail();
-      });
+    });
+      /***********************************************  Edit Campaign page End ***********************************************/
 });

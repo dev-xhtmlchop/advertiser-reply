@@ -34,6 +34,8 @@ Route::post('/advertiser-dashboard',[ DashboardController::class, 'dashboardAdve
 /* Login */
 Route::get('/login',[ LoginController::class, 'index'])->name('login');
 Route::post('/post-login',[ LoginController::class, 'postLogin'])->name('login.post');
+Route::post('/post-resend-otp',[ LoginController::class, 'postReSendOTP'])->name('login.resend.otp');
+Route::post('/post-verify-otp',[ LoginController::class, 'postVerifyOTP'])->name('login.verify.otp');
 Route::post('/post-login-user',[ LoginController::class, 'postLoginUser'])->name('login.postuser');
 
 /* Logout */

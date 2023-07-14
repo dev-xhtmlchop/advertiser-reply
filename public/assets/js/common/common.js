@@ -46,6 +46,43 @@ function sucessNotification( message ){
       $(".alert-notification-success").hide('medium');
   });
 }
+/*
+var timer2 = "02:00";
+var interval = setInterval(function() {
+  var timer = timer2.split(':');
+  //by parsing integer, I avoid all extra string processing
+  var minutes = parseInt(timer[0], 10);
+  var seconds = parseInt(timer[1], 10); --seconds;
+  minutes = (seconds < 0) ? --minutes : minutes;
+  if (minutes < 0) clearInterval(interval);
+  seconds = (seconds < 0) ? 59 : seconds;
+  seconds = (seconds < 10) ? '0' + seconds : seconds;
+  //minutes = (minutes < 10) ?  minutes : minutes;
+  console.log(minutes + ':' + seconds);
+  timer2 = minutes + ':' + seconds;
+}, 1000);
+*/
+function countdown( timer2 = null) {
+  var interval = setInterval(function() {
+    var timer = timer2.split(':');
+    //by parsing integer, I avoid all extra string processing
+    var minutes = parseInt(timer[0], 10);
+    var seconds = parseInt(timer[1], 10); --seconds;
+    minutes = (seconds < 0) ? --minutes : minutes;
+    if (minutes < 0) clearInterval(interval);
+    seconds = (seconds < 0) ? 59 : seconds;
+    seconds = (seconds < 10) ? '0' + seconds : seconds; 
+    var timerText = minutes + ':' + seconds;
+    if( timerText != '-1:59' ){
+      $('.email-time .counter').empty().append(timerText);
+    }
+    if( ( seconds == '00' ) && ( minutes == '0' ) ){
+      $('#email_send_otp').show();
+      $('#email_send_otp').css({'pointer-events': 'auto','cursor': 'pointer','opacity': '1'});
+    }
+    timer2 = minutes + ':' + seconds;
+  }, 1000);
+}
 
 function errorNotification( message ){
   $(".alert-notification-error .error-message").empty().text(message);
