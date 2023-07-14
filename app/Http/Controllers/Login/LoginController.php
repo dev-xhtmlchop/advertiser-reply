@@ -103,7 +103,7 @@ class LoginController extends Controller
                     Session::put('login_user_name', $request['user_name']);
                     Session::put('login_user_email_address', base64_encode($userDetail['email_address']) );
                     Session::put('login_display_name', $request['display_name']);
-                    Session::put('login_password', base64_encode($request['password']));
+                    Session::put('login_password', base64_encode($passwordDecrypt));
                     Session::put('login_media', $request['media']);
 
                     $tokenNumber = LoginController::checkToken( $userDetail['id'] );
