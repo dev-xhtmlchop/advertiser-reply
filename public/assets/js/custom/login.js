@@ -229,6 +229,10 @@ $(document).ready(function(){
             });
 
             if( veryFicationCode.length == 6 ){
+                $('#verify_account_form .submit-sec .spinner').show();
+                $('.email-otp-number input[type="number"]').each(function(){
+                    $(this).prop('disabled', true);
+                });
                 var otpCode = veryFicationCode.join('');
                 console.log( otpCode )
                 var data = { otp: btoa(otpCode) };
@@ -237,7 +241,11 @@ $(document).ready(function(){
                     type: 'POST',
                     data: {_token: CSRF_TOKEN, data: data },
                     success: function(response){
+                        $('#verify_account_form .submit-sec .spinner').hide();
                         if( response.status == 0 ){
+                            $('.email-otp-number input[type="number"]').each(function(){
+                                $(this).prop('disabled', false);
+                            });
                             error( response.message, response.class );
                             return false;
                         }else{

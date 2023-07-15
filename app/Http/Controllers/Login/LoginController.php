@@ -26,7 +26,19 @@ class LoginController extends Controller
         $mediaData = array( 
         'data' => array( 'mediaList' => $mediaList ),
         'title' => 'Login' );
-        return view('pages.login.index', $mediaData );
+        if (Auth::user()) {  
+            $dealStatusArray = Helper::dealStatusArray();
+            $dealViewArray = Helper::dealViewArray();
+            $dashboardData = array( 
+                'title' => 'Dashboard',
+                'dealStatus' => $dealStatusArray,
+                'dealView' => $dealViewArray
+            );                      
+            return view('pages.dashboard.index', $dashboardData);
+        } else{
+            return view('pages.login.index', $mediaData );
+        }
+        
     }
 
     public function postLoginUser( Request $request ){
@@ -194,8 +206,10 @@ class LoginController extends Controller
             $otp = base64_decode($request['data']['otp']);
             $date = date('Y-m-d H:i:s');
             $aboveTwoMinite = date("Y-m-d H:i:s", strtotime("-2 minutes"));
-            $checkCount = UserAccessTokens::where('user_id', '=' , $sessionUserId)->where('token', '=' , $otp)->whereBetween('created_at', [$aboveTwoMinite,  $date])->count();
+            $getTokenQuery = UserAccessTokens::where('user_id', '=' , $sessionUserId)->where('token', '=' , $otp)->where('verify', '=' , 1)->whereBetween('created_at', [$aboveTwoMinite,  $date]);
+            $checkCount = $getTokenQuery->count();
             if( $checkCount == 1 ){
+                $getTokenArray = $getTokenQuery->first()->toArray();
                 if( Auth::attempt( ['user_name' => $userName, 'password' => $password ] ) ){
                     $userId = Auth::id();
                     $getUserData = User::join('advertisers', 'advertisers.id', '=', 'users.advertiser_id')
@@ -222,14 +236,17 @@ class LoginController extends Controller
                         Session::put('advertiser_logintime', $currentDate);
                         Session::put('media_line', $getUserData->medias_name);
                     }
-                    
+
+                    $checkCount = UserAccessTokens::where('user_id', '=' , $sessionUserId)->where('token', '=' , $otp)->where('id', '=' , $getTokenArray['id'])
+                    ->update(['verify' => 0, 'updated_at' => $date]);
+
                     Helper::activityLog('User Verify Completed Go to Dashboard');
                     Helper::userHistory();
 
                     $data = array( 'status' => 1 , 'message' => 'Your Account Sucessfully Verify.');
                     return response()->json($data);
                 } else {
-                    $data = array( 'status' => 0 , 'class' => '' ,'message' => 'Account not Verify.');
+                    $data = array( 'status' => 0 , 'class' => '' ,'message' => 'Please Check Account Detail.');
                      return response()->json($data);
                 }
             } else{

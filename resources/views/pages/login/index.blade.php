@@ -99,6 +99,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center submit-sec">
+                                    <span class="spinner spinner-border spinner-border-sm verify-loader" role="status" aria-hidden="true" style="display: none;"></span>
                                     <input type="submit" class="au-btn au-btn--block au-btn--green verify-otp-btn" value="Verify OTP" />
                                 </div>
                             </form>

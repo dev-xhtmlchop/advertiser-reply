@@ -390,3 +390,4 @@
 .email-otp-number label#first-error, .email-otp-number label#second-error, .email-otp-number label#third-error, .email-otp-number label#fourth-error, .email-otp-number label#fifth-error, .email-otp-number label#sixth-error{ display: none !important; }
 .submit-sec .spinner-border-sm { width: 1rem; height: 1rem; border-width: 0.2em; position: absolute; left: auto; top: 15px; margin-left: -123px; color: #796149; }
 .submit-sec { position: relative; }
+.submit-sec .spinner-border-sm.verify-loader{ margin-left: -67px !important; }

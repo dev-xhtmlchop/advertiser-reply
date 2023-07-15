@@ -16,6 +16,8 @@ use App\Models\Brands;
 use App\Models\Locations;
 use App\Models\Outlets;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Medias;
 
 class DashboardController extends Controller
 {
@@ -70,12 +72,20 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'dealStatus' => $dealStatusArray,
             'dealView' => $dealViewArray
-        );                        
-        return view('pages.dashboard.index', $dashboardData);
+        );     
+        if (Auth::user()) {                   
+            return view('pages.dashboard.index', $dashboardData);
+        } else{
+            $mediaList = Medias::where('status','=','1')->get(['id','name'])->toArray();
+        $mediaData = array( 
+        'data' => array( 'mediaList' => $mediaList ),
+        'title' => 'Login' );
+            return view('pages.login.index', $dashboardData);
+        }
     }
 
     public function dashboardDealFilter( Request $request){
-       $advertiserId = Session::get('advertiser_id');
+        $advertiserId = Session::get('advertiser_id');
         if( $request->data !== null ){
             $data = $request->data;
             $results = Deals::join('deal_payloads','deal_payloads.id', '=', 'deals.deal_payload_id' )
@@ -190,7 +200,7 @@ class DashboardController extends Controller
                     DB::raw('SUM(deal_payloads.grp) as grp'),
                     DB::raw('SUM(deal_payloads.deal_unit) as deal_unit'),
                   ));
-
+               //print_r(DashboardController::filterAllDropdownData());
             $response = array(
                 'result' => $results, 
                 'dropdown' => DashboardController::filterAllDropdownData()

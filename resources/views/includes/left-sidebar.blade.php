@@ -2,7 +2,7 @@
     <div class="logo">
         <a href="{{ route('dashboard') }}">
             <img src="{{ asset('public/images/logo/logo.png') }}" class="main-bar" alt="logo" />
-            <img src="{{ asset('public/images/logo/logo-small.png') }}" class="side-bar" alt="logo" />
+            <img src="{{ asset('public/images/logo/logo-small.svg') }}" class="side-bar" alt="logo" />
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">
