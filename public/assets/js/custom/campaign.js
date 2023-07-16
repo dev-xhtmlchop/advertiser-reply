@@ -22,7 +22,7 @@ $(document).ready(function(){
                 $('#campaign_table').DataTable().destroy();
                 $('#campaign_view_body').empty().append(response.deal_table_html);
                 $('#campaign_table').DataTable({
-                    pageLength: 10,
+                    pageLength: 5,
                     rowReorder: true,
                     columnDefs: [
                         { orderable: true, className: 'reorder', targets: 0 },
@@ -93,7 +93,7 @@ $(document).ready(function(){
         getCampaginViewData( dealStatus );
     });
     $('#campaign_table').DataTable({
-        pageLength: 10,
+        pageLength: 5,
         rowReorder: true,
         columnDefs: [
             { orderable: true, className: 'reorder', targets: 0 },

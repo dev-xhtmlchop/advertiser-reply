@@ -29,7 +29,7 @@
                                         @php
                                             $imageUrl = "public/images/dashboard/".$dealViewVal['image'];
                                         @endphp
-                                        <div class="col form-group">
+                                        <div class="col">
                                             <div class="deal-component {{ $dealViewVal['background'] }}">
                                                 <h3>{{ $dealViewVal['name'] }}</h3>
                                                 <h5 id="deal_{{ $dealViewVal['slug'] }}">{{ $dealViewVal['value'] }}</h5>
@@ -47,7 +47,7 @@
                 <div class="row">
                     <div class="col-md-12 card-main">
                         <div class="deal-view-box card">
-                            <div class="row table-responsive table-responsive-data2">
+                            <div class="table-responsive table-responsive-data2">
                                 <table id="deals_table" class="table custom-table table-borderless table-striped dataTable no-footer " style="width:100%;">
                                     <thead>
                                         <tr>

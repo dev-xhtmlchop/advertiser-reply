@@ -58,65 +58,65 @@
                                             <div id="collapse-A" class="collapse show" data-bs-parent="#content" role="tabpanel" aria-labelledby="heading-A">
                                                 <div class="card-body">
                                                     <div class="row">
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="campaign_number">Campaign Number</label>
                                                             <input type="text" id="campaign_number" class="au-input au-input--full form-control campaign_number" name="campaign_number" value="" disabled="">
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="campaign_name">Campaign Name</label>
                                                             <input type="text" id="campaign_name"class="au-input au-input--full form-control campaign_name"name="campaign_name" value="" disabled="">
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="brand_name">Brand</label>
                                                             <input type="text" id="brand_name"class="au-input au-input--full form-control brand_name"name="brand_name" value="" disabled="">
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="media_line">Media Line</label>
                                                             <input type="text" id="media_line"class="au-input au-input--full form-control media_line_name"name="media_line_name" value="" disabled="">
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="dollar_rate">$ Rate</label>
                                                             <input type="text" id="dollar_rate"class="au-input au-input--full form-control"name="dollar_rate" value="" disabled="">
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="agency_name">Agency Name</label>
                                                             <input type="text" id="agency_name"class="au-input au-input--full form-control"name="agency_name" value="" disabled="">
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="demo_name">Demo</label>
                                                             <input type="text" id="demo_name"class="au-input au-input--full form-control"name="demo_name" value="" disabled="">
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="ae_name">AE</label>
                                                             <input type="text" id="ae_name"class="au-input au-input--full form-control"name="ae_name" value="" disabled="">
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="outlet_name">Outlet</label>
                                                             <input type="text" id="outlet_name"class="au-input au-input--full form-control"name="outlet_name" value="" disabled="">
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="market_place">Market Place</label>
                                                             <input type="text" id="market_place"class="au-input au-input--full form-control"name="market_place" value="" disabled="">
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="realistic">Realistic</label>
                                                             <div class="number-field">
                                                                 <input type="text" id="realistic"class="au-input au-input--full form-control"name="realistic" value="" disabled="">
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="agency_commision">Agency Commision</label>
                                                             <div class="number-field">
                                                                 <input type="text" id="agency_commision"class="au-input au-input--full form-control"name="agency_commision" value="" disabled="">
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="revenue_risk">Revenue Risk</label>
                                                             <div class="number-field">
                                                                 <input type="text" id="revenue_risk"class="au-input au-input--full form-control"name="revenue_risk" value="" disabled="">
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-4 form-group">
+                                                        <div class="col-xxl-4 form-group form-group-inline">
                                                             <label for="budget">Budget</label>
                                                             <input type="text" id="budget"class="au-input au-input--full form-control"name="budget" value="" disabled="">
                                                         </div>
@@ -325,56 +325,56 @@
                                             <div id="collapse-D" class="collapse" data-bs-parent="#content"
                                                 role="tabpanel" aria-labelledby="heading-D">
                                                 <div class="card-body" id="summary">
-                                                    <div class="row mb-5">
-                                                        <div class="col-md-6 form-group">
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
                                                             <label for="campaign_number">Campaign Number</label>
                                                             <span class="campaign_number au-input au-input--full form-control disable-bg "></span>
                                                         </div>
-                                                        <div class="col-md-6 form-group">
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
                                                             <label for="campaign_name">Campaign Name</label>
                                                             <span class="campaign_name au-input au-input--full form-control disable-bg "></span>
                                                         </div>
-                                                        <div class="col-md-6 form-group">
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
                                                             <label for="brand_name">Brand</label>
                                                             <span class="brand_name au-input au-input--full form-control disable-bg "></span>
                                                         </div>
-                                                        <div class="col-md-6 form-group">
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
                                                             <label for="media_line">Media Line</label>
                                                             <span class="media_line_name au-input au-input--full form-control disable-bg "></span>
                                                         </div>
-                                                        <div class="col-md-6 form-group">
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
                                                             <label for="demo_name">Demo</label>
                                                             <span class="demo_name au-input au-input--full form-control disable-bg "></span>
                                                         </div>
-                                                        <div class="col-md-6 form-group">
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
                                                             <label for="ae_name">AE</label>
                                                             <span class="ae_name au-input au-input--full form-control disable-bg "></span>
                                                         </div>
-                                                        <div class="col-md-6 form-group">
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
                                                             <label for="outlet_name">Outlet</label>
                                                             <span class="outlet_name au-input au-input--full form-control disable-bg "></span>
                                                         </div>
-                                                        <div class="col-md-6 form-group">
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
                                                             <label for="market_place">Market Place</label>
                                                             <span class="market_place au-input au-input--full form-control disable-bg "></span>
                                                         </div>
-                                                        <div class="col-md-6 form-group">
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
                                                             <label for="date_change">Date Change</label>
                                                             <span class="date_change au-input au-input--full form-control disable-bg "></span>
                                                         </div>
-                                                        <div class="col-md-6 form-group">
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
                                                             <label for="chnage_by">Change By</label>
                                                             <span class="chnage_by au-input au-input--full form-control disable-bg "></span>
                                                         </div>
                                                     </div>
-                                                    <div class="new-campaign-table mb-5">
+                                                    <div class="new-campaign-table mb-4">
                                                     <h4>New Detail</h4>
                                                         <div class="flight-date row mb-4">
-                                                            <div class="col-md-6 form-group flight-start-date">
+                                                            <div class="col-lg-6 form-group form-group-inline flight-start-date">
                                                                 <span class="label">Flight Start Date</span>
                                                                 <span class="new-flight-stat-date-text au-input au-input--full form-control ">MM/DD/YYYY</span>
                                                             </div>
-                                                            <div class="col-md-6 form-group flight-end-date">
+                                                            <div class="col-lg-6 form-group form-group-inline flight-end-date">
                                                                 <span class="label">Flight End Date</span>
                                                                 <span class="new-flight-end-date-text au-input au-input--full form-control">MM/DD/YYYY</span>
                                                             </div>
@@ -425,11 +425,11 @@
                                                     <div class="old-campaign-table">
                                                         <h4>Old Detail</h4>
                                                         <div class="flight-date row mb-4">
-                                                            <div class="flight-start-date form-group col-md-6">
+                                                            <div class="flight-start-date form-group form-group-inline col-lg-6">
                                                                 <span class="label">Flight Start Date</span>
                                                                 <span class="flight-stat-date-text au-input au-input--full form-control">MM/DD/YYYY</span>
                                                             </div>
-                                                            <div class="flight-end-date form-group col-md-6">
+                                                            <div class="flight-end-date form-group form-group-inline col-lg-6">
                                                                 <span class="label">Flight End Date</span>
                                                                 <span class="flight-end-date-text au-input au-input--full form-control">MM/DD/YYYY</span>
                                                             </div>

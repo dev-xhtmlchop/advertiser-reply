@@ -2,33 +2,30 @@
     <div class="section__content section__content--p10">
         <div class="container-fluid">
             <div class="header-wrap">
-                <div class="align-items-center row">
-                    <div class="col-md-3">
+                <div class="header-wrap-box d-flex align-items-center justify-content-between">
+                    <div class="bar-icon-box">
                         <a class="bars-icon" href="#" role="button"><i class="fas fa-bars"></i></a>        
                     </div>
-                    <div class="col-md-6 justify-content-center d-flex">
-                        <ul class="d-flex">
-                            <li>
-                                <span>Client Name</span>
-                                @if(Session::has('clent_name'))
-                                    <b>{{ Session::get('clent_name')}}</b>
-                                @endif
-                            </li>
-                            <li>
-                                <span>Advertiser Name</span>
-                                @if(Session::has('advertiser_name'))
-                                    <b>{{ Session::get('advertiser_name')}}</b>
-                                @endif
-                            </li>
-                            <li>
-                                <span>Media Line</span>
-                                @if(Session::has('media_line'))
+                        <ul class="d-flex client-info">
+                            @if(Session::has('clent_name'))
+                                <li>
+                                    <span>Client Name</span>
+                                        <b>{{ Session::get('clent_name')}}</b>
+                                </li>
+                            @endif
+                            @if(Session::has('advertiser_name'))
+                                <li>
+                                    <span>Advertiser Name</span>
+                                        <b>{{ Session::get('advertiser_name')}}</b>
+                                </li>
+                            @endif
+                            @if(Session::has('media_line'))
+                                <li>
+                                    <span>Media Line</span>
                                     <b>{{ Session::get('media_line')}}</b>
-                                @endif
-                            </li>
+                                </li>
+                            @endif
                         </ul>
-                    </div>
-                    <div class="col-md-3 d-flex justify-content-end">
                         <div class="account-info-main d-flex align-items-center">
                             <div class="account-info account-wrap">
                                 <div class="account-item clearfix js-item-menu">
@@ -56,6 +53,28 @@
                                                 @endif
                                             </div>
                                         </div>
+                                        <div class="client-info-box">
+                                            <ul class="client-info">
+                                                @if(Session::has('clent_name'))
+                                                    <li>
+                                                        <span>Client Name</span>
+                                                            <b>{{ Session::get('clent_name')}}</b>
+                                                    </li>
+                                                @endif
+                                                @if(Session::has('advertiser_name'))
+                                                    <li>
+                                                        <span>Advertiser Name</span>
+                                                            <b>{{ Session::get('advertiser_name')}}</b>
+                                                    </li>
+                                                @endif
+                                                @if(Session::has('media_line'))
+                                                    <li>
+                                                        <span>Media Line</span>
+                                                        <b>{{ Session::get('media_line')}}</b>
+                                                    </li>
+                                                @endif
+                                            </ul>
+                                        </div>
                                         <div class="account-dropdown__body">
                                             <div class="account-dropdown__item">
                                                 <p><strong>Advertiser ID: </strong>@if(Session::has('advertiser_id')){{ Session::get('advertiser_id')}}@endif</p>
@@ -71,7 +90,6 @@
                                 <a href="{{ route('logout') }}"><i class="zmdi zmdi-power"></i>Logout</a>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

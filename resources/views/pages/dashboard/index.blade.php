@@ -7,10 +7,10 @@
                 <div class="row">
                     <div class="col-md-12 card-main">
                         <div class="filter-box card" id="dashboard_deal">
-                            <div class="head d-flex justify-content-center align-items-center mb-4">
+                            <div class="head d-flex justify-content-end align-items-center mb-4">
                                 <!--<h2 class="mb-0">Filter</h2> -->
                                 <div class="d-flex align-items-center flight-range">
-                                    <div class="daterange d-flex align-items-center">
+                                    <div class="daterange d-flex">
                                         <div class="daterange-input">
                                             <input type="text" name="daterange" id="daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy" />
                                             <input type="hidden" name="start_daterange" id="start_daterange" value="" />
@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 card-main">
+                    <div class="col-xl-6 card-main">
                         <div class="deal-view-box card">
                             <div
                             class="head d-flex justify-content-center align-items-center mb-4">
@@ -74,7 +74,7 @@
                                         @php
                                             $imageUrl = "public/images/dashboard/".$dealViewVal['image'];
                                         @endphp
-                                        <div class="col-md-6 form-group">
+                                        <div class="col-sm-4">
                                             <div class="deal-component {{ $dealViewVal['background'] }}">
                                                 <h3>{{ $dealViewVal['name'] }}</h3>
                                                 <h5 id="deal_{{ $dealViewVal['slug'] }}">{{ $dealViewVal['value'] }}</h5>
@@ -88,12 +88,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 card-main">
+                    <div class="col-xl-6 card-main">
                         <div class="advertiser-dashboard-box card">
                             <div class="advertiser-view">
-                                <div class="head d-flex justify-content-between align-items-center mb-4">
+                                <div class="head d-xxl-flex justify-content-between align-items-center mb-4">
                                     <h2 class="mb-0">Advertiser Dashboard</h2>
-                                    <div class="d-flex align-items-center flight-range">
+                                    <div class="d-flex align-items-center justify-content-center flight-range">
                                         <div class="daterange d-flex align-items-center">
                                             <div class="daterange-input">
                                                 <input type="text" name="advertiser_daterange" id="advertiser_daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy" />
@@ -107,7 +107,7 @@
                                 <div class="row">
                                     @if( count( $dealStatus ) > 0 )
                                         @foreach( $dealStatus as $dealStatusKey => $dealStatusVal )
-                                            <div class="col-md-6 col-lg-6 col-xl-6 form-group">
+                                            <div class="col-sm-4col-lg-4 col-xl-4">
                                                 <div class="advertiser-component d-flex align-items-center">
                                                     <span class="info-icon {{ $dealStatusVal['background'] }}"><i class="{{ $dealStatusVal['icon'] }}"></i></span>
                                                     <h4 id="advertiser_{{ $dealStatusVal['slug'] }}" >0 {{ $dealStatusVal['name'] }}</h4>

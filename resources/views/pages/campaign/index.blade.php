@@ -9,7 +9,7 @@
                         <div class="deal-view-box card">
                             <div class="head d-flex justify-content-center align-items-center mb-4">
                                 <h2 class="mb-0">Campaign View</h2>
-                                <div class="d-flex align-items-center flight-range">
+                                <div class="d-flex align-items-center flight-range select">
                                     <div class="daterange d-flex align-items-center">
                                         <select name="deal_status" id="deal_status" class="au-input" >
                                             <option value="">Status</option>
@@ -29,7 +29,7 @@
                                         @php
                                             $imageUrl = "public/images/dashboard/".$dealViewVal['image'];
                                         @endphp
-                                        <div class="col form-group">
+                                        <div class="col">
                                             <div class="deal-component {{ $dealViewVal['background'] }}">
                                                 <h3>{{ $dealViewVal['name'] }}</h3>
                                                 <h5 id="deal_{{ $dealViewVal['slug'] }}">{{ $dealViewVal['value'] }}</h5>
@@ -48,7 +48,7 @@
                     <div class="col-md-12 card-main">
                         <div class="deal-view-box card">
                             <div class="head d-flex justify-content-center align-items-center mb-4">
-                                <div class="d-flex align-items-center flight-range">
+                                <div class="d-flex align-items-center flight-range select">
                                     <div class="daterange d-flex align-items-center">
                                         <button class="btn btn-lg btn-secondary" >Create Campaign</button>    
                                     </div>
