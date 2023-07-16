@@ -1,7 +1,8 @@
 <script src="{{ asset('public/assets/js/common/jquery/jquery-3.7.0.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/bootstrap/popper.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/bootstrap/bootstrap.min.js') }}" defer></script>
-<script src="{{ asset('public/assets/js/common/bootstrap/bootstrap.bundle.min.js') }}" defer></script>
+<script src="{{ asset('public/assets/js/common/animsition/animsition.min.js') }}" defer></script>
+<?php /*<script src="{{ asset('public/assets/js/common/bootstrap/bootstrap.bundle.min.js') }}" defer></script> */?>
 <script src="{{ asset('public/assets/js/common/select2/select2.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/jquery/jquery.validate.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/jquery/additional-methods.min.js') }}" defer></script>
@@ -10,6 +11,7 @@
 <script src="{{ asset('public/assets/js/common/datatable/jquery.dataTables.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/datatable/dataTables.bootstrap5.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/common.js') }}" defer></script>
+<script src="{{ asset('public/assets/js/common/main.js') }}" defer></script>
 @if( request()->is('login') ) 
 <script src="{{ asset('public/assets/js/custom/login.js') }}" defer></script>
 @endif
