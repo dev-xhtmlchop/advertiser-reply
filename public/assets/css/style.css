@@ -83,17 +83,17 @@ text-align: center;width: 60px;height: 60px;color: #ffffff;}
 div.dataTables_wrapper div.dataTables_length select{margin: 0 10px;}
 .table-striped tbody tr:nth-of-type(odd) {background-color: rgba(0,0,0,.10) !important;}
 .responsive-tabs {column-gap: 15px;}
-.responsive-tabs .nav-tabs {display: none;width: 20%;background: #ffffff;border: none;padding: 20px 0;}
-.responsive-tabs .tab-content{width: 80%;}
-.responsive-tabs .tab-content .card{padding: 10px;}
-.responsive-tabs .nav-tabs .nav-link{border: none;padding: 1rem;color: #afafaf;font-weight: 600;position: relative;}
+.responsive-tabs .nav-tabs {display: none;background: #ffffff;}
+/* .responsive-tabs .tab-content{width: 80%;} */
+.responsive-tabs .tab-content .card{padding: 10px;border: 1px solid #dee2e6;border-top: 0px;}
+.responsive-tabs .nav-tabs .nav-link{padding: 1rem 2rem;color: #afafaf;font-weight: 600;position: relative;}
 .responsive-tabs .nav-tabs .nav-link i{width: 40px;height: 40px;background: #f1f1f1;border-radius: 50%;text-align: center;line-height: 40px;
 margin-right: 10px;color: #afafaf;}
 .responsive-tabs .nav-tabs .nav-link:hover, .responsive-tabs .nav-tabs .nav-link.active{color: #000000;}
 .responsive-tabs .nav-tabs .nav-link:hover i, .responsive-tabs .nav-tabs .nav-link.active i{color: #ffffff;background: #6355b1;}
-.responsive-tabs .nav-tabs .nav-link:after{content: "\f105";font: normal normal normal 14px/1 FontAwesome;position: absolute;font-size: 20px; right: 16px;top: 50%;
+/* .responsive-tabs .nav-tabs .nav-link:after{content: "\f105";font: normal normal normal 14px/1 FontAwesome;position: absolute;font-size: 20px; right: 16px;top: 50%;
 -webkit-transform: translate(0, -50%);-moz-transform: translate(0, -50%);-ms-transform: translate(0, -50%);-o-transform: translate(0, -50%);
-transform: translate(0, -50%);}
+transform: translate(0, -50%);} */
 .campaign-number h4{margin-bottom: 15px;}
 .campaign-date span{display: block;font-size: 14px;font-weight: 500;}
 table.dataTable.table-striped>tbody>tr>td{ vertical-align: middle;}
@@ -130,69 +130,24 @@ span.disable-bg{ background-color: #e9ecef;opacity: 1;}
 .side-bar{display: none;}
 .copyright{padding: 15px 0 15px 0;}
 /*hamburger*/
-.header-mobile .hamburger .hamburger-box span.hamburger-inner {
-    width: 20px;
-    height: 2px;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-}
-
-.header-mobile .hamburger .hamburger-box span.hamburger-inner:before {
-    width: 20px;
-    height: 2px;
-    top: 6px;
-}
-
-.header-mobile .hamburger .hamburger-box span.hamburger-inner:after {
-    top: 12px;
-    width: 20px;
-    height: 2px;
-}
-.hamburger-inner:after, .hamburger-inner:before {
-    display: block;
-    content: "";
-}
-.hamburger-inner, .hamburger-inner:after, .hamburger-inner:before {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 40px;
-    height: 4px;
-    transition-timing-function: ease;
-    transition-duration: .15s;
-    transition-property: transform;
-    border-radius: 4px;
-    background-color: #000;
-}
-.header-mobile .hamburger .hamburger-box {
-    width: 20px;
-    height: 15px;
-}
-.hamburger-box {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 24px;
-}
-.hamburger--slider.is-active .hamburger-inner {
-    transform: translate3d(0,10px,0) rotate(45deg);
-    top: -3px;
-}
-.hamburger--slider.is-active .hamburger-inner:before {
-    transform: rotate(-45deg) translate3d(-5.71429px,-6px,0);
-    opacity: 0;
-}
-.hamburger.is-active .hamburger-box .hamburger-inner:after {
-    -webkit-transform: translate3d(0, -12px, 0) rotate(-90deg);
-    -moz-transform: translate3d(0, -12px, 0) rotate(-90deg);
-    transform: translate3d(0, -12px, 0) rotate(-90deg);
-    top: -3px;
-}
+.header-mobile .hamburger{background: #a5c32a;}
+.header-mobile .hamburger .hamburger-box span.hamburger-inner {width: 20px;height: 2px;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;}
+.header-mobile .hamburger .hamburger-box span.hamburger-inner:before {width: 20px;height: 2px;top: 6px;}
+.header-mobile .hamburger .hamburger-box span.hamburger-inner:after {top: 12px;width: 20px;height: 2px;}
+.hamburger-inner:after, .hamburger-inner:before {display: block;content: "";}
+.hamburger-inner, .hamburger-inner:after, .hamburger-inner:before {position: absolute;left: 0;top: 0;width: 40px;height: 4px;transition-timing-function: ease;
+transition-duration: .15s;transition-property: transform;border-radius: 4px;background-color: #ffffff;}
+.header-mobile .hamburger .hamburger-box {width: 20px;height: 15px;}
+.hamburger-box {position: relative;display: inline-block;width: 40px;height: 24px;}
+.hamburger--slider.is-active .hamburger-inner {transform: translate3d(0,10px,0) rotate(45deg);top: -3px;}
+.hamburger--slider.is-active .hamburger-inner:before {transform: rotate(-45deg) translate3d(-5.71429px,-6px,0);opacity: 0;}
+.hamburger.is-active .hamburger-box .hamburger-inner:after {-webkit-transform: translate3d(0, -12px, 0) rotate(-90deg);-moz-transform: translate3d(0, -12px, 0) rotate(-90deg);
+transform: translate3d(0, -12px, 0) rotate(-90deg);top: -3px;}
 .form-group-inline{display: flex;align-items: center;column-gap: 10px;}
 .form-group-inline label, .form-group-inline span.label{width: 40%;margin-bottom: 0px;}
 .form-group-inline input, .form-group-inline select, .form-group-inline .number-field, .form-group-inline span{width: 60%;}
 .form-group-inline .number-field input{width: 100%;}
+
 @media (min-width: 1400px){
     .advertiser-view .head h2{width: calc(100% - 340px);padding-right: 5px;}
 }
@@ -217,7 +172,7 @@ span.disable-bg{ background-color: #e9ecef;opacity: 1;}
   .header-resize .main-bar{display: none;}
 }
 @media (min-width: 768px) {
-  .responsive-tabs .nav-tabs {display: block;}
+  .responsive-tabs .nav-tabs {display: flex;}
   .responsive-tabs .card {border: none;box-shadow: none;}
   .responsive-tabs .card .card-header {display: none;}
   .responsive-tabs .card .collapse {display: block;}
@@ -230,7 +185,8 @@ span.disable-bg{ background-color: #e9ecef;opacity: 1;}
    .client-info-box, .account-dropdown .client-info{display: block !important;}
    .account-info-main, .bar-icon-box, .client-info{width: auto;}
    .client-info-box{padding: 0 25px;}
-   
+   .deal-view-sec .deal-view .col, .campaign-view-sec .deal-view .col {width: 25%;flex: 0 0 auto;
+}
    
 }
 @media (max-width: 991px){

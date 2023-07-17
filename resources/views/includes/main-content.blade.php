@@ -5,4 +5,5 @@
     <!-- MAIN CONTENT START -->
         @yield('content')
     <!-- MAIN CONTENT END -->
+        @include('includes.footer')
 </div>

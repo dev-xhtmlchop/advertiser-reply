@@ -19,7 +19,7 @@
             @include('includes.main-content')
         
         <!-- FOOTER START -->
-            @include('includes.footer')
+            
         <!-- FOOTER END -->
     </div>
 @else
