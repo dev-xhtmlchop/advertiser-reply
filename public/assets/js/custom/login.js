@@ -182,6 +182,10 @@ $(document).ready(function(){
     $('#email_send_otp').click(function(){
         countdown('02:00');
         $('#email_send_otp').css({'pointer-events': 'all','cursor': 'not-allowed','opacity': '0.7'});
+        $('.email-otp-number input[type="number"]').each(function(){
+            $(this).prop('disabled', true);
+            $(this).val('');
+        });
         var password = $(this).val();
         var data = {resend:1};
         $.ajax({
@@ -192,6 +196,9 @@ $(document).ready(function(){
                 if( response.status == 0 ){
                     error( response.message, response.class );
                 }else{
+                    $('.email-otp-number input[type="number"]').each(function(){
+                        $(this).prop('disabled', false);
+                    });
                     success( response.message );
                 }
                 return false;
@@ -234,7 +241,6 @@ $(document).ready(function(){
                     $(this).prop('disabled', true);
                 });
                 var otpCode = veryFicationCode.join('');
-                console.log( otpCode )
                 var data = { otp: btoa(otpCode) };
                 $.ajax({
                     url: URL+"/post-verify-otp",

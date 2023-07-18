@@ -24,6 +24,7 @@ $(document).ready(function(){
                 $('#campaign_table').DataTable({
                     pageLength: 5,
                     rowReorder: true,
+                    responsive: true,
                     columnDefs: [
                         { orderable: true, className: 'reorder', targets: 0 },
                         { orderable: false, targets: '_all' }
@@ -94,6 +95,7 @@ $(document).ready(function(){
     });
     $('#campaign_table').DataTable({
         pageLength: 5,
+        responsive: true,
         rowReorder: true,
         columnDefs: [
             { orderable: true, className: 'reorder', targets: 0 },

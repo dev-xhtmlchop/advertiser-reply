@@ -11,6 +11,7 @@ $(document).ready(function(){
                 $('#deals_table').DataTable({
                     pageLength: 5,
                     rowReorder: true,
+                    responsive: true,
                     columnDefs: [
                         { orderable: true, className: 'reorder', targets: 0 },
                         { orderable: false, targets: '_all' }
@@ -36,8 +37,9 @@ $(document).ready(function(){
         getDealViewData( dealStatus );
     });
     $('#deals_table').DataTable({
-        pageLength: 10,
+        pageLength: 5,
         rowReorder: true,
+        responsive: true,
         columnDefs: [
             { orderable: true, className: 'reorder', targets: 0 },
             { orderable: false, targets: '_all' }

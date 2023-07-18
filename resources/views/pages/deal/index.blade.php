@@ -7,9 +7,9 @@
                 <div class="row">
                     <div class="col-md-12 card-main">
                         <div class="deal-view-box card">
-                            <div class="head d-flex justify-content-center align-items-center mb-4">
+                            <div class="head d-flex justify-content-center align-items-center mb-3">
                                 <h2 class="mb-0">Deal View</h2>
-                                <div class="d-flex align-items-center flight-range">
+                                <div class="d-flex align-items-center flight-range select">
                                     <div class="daterange d-flex align-items-center">
                                         <select name="deal_status" id="deal_status" class="au-input" >
                                             <option value="">Status</option>
