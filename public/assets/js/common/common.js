@@ -143,4 +143,7 @@ $(document).ready(function(){
     $('.navbar-sidebar ul li').mouseout(function(){
         $('body').removeClass('hover-resize');
     });
+    $(".dropdown-close").click(function(){
+      $(".account-item").removeClass("show-dropdown");
+   });
 });

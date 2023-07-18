@@ -264,7 +264,7 @@
                                                             
                                                         </div>
                                                     </div>
-                                                    <div class="flighting-table-box">
+                                                    <div class="flighting-table-box table-responsive">
                                                         <table class="table custom-table table-borderless table-striped dataTable no-footer" id="edit_flight">
                                                             <thead>
                                                                 <tr>
@@ -379,7 +379,7 @@
                                                                 <span class="new-flight-end-date-text au-input au-input--full form-control">MM/DD/YYYY</span>
                                                             </div>
                                                         </div>
-                                                        <div class="new-campaign-table-box">
+                                                        <div class="new-campaign-table-box table-responsive">
                                                             <table id="new_campaign_table"  class="table custom-table table-borderless table-striped dataTable no-footer"  style="width:100%">
                                                                 <thead>
                                                                     <tr>
@@ -434,7 +434,7 @@
                                                                 <span class="flight-end-date-text au-input au-input--full form-control">MM/DD/YYYY</span>
                                                             </div>
                                                         </div>
-                                                        <div class="old-campaign-table-box">
+                                                        <div class="old-campaign-table-box table-responsive">
                                                             <table id="old_campaign_table" class="table custom-table table-borderless table-striped dataTable no-footer" style="width:100%">
                                                                 <thead>
                                                                     <tr>

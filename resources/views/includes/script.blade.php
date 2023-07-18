@@ -2,7 +2,7 @@
 <script src="{{ asset('public/assets/js/common/bootstrap/popper.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/bootstrap/bootstrap.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/animsition/animsition.min.js') }}" defer></script>
-<?php /*<script src="{{ asset('public/assets/js/common/bootstrap/bootstrap.bundle.min.js') }}" defer></script> */?>
+<script src="{{ asset('public/assets/js/common/bootstrap/bootstrap.bundle.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/select2/select2.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/jquery/jquery.validate.min.js') }}" defer></script>
 <script src="{{ asset('public/assets/js/common/jquery/additional-methods.min.js') }}" defer></script>

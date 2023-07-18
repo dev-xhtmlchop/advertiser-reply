@@ -38,6 +38,7 @@
                                         @endif
                                     </div>
                                     <div class="account-dropdown js-dropdown">
+                                        <button class="dropdown-close"><i class="fa fa-times" aria-hidden="true"></i></button>
                                         <div class="info clearfix">
                                             <div class="image">
                                                     <i class="fa fa-user-circle fa-3x" aria-hidden="true"></i>

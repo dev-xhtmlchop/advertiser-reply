@@ -47,7 +47,7 @@
                 <div class="row">
                     <div class="col-md-12 card-main">
                         <div class="deal-view-box card">
-                            <div class="table-responsive table-responsive-data2">
+                            <div class="table-responsive table-responsive-data2 ">
                                 <table id="deals_table" class="table custom-table table-borderless table-striped dataTable no-footer " style="width:100%;">
                                     <thead>
                                         <tr>
