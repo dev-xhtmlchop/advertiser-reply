@@ -18,6 +18,7 @@ use App\Models\Outlets;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Medias;
+use Jenssegers\Agent\Facades\Agent;
 
 class DashboardController extends Controller
 {
@@ -65,7 +66,6 @@ class DashboardController extends Controller
     public function index( Request $request ){
         
        // $medias = Campaigns::with('medias')->with('brands')->get()->toArray();
-
         $dealStatusArray = Helper::dealStatusArray();
         $dealViewArray = Helper::dealViewArray();
         $dashboardData = array( 
@@ -210,33 +210,29 @@ class DashboardController extends Controller
     }
 
     public function dashboardAdvertiserFilter( Request $request){
+        $allStatusArray = Helper::dealStatusArray();
+        $advertiserDashboardArray = [];
         if( $request->data !== null ){
             $data = $request->data;
-            $inflight = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','inflight')->count();
-            $approved = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','approved')->count();
-            $proposal = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','proposal')->count();
-            $ordered = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','ordered')->count();
-            $planning = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','planning')->count();
-            $ended = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','ended')->count();
-            $expired = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('status','expired')->count();
+            if( count( $allStatusArray ) > 0 ){
+                foreach( $allStatusArray as $allStatusArrayKey => $allStatusArrayVal  ){
+                    $statusName = strtolower($allStatusArrayVal['name']);
+                    $data = $request->data;
+                    $advertiserData = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->whereDate('deal_payloads.flight_start_date', '>=', $data['start_date'])->whereDate('deal_payloads.flight_end_date', '<=', $data['end_date'])->where('deals.status',$allStatusArrayVal['id'])->count();
+                    $advertiserDashboardArray[$statusName] = $advertiserData;
+                }
+            }
         }else{
-            $inflight = Deals::where('status','inflight')->count();
-            $approved = Deals::where('status','approved')->count();
-            $proposal = Deals::where('status','proposal')->count();
-            $planning = Deals::where('status','planning')->count();
-            $ordered = Deals::where('status','ordered')->count();
-            $ended = Deals::where('status','ended')->count();
-            $expired = Deals::where('status','expired')->count();
+            if( count( $allStatusArray ) > 0 ){
+                foreach( $allStatusArray as $allStatusArrayKey => $allStatusArrayVal  ){
+                    $statusName = strtolower($allStatusArrayVal['name']);
+                    $data = $request->data;
+                    $advertiserData = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')->where('deals.status',$allStatusArrayVal['id'])->count();
+                    $advertiserDashboardArray[$statusName] = $advertiserData;
+                }
+            }
         }
-        $statusArray = array( 
-                'inflight' => $inflight, 
-                'approved' => $approved, 
-                'proposal' => $proposal, 
-                'planning' => $planning, 
-                'ordered' => $ordered,
-                'ended' => $ended,
-                'expired' => $expired 
-        );
+        $statusArray = $advertiserDashboardArray;
         return response()->json($statusArray);  
     }
 }

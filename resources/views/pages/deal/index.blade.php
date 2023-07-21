@@ -15,7 +15,7 @@
                                             <option value="">Status</option>
                                             @if( count( $dealStatus ) > 0 )
                                                 @foreach( $dealStatus as $dealStatusKey => $dealStatusVal )
-                                                    <option value="{{ $dealStatusVal['slug'] }}">{{ $dealStatusVal['name'] }}</option>
+                                                    <option value="{{ $dealStatusVal['id'] }}">{{ $dealStatusVal['name'] }}</option>
                                                 @endforeach
                                             @endif
                                         </select>

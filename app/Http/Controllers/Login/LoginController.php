@@ -18,6 +18,7 @@ use App\Mail\SetMail;
 use App\Models\UserAccessTokens;
 use Illuminate\Support\Facades\DB;
 
+
 class LoginController extends Controller
 {
     /********************************* Login Page Start **************************/
@@ -199,10 +200,11 @@ class LoginController extends Controller
 
     public function postVerifyOTP( Request $request ){
         //dd( $request );
-        if(isset( $request['data'] ) && ( count( $request['data'] ) > 0 ) ){
+        if(isset( $request['data'] ) && ( count( $request['data'] ) > 0 ) ){           
             $sessionUserId = Session::get('login_user_id');
             $userName = Session::get('login_user_name');
             $password = base64_decode(Session::get('login_password'));
+            
             $otp = base64_decode($request['data']['otp']);
             $date = date('Y-m-d H:i:s');
             $aboveTwoMinite = date("Y-m-d H:i:s", strtotime("-2 minutes"));

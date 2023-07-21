@@ -19,6 +19,7 @@ class DealController extends Controller
         $advertiserId = Session::get('advertiser_id');
         $dealList = Deals::join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')
             ->join('campaigns', 'campaigns.deal_id', '=', 'deals.id')->where( 'campaigns.delete','=',0)
+            ->join('status', 'deals.status', '=', 'status.id')
             ->when($status, function ($query) use ($status) {
                 return $query->where('deals.status','=', $status);
             })
@@ -48,7 +49,7 @@ class DealController extends Controller
             'deal_payloads.a25_49_ss as a25_49_ss', 
             'deal_payloads.a25_49_cpm as a25_49_cpm', 
             'deal_payloads.a25_49_univ as a25_49_univ',
-            'deals.status as status',
+            'status.name as status',
             ])->toArray();
         
         $dealDayTableData =  $dealList->get([

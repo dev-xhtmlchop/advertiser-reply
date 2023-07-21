@@ -21,7 +21,10 @@
     <link href="{{ asset('public/assets/css/common/bootstrap-5.1/bootstrap.min.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('public/assets/css/common/bootstrap-5.1/bootstrap.bundle.min.css') }}" rel="stylesheet" media="all">   
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" />
-    <link href="{{ asset('public/assets/css/common/datatable/dataTables.bootstrap5.min.css') }}" rel="stylesheet" media="all">   
+   
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/css/common/datatable/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/css/common/datatable/responsive.bootstrap5.min.css') }}">
+
 
     <!-- Select2 -->
     <link href="{{ asset('public/assets/css/common/select2/select2.min.css') }}" rel="stylesheet" media="all">

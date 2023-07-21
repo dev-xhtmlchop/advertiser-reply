@@ -33,6 +33,7 @@ class CampaignController extends Controller
             ->join('brands', 'campaigns.brand_id', '=', 'brands.id')->where('brands.status','=', 1)
             ->join('medias', 'campaigns.media_id', '=', 'medias.id')->where('medias.status','=', 1)
             ->join('deals', 'campaigns.deal_id', '=', 'deals.id')
+            ->join('status', 'campaigns.status', '=', 'status.id')
             ->join('deal_payloads', 'deals.deal_payload_id', '=', 'deal_payloads.id')
             ->orderBy('campaigns.id', 'asc');
 
@@ -53,7 +54,7 @@ class CampaignController extends Controller
             'campaign_payloads.rc_rate_percentage as rc_rate_percentage', 
             'campaign_payloads.total_avil as total_avil', 
             'campaign_payloads.total_unit as total_unit', 
-            'campaigns.status as status',
+            'status.name as status',
             'campaign_payloads.id as deal_auto_id',
         ])->toArray();
         

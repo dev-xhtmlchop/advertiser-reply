@@ -30,7 +30,7 @@
                                 <input type="hidden" name="total_avails" id="total_avails" value="" />
                                 <input type="hidden" name="total_unit" id="total_unit" value="" />
                                 <div class="responsive-tabs">
-                                    <ul class="nav nav-tabs justify-content-center" role="tablist">
+                                    <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item">
                                             <a id="general" href="#pane-A" class="nav-link active show" data-toggle="tab" role="tab" aria-controls="general" aria-selected="true" ><i class="fa fa-wrench" aria-hidden="true"></i>General</a>
                                         </li>
@@ -139,7 +139,7 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <div class="row">
+                                                            <div class="row  align-items-center">
                                                                 <div class="col-md-6 form-group">
                                                                     <label for="realistic">Demographics</label>
                                                                 </div>
@@ -156,42 +156,42 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <div class="row">
+                                                            <div class="row  align-items-center">
                                                                 <div class="col-md-6 form-group">
                                                                     <label for="demo_population">Demo Population</label>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
-                                                                    <input type="number" name="cpm_ipm_demo_population" max="1" min="0" class="au-input--full form-control" value="" >
+                                                                    <input type="number" name="cpm_ipm_demo_population" class="au-input--full form-control" value="" >
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <div class="row">
+                                                            <div class="row  align-items-center">
                                                                 <div class="col-md-6 form-group">
                                                                     <label for="demo_population">Impressions</label>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
-                                                                    <input type="number" name="cpm_ipm_impressions" max="1" min="0" class="au-input--full form-control" value="" >
+                                                                    <input type="number" name="cpm_ipm_impressions" class="au-input--full form-control" value="" >
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <div class="row">
+                                                            <div class="row  align-items-center">
                                                                 <div class="col-md-6 form-group">
                                                                     <label for="demo_population">GRP</label>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
-                                                                    <input type="number" name="cpm_ipm_grp" max="1" min="0" class="au-input--full form-control" value="" >
+                                                                    <input type="number" name="cpm_ipm_grp" class="au-input--full form-control" value="" >
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <div class="row">
+                                                            <div class="row  align-items-center">
                                                                 <div class="col-md-6 form-group">
                                                                     <label for="demo_population">CPM</label>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
-                                                                    <input type="number" name="cpm_ipm_cpm" max="1" min="0" class="au-input--full form-control" value="" >
+                                                                    <input type="number" name="cpm_ipm_cpm" class="au-input--full form-control" value="" >
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -357,6 +357,22 @@
                                                         <div class="col-md-6 form-group-inline form-group col-xxl-4">
                                                             <label for="market_place">Market Place</label>
                                                             <span class="market_place au-input au-input--full form-control disable-bg "></span>
+                                                        </div>
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
+                                                            <label for="demo_population">Demo Population</label>
+                                                            <span class="demo_population au-input au-input--full form-control disable-bg "></span>
+                                                        </div>
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
+                                                            <label for="impressions">Impressions</label>
+                                                            <span class="impressions au-input au-input--full form-control disable-bg "></span>
+                                                        </div>
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
+                                                            <label for="grp">GRP</label>
+                                                            <span class="grp au-input au-input--full form-control disable-bg "></span>
+                                                        </div>
+                                                        <div class="col-md-6 form-group-inline form-group col-xxl-4">
+                                                            <label for="cpm">CPM</label>
+                                                            <span class="cpm au-input au-input--full form-control disable-bg "></span>
                                                         </div>
                                                         <div class="col-md-6 form-group-inline form-group col-xxl-4">
                                                             <label for="date_change">Date Change</label>

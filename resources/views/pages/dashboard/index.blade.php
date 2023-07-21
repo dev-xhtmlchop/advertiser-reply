@@ -110,7 +110,7 @@
                                             <div class="col-sm-6 col-lg-6 col-xl-6">
                                                 <div class="advertiser-component d-flex align-items-center">
                                                     <span class="info-icon {{ $dealStatusVal['background'] }}"><i class="{{ $dealStatusVal['icon'] }}"></i></span>
-                                                    <h4 id="advertiser_{{ $dealStatusVal['slug'] }}" >0 {{ $dealStatusVal['name'] }}</h4>
+                                                    <h4 id="advertiser_{{ strtolower($dealStatusVal['name']) }}" >0 {{ $dealStatusVal['name'] }}</h4>
                                                 </div>
                                             </div>
                                         @endforeach

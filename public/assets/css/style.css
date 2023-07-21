@@ -25,10 +25,10 @@ a{text-decoration: none;}
 .account-log a{font-size: 14px;color: #333333;font-weight: 500;}
 .account-log a:hover{color: #666666;}
 .account-log a i{margin-right: 10px;}
+.page-wrapper.login{position: relative;padding: 30px 0;}
 .login-content{position: relative;}
 .bg-img{position: absolute;top: 0;left: 0;width: 100%;height: 100%;object-fit: cover; object-position: top;}
 .login-form{position: relative;}
-.page-wrapper.login{padding-bottom: 0px;}
 /* .login-form label{color: #ffffff;} */
 .card-main{margin-bottom: 1rem;}
 .card{padding: 20px;box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);margin-bottom: 0px; height: 100%;position: relative;}
@@ -79,22 +79,25 @@ text-align: center;width: 60px;height: 60px;color: #ffffff;}
 .custom-table tr th, .custom-table tr td{font-size: 12px;padding: 10px 5px;box-shadow: none !important;text-align: center !important;}
 .flight-range{ column-gap: 10px; }
 .flight-range.select{position: absolute;top: 20px;right: 20px;}
-.card .dataTables_wrapper .row{margin: 10px 0 0 0 !important;}
+.card .dataTables_wrapper .row{margin-top: 10px !important;}
 div.dataTables_wrapper div.dataTables_length select{margin: 0 10px;}
 .table-striped tbody tr:nth-of-type(odd) {background-color: rgba(0,0,0,.10) !important;}
 .responsive-tabs {column-gap: 15px;}
 .responsive-tabs .nav-tabs {display: none;}
 /* .responsive-tabs .tab-content{width: 80%;} */
 .responsive-tabs .tab-content .card{padding: 10px;border: 1px solid #dee2e6;border-top: 0px;}
-.responsive-tabs .nav-tabs .nav-link{padding: 1rem;color: #afafaf;font-weight: 600;position: relative;}
-.responsive-tabs .nav-tabs .nav-link i{width: 40px;height: 40px;background: #f1f1f1;border-radius: 50%;text-align: center;line-height: 40px;
+.responsive-tabs .nav-tabs .nav-link{padding: 1rem;color: #afafaf;font-weight: 600;position: relative;font-size: 14px;}
+.responsive-tabs .nav-tabs .nav-link i{font-size: 12px; width: 30px;height: 30px;background: #f1f1f1;border-radius: 50%;text-align: center;line-height: 30px;
 margin-right: 10px;color: #afafaf;}
 .responsive-tabs .nav-tabs .nav-link:hover, .responsive-tabs .nav-tabs .nav-link.active{color: #000000;}
 .responsive-tabs .nav-tabs .nav-link:hover i, .responsive-tabs .nav-tabs .nav-link.active i{color: #ffffff;background: #a5c32a;}
 /* .responsive-tabs .nav-tabs .nav-link:after{content: "\f105";font: normal normal normal 14px/1 FontAwesome;position: absolute;font-size: 20px; right: 16px;top: 50%;
 -webkit-transform: translate(0, -50%);-moz-transform: translate(0, -50%);-ms-transform: translate(0, -50%);-o-transform: translate(0, -50%);
 transform: translate(0, -50%);} */
-.campaign-number h4{margin-bottom: 15px;}
+.campaign-number-time-sec{position: absolute;right: 15px;top: 0;text-align: right;}
+.campaign-number-time-sec .campaign-number{text-align: right !important;}
+.campaign-number-time-sec .campaign-date{text-align: right !important;}
+.campaign-number h4{margin-bottom: 0px;font-size: 16px;line-height: 1.5;}
 .campaign-date span{display: block;font-size: 14px;font-weight: 500;}
 table.dataTable.table-striped>tbody>tr>td{ vertical-align: middle;}
 .form-check-input{border-color: #6455b3;width: 16px;height: 16px;}
@@ -111,7 +114,8 @@ table.dataTable.table-striped>tbody>tr>td{ vertical-align: middle;}
 .btn-secondary.btn:hover, .btn-secondary.btn:focus {background: #84a10d;color: #ececec;border-color: transparent;}
 .btn.focus, .btn:focus {outline: 0 !important;}
 .page-link:focus, .btn:focus, .form-check-input:focus{box-shadow: none;}
-.form-group .label, .form-group label{font-weight: 600;font-size: 14px;margin-bottom: 10px;display: block;}
+.form-group .label, .form-group label{font-weight: 600;font-size: 14px;margin-bottom: 0px;display: block;}
+.cpm-imp-tab .form-group label{ text-align: right; }
 .new-campaign-table h4, .old-campaign-table h4{margin-bottom: 15px;text-align: center;font-weight: 700;}
 .new-campaign-table, .old-campaign-table{background:#f4f6f9;padding: 20px;border-radius: 15px;}
 /* Chrome, Safari, Edge, Opera */
@@ -144,12 +148,13 @@ transition-duration: .15s;transition-property: transform;border-radius: 4px;back
 .hamburger.is-active .hamburger-box .hamburger-inner:after {-webkit-transform: translate3d(0, -12px, 0) rotate(-90deg);-moz-transform: translate3d(0, -12px, 0) rotate(-90deg);
 transform: translate3d(0, -12px, 0) rotate(-90deg);top: -3px;}
 .form-group-inline{display: flex;align-items: center;column-gap: 10px;}
-.form-group-inline label, .form-group-inline span.label{width: 40%;margin-bottom: 0px;}
+.form-group-inline label, .form-group-inline span.label{width: 40%;margin-bottom: 0px; text-align: right;}
 .form-group-inline input, .form-group-inline select, .form-group-inline .number-field, .form-group-inline span{width: 60%;}
 .form-group-inline .number-field input{width: 100%;}
 .create-campaign-btn{min-height: inherit !important;}
 .create-campaign-btn .flight-range{right: auto !important;}
 .dropdown-close{position: absolute;top: 10px;right: 10px;color: #a5c32a;}
+
 @media (min-width: 1400px){
     .advertiser-view .head h2{width: calc(100% - 340px);padding-right: 5px;}
 }
@@ -181,6 +186,12 @@ transform: translate3d(0, -12px, 0) rotate(-90deg);top: -3px;}
 }
 @media (max-width: 1399px){
     .card .advertiser-view .head h2{text-align: center;margin-bottom: 10px !important;}
+    .campaign-number-time-sec{max-width: 217px;}
+    .campaign-edit .deal-view-box{padding-top: 35px;}
+    .campaign-number h4{font-size: 14px;}
+    .campaign-date span{font-size: 12px;}
+    .responsive-tabs .nav-tabs .nav-link{padding: 15px 10px;}
+    .responsive-tabs .nav-tabs .nav-link{font-size: 12px;}
 }
 @media (max-width: 1199px){
    .header-wrap .client-info{display: none !important;}
@@ -188,7 +199,10 @@ transform: translate3d(0, -12px, 0) rotate(-90deg);top: -3px;}
    .account-info-main, .bar-icon-box, .client-info{width: auto;}
    .client-info-box{padding: 25px;}
    .deal-view-sec .deal-view .col, .campaign-view-sec .deal-view .col {width: 25%;flex: 0 0 auto;}
-   .create-campaign-btn .flight-range{right: 20px !important;}
+   
+}
+@media (max-width: 1090px){
+  .create-campaign-btn .flight-range{right: 20px !important;}
    .create-campaign-btn{min-height: 48px !important;}
 }
 @media (max-width: 991px){
@@ -207,28 +221,28 @@ transform: translate3d(0, -12px, 0) rotate(-90deg);top: -3px;}
     .header-mobile .header-mobile-inner{justify-content: center;position: relative;}
     .header-mobile .hamburger{position: absolute;left: 0;}
     .account-info .account-item > .content > a, .account-log a{font-size: 0px;}
-    .account-log a i{font-size: 14px;margin-right: 0px;color: #a5c32a;}
+    .account-log a i{font-size: 18px;margin-right: 0px;color: #a5c32a;}
     .account-item > .content > a:after{display: none;}
     .account-item > .content{margin-left: 0px;padding-left: 0px;}
-    .account-info-main{column-gap: 10px;}
-    .account-item .image{width: 35px;height: 35px;}
-    .account-item .image i{font-size: 37px;color: #a5c32a;}
+    .account-info-main{column-gap: 15px;}
+    .account-item .image{width: 30px;height: 30px;}
+    .account-item .image i{font-size: 30px;color: #a5c32a;}
     .header-desktop .container-fluid{padding: 0px;}
     .account-dropdown:after{right: 10px;}
     .account-dropdown{width: 300px;min-width: inherit;top: 70px;}
+    .account-item > .content{padding: 0px;}
 }
 @media (max-width: 767px) {
   .responsive-tabs .tab-pane {display: block !important;opacity: 1;}
   .flight-range, .flight-range .daterange, .flight-range .daterange-input, .flight-range.select select{width: 100%;}
   .card .head .daterange input{min-width: 100%;}
   .card{padding: 15px;}
-  .dataTables_length, .dataTables_info{margin-bottom: 15px;font-size: 14px;}
-  .flight-range.select{position: static;display: block !important;}
+  
   .deal-view-box .head{display: block !important;text-align: center;}
   .deal-view-box .head h2{margin-bottom: 15px !important;}
   .deal-view-sec .deal-view{row-gap: 15px;}
   .deal-view-sec .deal-view .col, .campaign-view-sec .deal-view .col{width: 50%;flex: 0 0 auto;}
-  .flight-range.select .daterange{justify-content: center;}
+  
   div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child{padding-right: calc(var(--bs-gutter-x) * .5);}
   .responsive-tabs .tab-content{width: 100%;}
   .card-header{border: none;background: #ffffff;}
@@ -236,6 +250,15 @@ transform: translate3d(0, -12px, 0) rotate(-90deg);top: -3px;}
   .responsive-tabs .tab-content .card{margin-bottom: 15px;padding: 10px 0;}
   .btn{font-size: 1rem;}
   .account-dropdown .info, .client-info-box{padding: 10px;}
+  .campaign-number-time-sec{max-width: 100%;position: static;}
+  .campaign-edit .deal-view-box{padding-top: 0px;}
+  .campaign-number-time-sec .campaign-date, .campaign-number-time-sec .campaign-number{text-align: center !important;}
+  .campaign-number h4{margin-bottom: 5px;}
+  .flight-range.select .daterange, .flight-range.select{width: auto;}
+  .dataTables_length{text-align: left !important;}
+  .dataTables_filter{text-align: right !important;}
+  .dataTables_filter input{max-width: 170px;}
+  .dataTables_wrapper .col-sm-12{ width: 50% !important;}
 }
 @media (max-width: 575px) {
     .deal-view-sec .deal-view .col, .campaign-view-sec .deal-view .col{width: 100%;flex: 0 0 auto;}
@@ -244,6 +267,11 @@ transform: translate3d(0, -12px, 0) rotate(-90deg);top: -3px;}
     .account-dropdown .info .image{float: none;margin: auto;}
     .account-dropdown .info .content{margin-left: 0px;padding-left: 0px;}
     .account-dropdown .info{text-align: center;}
+    .dataTables_length, .dataTables_info{margin-bottom: 15px;font-size: 14px;}
+  .flight-range.select{position: static;display: block !important;}
+  .flight-range.select .daterange{justify-content: center;}
+  .dataTables_length, .dataTables_filter{text-align: center !important;}
+  .dataTables_wrapper .col-sm-12{ width: 100% !important;}
 }
 @media (max-width: 479px) {
     .form-group-inline label, .form-group-inline span.label, .form-group-inline input, .form-group-inline select, .form-group-inline .number-field, .form-group-inline span{width: 100%;}

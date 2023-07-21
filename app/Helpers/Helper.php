@@ -6,6 +6,7 @@ use Illuminate\Routing\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use App\Models\UserHistories;
+use App\Models\Statu;
 
 class Helper{
     public static function activityLog( $message = null ){
@@ -44,7 +45,8 @@ class Helper{
     }
 
     public static function dealStatusArray(){
-        $dealStatus = array(
+        $dealStatus = Statu::orderBy('id', 'asc')->get()->toArray();
+        /*$dealStatus = array(
             array(
                 'id' => 1,
                 'name' => 'Inflight',
@@ -57,7 +59,7 @@ class Helper{
                 'name' => 'Proposal',
                 'slug' => 'proposal',
                 'icon' => 'fa fa-file',
-                 'background' => 'overview-item--c2'
+                'background' => 'overview-item--c2'
             ),
             array(
                 'id' => 3,
@@ -94,7 +96,7 @@ class Helper{
                 'icon' => 'fa fa-clock-o',
                  'background' => 'overview-item--c3'
             ),
-        );
+        );*/
         return $dealStatus;
     }
 

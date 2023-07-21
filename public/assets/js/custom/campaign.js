@@ -209,7 +209,19 @@ $(document).ready(function(){
                         $('.cpm-imp-tab #demographic_name').change(function(){
                             var demoName =  $(this).find('option:selected').text()
                             dataAppend('#summary .demo_name', demoName);
-                        })
+                        });
+                        $('.cpm-imp-tab input[name="cpm_ipm_impressions"]').change(function(){
+                            dataAppend('#summary .impressions', $(this).val());
+                        });
+                        $('.cpm-imp-tab input[name="cpm_ipm_cpm"]').change(function(){
+                            dataAppend('#summary .cpm', $(this).val());
+                        });
+                        $('.cpm-imp-tab input[name="cpm_ipm_demo_population"]').change(function(){
+                            dataAppend('#summary .demo_population', $(this).val());
+                        });
+                        $('.cpm-imp-tab input[name="cpm_ipm_grp"]').change(function(){
+                            dataAppend('#summary .grp', $(this).val());
+                        });
                         /* Step 2 End */
 
                         /* Step 3 Flighting */
@@ -258,6 +270,10 @@ $(document).ready(function(){
                         dataAppend('#summary .new-campaign-id', campaignArrayData.campaign_id);
                         dataAppend('#summary .change_by', campaignArrayData.change_by);
                         dataAppend('#summary .market_place', campaignArrayData.market_place);
+                        dataAppend('#summary .demo_population', campaignArrayData.demo_population);
+                        dataAppend('#summary .impressions', campaignArrayData.impressions);
+                        dataAppend('#summary .grp', campaignArrayData.grp);
+                        dataAppend('#summary .cpm', campaignArrayData.cpm);
                         dataAppend('#summary .campaign_number, #new_campaign_table .new-campaign-id, #old_campaign_table .old-campaign-id', campaignArrayData.campaign_id );
                         dataAppend('#summary .campaign_name, #new_campaign_table .new-campaign-name, #old_campaign_table .old-campaign-name', campaignArrayData.name);
                         dataAppend('#new_campaign_table .new-campaign-deal-name, #old_campaign_table .old-campaign-deal-name', campaignArrayData.deal_payloads_name);
