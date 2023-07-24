@@ -15,4 +15,9 @@ class LogoutController extends Controller
         return redirect('/');
     }
 
+    public function postRemoveSession(){
+        Session::flush();
+        Auth::logout();
+        return redirect('/');
+    }
 }

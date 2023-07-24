@@ -29,8 +29,11 @@ function checkedCheckbox( fieldName, fieldValue ){
   }
 }
 
-function dataAppend( fieldName, fieldValue ){
+function dataAppend( fieldName, fieldValue, flag = 0 ){
   $(fieldName).empty().append(fieldValue);
+  if( flag == 1 ){
+    $(fieldName).addClass('bg-active');
+  }
 }
 
 function dataValue( fieldName, fieldValue ){
@@ -146,4 +149,45 @@ $(document).ready(function(){
     $(".dropdown-close").click(function(){
       $(".account-item").removeClass("show-dropdown");
    });
+
+
+   var validNavigation = false;
+
+        // Attach the event keypress to exclude the F5 refresh (includes normal refresh)
+        $(document).bind('keypress', function(e) {
+            if (e.keyCode == 116){
+                validNavigation = true;
+            }
+        });
+
+        // Attach the event click for all links in the page
+        $("a").bind("click", function() {
+            validNavigation = true;
+        });
+
+        // Attach the event submit for all forms in the page
+        $("form").bind("submit", function() {
+          validNavigation = true;
+        });
+
+        // Attach the event click for all inputs in the page
+        $("input[type=submit]").bind("click", function() {
+          validNavigation = true;
+        }); 
+
+        /*$(window).on("unload", function() {
+          if( window.performance.navigation.type ==  performance.navigation.TYPE_RELOAD ) {
+            validNavigation = true;
+          } else{
+            if (!validNavigation) {     
+              //window.close();
+              $.cookie("advertiser_session",null,{domain:'localhost'},{path:'/'});
+              $.cookie("laravel_session",null,{domain:'localhost'},{path:'/'});
+              $.cookie("XSRF-TOKEN",null,{domain:'localhost'},{path:'/'},{expire:'2023-07-23T14:38:44.957Z'});
+              location.reload();
+          }
+          }
+        })
+        */
+
 });

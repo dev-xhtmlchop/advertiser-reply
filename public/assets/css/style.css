@@ -115,7 +115,7 @@ table.dataTable.table-striped>tbody>tr>td{ vertical-align: middle;}
 .btn.focus, .btn:focus {outline: 0 !important;}
 .page-link:focus, .btn:focus, .form-check-input:focus{box-shadow: none;}
 .form-group .label, .form-group label{font-weight: 600;font-size: 14px;margin-bottom: 0px;display: block;}
-.cpm-imp-tab .form-group label{ text-align: right; }
+.cpm-imp-tab .form-group label, .flighting-tab .form-group label{ text-align: right; }
 .new-campaign-table h4, .old-campaign-table h4{margin-bottom: 15px;text-align: center;font-weight: 700;}
 .new-campaign-table, .old-campaign-table{background:#f4f6f9;padding: 20px;border-radius: 15px;}
 /* Chrome, Safari, Edge, Opera */
@@ -154,6 +154,9 @@ transform: translate3d(0, -12px, 0) rotate(-90deg);top: -3px;}
 .create-campaign-btn{min-height: inherit !important;}
 .create-campaign-btn .flight-range{right: auto !important;}
 .dropdown-close{position: absolute;top: 10px;right: 10px;color: #a5c32a;}
+.campaign-edit .bg-active {background: #a5c32a; }
+input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
 
 @media (min-width: 1400px){
     .advertiser-view .head h2{width: calc(100% - 340px);padding-right: 5px;}

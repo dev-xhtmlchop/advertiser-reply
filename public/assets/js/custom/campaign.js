@@ -77,7 +77,7 @@ $(document).ready(function(){
         return response;
     }
 
-    function changeDetailNewTable(dayTimeVal){
+    function changeDetailNewTable(dayTimeVal,flag){
         var dayOfList = [];
         $('#edit_flight tr.day-checkbox-list .form-check-input').each(function(){
             if( $(this).is(":checked") ) {
@@ -85,7 +85,7 @@ $(document).ready(function(){
             }
         });
         var checkDayVal = dayOfList.join(" ");
-        dataAppend('#new_campaign_table .new-campaign_day-time', checkDayVal+' '+dayTimeVal);
+        dataAppend('#new_campaign_table .new-campaign_day-time', checkDayVal+' '+dayTimeVal,flag);
     }
 
     getCampaginViewData();
@@ -208,19 +208,19 @@ $(document).ready(function(){
                         })
                         $('.cpm-imp-tab #demographic_name').change(function(){
                             var demoName =  $(this).find('option:selected').text()
-                            dataAppend('#summary .demo_name', demoName);
+                            dataAppend('#summary .demo_name', demoName, 1);
                         });
                         $('.cpm-imp-tab input[name="cpm_ipm_impressions"]').change(function(){
-                            dataAppend('#summary .impressions', $(this).val());
+                            dataAppend('#summary .impressions', $(this).val(), 1);
                         });
                         $('.cpm-imp-tab input[name="cpm_ipm_cpm"]').change(function(){
-                            dataAppend('#summary .cpm', $(this).val());
+                            dataAppend('#summary .cpm', $(this).val(), 1);
                         });
                         $('.cpm-imp-tab input[name="cpm_ipm_demo_population"]').change(function(){
-                            dataAppend('#summary .demo_population', $(this).val());
+                            dataAppend('#summary .demo_population', $(this).val(), 1);
                         });
                         $('.cpm-imp-tab input[name="cpm_ipm_grp"]').change(function(){
-                            dataAppend('#summary .grp', $(this).val());
+                            dataAppend('#summary .grp', $(this).val(), 1);
                         });
                         /* Step 2 End */
 
@@ -318,19 +318,21 @@ $(document).ready(function(){
 */
     $('input[name="ad_length"]').on('apply.daterangepicker', function(){
         var startDate = $(this).val(); 
-        dataAppend('#new_campaign_table .new-campaign-inv-length', startDate);
+        dataAppend('#new_campaign_table .new-campaign-inv-length', startDate,1);
     });
     /** Flight Change Event  */
     $('#flight_start_date').on('apply.daterangepicker', function(){
         var startDate = $(this).val(); 
         $('#summary .new-flight-stat-date-text').empty().text(startDate);
-        dataAppend('#new_campaign_table .new-campaign-start-flight-date', startDate);
+        $('#summary .new-flight-stat-date-text').addClass('bg-active');
+        dataAppend('#new_campaign_table .new-campaign-start-flight-date', startDate,1);
     });
 
     $('#flight_end_date').on('apply.daterangepicker', function(){
         var endDate = $(this).val();
-        $('#summary .new-flight-end-date-text').empty().text(endDate)
-        dataAppend('#new_campaign_table .new-campaign-end-flight-date', endDate);
+        $('#summary .new-flight-end-date-text').empty().text(endDate);
+        $('#summary .new-flight-end-date-text').addClass('bg-active');
+        dataAppend('#new_campaign_table .new-campaign-end-flight-date', endDate,1);
     });
     $('#edit_flight .day-split-checkbox-list .number-field input[type="number"]').change(function(){
         var getDayOfSplit = $(this).val(); 
@@ -341,7 +343,7 @@ $(document).ready(function(){
             $('#edit_flight .day-checkbox-list .form-check input[id="'+onlyDay[0]+'"]').attr('checked',true);
         }
         var dayTime = $('#day_parts_id option:selected').text();
-        changeDetailNewTable(dayTime)
+        changeDetailNewTable(dayTime,1)
     });
 
     /* Flight Section End */
@@ -356,12 +358,12 @@ $(document).ready(function(){
     });
     $('input[name="days[]"]').change(function(){
         var dayTimeVal = $('#campaign_day_time').val();
-        changeDetailNewTable(dayTimeVal)
+        changeDetailNewTable(dayTimeVal,1)
     });
     
     $('select:input[name="day_parts_id"]').change(function(){
         var dayPartVal = $(this).find('option:selected').text();
-        changeDetailNewTable(dayTimeVal)
+        changeDetailNewTable(dayPartVal,1)
     });
 
     $("#edit_campaign").validate({
