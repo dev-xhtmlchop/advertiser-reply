@@ -24,7 +24,7 @@
    
     <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/css/common/datatable/dataTables.bootstrap5.min.css') }}"> 
     <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/css/common/datatable/responsive.bootstrap5.min.css') }}">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
 
     <!-- Select2 -->
     <link href="{{ asset('public/assets/css/common/select2/select2.min.css') }}" rel="stylesheet" media="all">

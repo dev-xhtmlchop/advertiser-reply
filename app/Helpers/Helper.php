@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use App\Models\UserHistories;
 use App\Models\Statu;
+use App\Models\Deals;
+use App\Models\DealPayload;
+use App\Models\Campaigns;
+use App\Models\CampaignPayload;
+use Illuminate\Support\Facades\Schema;
 
 class Helper{
     public static function activityLog( $message = null ){
@@ -292,6 +297,134 @@ class Helper{
             }
         }
         return $newDataArray;
+    }
+
+    public static function removeUnderscore($value){
+        $replaceValue = str_replace("_"," ",$value);
+        return ucwords($replaceValue);
+    }
+
+    public static function addUnderscore($value){
+        $replaceValue = str_replace(" ","_",$value);
+        return $replaceValue;
+    }
+
+    public static function getInput($tableName,$fieldId,$fieldsVal){
+        $input = '';
+        switch ($tableName) {
+            case "bigint":
+                $input = '<input type="text" id="db_field_name_'.$fieldId.'" attr-key="bigint" class="au-input au-input--full form-control" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
+                break;
+            case "string":
+                $input = '<input type="text" id="db_field_name_'.$fieldId.'" attr-key="string" class="au-input au-input--full form-control" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
+                break;
+            case "integer":
+                $input = '<input type="number" id="db_field_name_'.$fieldId.'" attr-key="integer" class="au-input au-input--full form-control" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
+                break;
+            case "datetime":
+                $input = '<input type="text" id="db_field_name_'.$fieldId.'" attr-key="datetime" class="au-input au-input--full form-control json-datetime" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
+                break;
+            case "date":
+                $input = '<input type="text" id="db_field_name_'.$fieldId.'" attr-key="date" class="au-input au-input--full form-control json-year" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
+                break;
+            case "boolean":
+                $selectFirst = ( $fieldsVal == 0 )?'selected="selected"':""; 
+                $selectSecond = ( $fieldsVal == 1 )?'selected="selected"':""; 
+                $input = '<select name="db_field_name[]" id="db_field_name_'.$fieldId.'" attr-key="boolean" class="au-input au-input--full valid" aria-invalid="false">
+                <option value="0"'.$selectFirst.'>0</option><option value="1" '.$selectSecond.'>1</option></select>';
+                break;
+        }
+        return  $input;
+    }
+
+    public static function removeId( $mainArrayData ){
+        if( count( $mainArrayData ) > 0 ){
+            $newData = [];
+            foreach( $mainArrayData as $mainArrayDataKey => $mainArrayDataVal ){
+                $columnName = $mainArrayDataVal[0];
+                $columnType = $mainArrayDataVal[1];
+                    switch ($columnName) {
+                        case str_contains($columnName, '_id'):
+                            $removeId = str_replace('_id','_name',$columnName);
+                            $newData[$removeId] = $columnType;
+                            break;
+                        case str_contains($columnName, 'id'):
+                            break;
+                        case "created_by":
+                            break;
+                        case "updated_by":
+                            break;
+                        case "created_at":
+                            break;
+                        case "updated_at":
+                            break;
+                        case "delete":
+                            break;
+                        case "status":
+                            break;
+                        default:
+                        $newData[$columnName] = $columnType;
+                    }
+              //  }
+            }
+        }
+        return $newData;
+    }
+
+    public static function getTableName($tablename){
+        $tableData = '';
+        switch ($tablename) {
+            case "deal":
+                $tableData = new Deals;
+            break;
+            case "dealpayload":
+                $tableData = new DealPayload;
+            break;
+            case "campaign":
+                $tableData = new Campaigns;
+            break;
+            case "campaignpayload":
+                $tableData = new CampaignPayload;
+            break;
+        }
+        return $tableData;
+    }
+
+    public static function getTableColumnType( $dealPayloads, $arrayData ){
+        $tableName = Helper::getTableName($dealPayloads);
+        $tableNameTypeArr = [];
+        foreach( $arrayData as $arrayDataKey => $arrayDataVal ){
+            $tableNameTypeArr[] = array(  $arrayDataVal,  $tableName->getTableTypes($arrayDataVal) );
+        }
+       return $tableNameTypeArr;
+    }
+
+    public static function jsonDataTableList(){
+        $dealColumnsList = Helper::getTableName('deal')->getTableColumns();
+        $dealColumnsTypeList = Helper::getTableColumnType('deal',$dealColumnsList);
+        $dealremoveArray = Helper::removeId($dealColumnsTypeList);
+
+        $dealpaylpadsColumnsList = Helper::getTableName('dealpayload')->getTableColumns();
+        $dealpaylpadsColumnsTypeList = Helper::getTableColumnType('dealpayload',$dealpaylpadsColumnsList);
+        $dealpaylpadsremoveArray = Helper::removeId($dealpaylpadsColumnsTypeList);
+
+        $dealTableFields = array_merge($dealremoveArray,$dealpaylpadsremoveArray);
+        
+        $campaignColumnsList = Helper::getTableName('campaign')->getTableColumns();
+        $campaignColumnsTypeList = Helper::getTableColumnType('campaign',$campaignColumnsList);
+        $campaignremoveArray = Helper::removeId($campaignColumnsTypeList);
+
+        $campaignpaylpadsColumnsList = Helper::getTableName('campaignpayload')->getTableColumns();
+        $campaignpaylpadsColumnsTypeList = Helper::getTableColumnType('campaignpayload',$campaignpaylpadsColumnsList);
+        $campaignpaylpadsremoveArray = Helper::removeId($campaignpaylpadsColumnsTypeList);
+
+        $campaignTableFields = array_merge($campaignremoveArray,$campaignpaylpadsremoveArray);
+        
+        $tableFieldsData = array(  
+             'deal' => $dealTableFields,
+             'campaign' => $campaignTableFields,
+            );
+        return $tableFieldsData;
     }
 }
 ?>

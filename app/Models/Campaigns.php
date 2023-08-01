@@ -23,4 +23,14 @@ class Campaigns extends Model
     {
         return $this->belongsTo(Brands::class,'brand_id','id');
     }*/
+
+    public function getTableColumns() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
+
+    public function getTableTypes( $databaseTableFieldname = '') {
+        if( !empty( $databaseTableFieldname ) ){
+            return $this->getConnection()->getDoctrineColumn($this->getTable(), $databaseTableFieldname)->getType()->getName();
+        }
+    }
 }

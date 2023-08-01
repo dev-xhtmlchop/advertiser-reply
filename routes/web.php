@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JsonInsertData\JsonInsertDataController;
 use App\Http\Controllers\Campaign\CampaignController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Deal\DealController;
@@ -40,6 +41,7 @@ Route::post('/post-login-user',[ LoginController::class, 'postLoginUser'])->name
 
 /* Logout */
 Route::get('/logout',[ LogoutController::class, 'index'])->name('logout');
+Route::post('/post-remove-cookie-session',[ LogoutController::class, 'postRemoveSession'])->name('logout');
 //Route::get('/login/{id}',[ LoginController::class, 'loginAccessToken'])->name('login.accesstoken');
 
 /* Registration */
@@ -65,4 +67,9 @@ Route::post('/get-campaign-detail',[CampaignController::class, 'getEditCampaignD
 Route::get('/campaign/edit/{id}',[CampaignController::class, 'getEditCampaignInfo'])->name('campaign.edit')->middleware('auth');
 Route::post('/campaign/post-campaign-edit',[CampaignController::class, 'postEditCampaign'])->name('post.campaign.edit')->middleware('auth'); 
 
+/* No page */
 Route::get('/no-page',[NoPageController::class, 'index'])->name('nopage')->middleware('auth');
+
+/* No page */
+Route::get('/api-insert',[JsonInsertDataController::class, 'index'])->name('api-insert')->middleware('auth'); 
+Route::post('/get-json-data',[JsonInsertDataController::class, 'getJSONData'])->name('getjsondata')->middleware('auth'); 

@@ -49,6 +49,13 @@ function sucessNotification( message ){
       $(".alert-notification-success").hide('medium');
   });
 }
+function addErrorMessage(name, message){
+    var errorMessageDiv = '<label class="error invalid-feedback" for="'+name+'">'+message+'</label>';
+    $('#'+name).parent().find('.error').empty();
+    if( message != '' ){
+        $('#'+name).parent().append(errorMessageDiv);
+    }
+}
 /*
 var timer2 = "02:00";
 var interval = setInterval(function() {

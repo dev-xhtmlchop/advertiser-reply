@@ -22,7 +22,8 @@
                 <li><a href="{{ route('nopage') }}"><i class="fa fa-wrench"></i>Ad Operation</a></li>
                 <li><a href="{{ route('nopage') }}"><i class="fa fa-user"></i>Advertiser Profile</a></li>
                 <li><a href="{{ route('nopage') }}"><i class="fa fa-file"></i>Reports</a></li>
-                <li><a href="{{ route('nopage') }}"><i class="fa fa-sitemap"></i>Administration</a></li>
+                <li><a href="{{ ( request()->is('administration') || request()->is('administration') ) ? 'active' : '' }}"><i class="fa fa-sitemap"></i>Administration</a></li>
+                <li class="{{ ( request()->is('api-insert') ) ? 'active' : '' }}"><a href="{{ route('api-insert') }}"><i class="fa fa-database" aria-hidden="true"></i>API Insert</a></li>
             </ul>
         </div>
     </nav>

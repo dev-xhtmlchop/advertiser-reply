@@ -15,6 +15,8 @@
 <script type="text/javascript" src="{{ asset('public/assets/js/common/datatable/dataTables.responsive.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/assets/js/common/datatable/responsive.bootstrap5.min.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+
 <script src="{{ asset('public/assets/js/common/common.js') }}" ></script>
 <script src="{{ asset('public/assets/js/common/main.js') }}" ></script>
 
@@ -29,7 +31,11 @@
 @if( request()->is('deal') ) 
 <script src="{{ asset('public/assets/js/custom/deal.js') }}" ></script>  
 @endif
+
 @if( request()->is('campaign/*') || request()->is('campaign') ) 
 <script src="{{ asset('public/assets/js/custom/campaign.js') }}" ></script>  
 @endif
 
+@if( request()->is('api-insert') ) 
+<script src="{{ asset('public/assets/js/custom/jsondata.js') }}" ></script>  
+@endif

@@ -9,4 +9,8 @@ class DayParts extends Model
 {
     use HasFactory;
     protected $fillable = [ 'name', 'status', 'created_by', 'updated_by', 'created_at', 'updated_at' ];
+
+    public function getTableColumns() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 }

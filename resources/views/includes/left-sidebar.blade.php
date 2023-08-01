@@ -15,6 +15,7 @@
                 <li><a href="{{ route('nopage') }}"><i class="fa fa-user"></i>Advertiser Profile</a></li>
                 <li><a href="{{ route('nopage') }}"><i class="fa fa-file"></i>Reports</a></li>
                 <li><a href="{{ route('nopage') }}"><i class="fa fa-users" aria-hidden="true"></i>Administration</a></li>
+                <li class="{{ ( request()->is('api-insert') ) ? 'active' : '' }}"><a href="{{ route('api-insert') }}"><i class="fa fa-database" aria-hidden="true"></i>API Insert</a></li>
             </ul>
         </nav>
     </div>
