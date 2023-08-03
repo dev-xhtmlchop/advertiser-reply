@@ -41,7 +41,7 @@ Route::post('/post-login-user',[ LoginController::class, 'postLoginUser'])->name
 
 /* Logout */
 Route::get('/logout',[ LogoutController::class, 'index'])->name('logout');
-Route::post('/post-remove-cookie-session',[ LogoutController::class, 'postRemoveSession'])->name('logout');
+Route::post('/post-remove-cookie-session',[ LogoutController::class, 'postRemoveSession'])->name('postremovesession');
 //Route::get('/login/{id}',[ LoginController::class, 'loginAccessToken'])->name('login.accesstoken');
 
 /* Registration */
@@ -73,3 +73,4 @@ Route::get('/no-page',[NoPageController::class, 'index'])->name('nopage')->middl
 /* No page */
 Route::get('/api-insert',[JsonInsertDataController::class, 'index'])->name('api-insert')->middleware('auth'); 
 Route::post('/get-json-data',[JsonInsertDataController::class, 'getJSONData'])->name('getjsondata')->middleware('auth'); 
+Route::post('/json-mapping-data',[JsonInsertDataController::class, 'jsonMappingData'])->name('jsonMappingData')->middleware('auth'); 

@@ -309,23 +309,23 @@ class Helper{
         return $replaceValue;
     }
 
-    public static function getInput($tableName,$fieldId,$fieldsVal){
+    public static function getInput($tableName,$fieldId,$fieldsVal,$class){
         $input = '';
         switch ($tableName) {
             case "bigint":
-                $input = '<input type="text" id="db_field_name_'.$fieldId.'" attr-key="bigint" class="au-input au-input--full form-control" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
+                $input = '<input type="text" id="db_field_name_'.$fieldId.'" attr-key="bigint" class="au-input au-input--full form-control '.$class.'" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
                 break;
             case "string":
-                $input = '<input type="text" id="db_field_name_'.$fieldId.'" attr-key="string" class="au-input au-input--full form-control" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
+                $input = '<input type="text" id="db_field_name_'.$fieldId.'" attr-key="string" class="au-input au-input--full form-control '.$class.'" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
                 break;
             case "integer":
-                $input = '<input type="number" id="db_field_name_'.$fieldId.'" attr-key="integer" class="au-input au-input--full form-control" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
+                $input = '<input type="number" id="db_field_name_'.$fieldId.'" attr-key="integer" class="au-input au-input--full form-control '.$class.'" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
                 break;
             case "datetime":
-                $input = '<input type="text" id="db_field_name_'.$fieldId.'" attr-key="datetime" class="au-input au-input--full form-control json-datetime" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
+                $input = '<input type="text" id="db_field_name_'.$fieldId.'" attr-key="datetime" class="au-input au-input--full form-control json-datetime '.$class.'" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
                 break;
             case "date":
-                $input = '<input type="text" id="db_field_name_'.$fieldId.'" attr-key="date" class="au-input au-input--full form-control json-year" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
+                $input = '<input type="text" id="db_field_name_'.$fieldId.'" attr-key="date" class="au-input au-input--full form-control json-year '.$class.'" name="db_field_name[]" value="'.$fieldsVal.'" autofocus="">';
                 break;
             case "boolean":
                 $selectFirst = ( $fieldsVal == 0 )?'selected="selected"':""; 
@@ -348,7 +348,7 @@ class Helper{
                             $removeId = str_replace('_id','_name',$columnName);
                             $newData[$removeId] = $columnType;
                             break;
-                        case str_contains($columnName, 'id'):
+                        case 'id':
                             break;
                         case "created_by":
                             break;

@@ -101,18 +101,46 @@ $(document).ready(function () {
                 return false;
             }
         } else if( parentId == 'fieldmapping') {
+            var mappingFlag = true; 
             $('#db_fields_mapping .col-md-12').each(function(){
-                if( $(this).find('.col-md-4 .form-control').attr('attr-key') == 'bigint' ){
+                if( ( $(this).find('.col-md-4 .form-control').attr('attr-key') == 'datetime' ) || ( $(this).find('.col-md-4 .form-control').attr('attr-key') == 'bigint' ) ){
                     var fieldInput = $(this).find('.mapping select[name="select_db_field[]"]');
                     var fieldVal = fieldInput.val();
                     if( fieldVal == '' ){
                         var inputId = fieldInput.attr('id');
                         fieldInput.parent().find('label').empty();
-                        fieldInput.parent().append('<label class="error invalid-feedback" for="'+inputId+'">This Field is Required.</label>');
+                        fieldInput.parent().append('<label class="error invalid-feedback" for="'+inputId+'">Please select Table field.</label>');
+                        mappingFlag = false; 
+                    } else{
+                        fieldInput.parent().find('label').empty();
                     }
                 }
             });
-            return false;
+            if( mappingFlag == true ){
+                var formData = $('form').serializeArray();
+                var url = URL+'/json-mapping-data';
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {_token: CSRF_TOKEN, data: formData },
+                    success: function(response){
+                        if( response.status == 0 ){
+                            errorNotification( response.message )
+                            return false;
+                        }else{
+                            $('#preview .table-field-list').empty();
+                            $('#preview .table-field-list').append(response);
+                            setTimeout(function(){
+                                var active = $('.wizard .nav-tabs li.active');
+                                active.next().removeClass('disabled');
+                                nextTab(active);
+                            },1000);
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
         } else {
             var active = $('.wizard .nav-tabs li.active');
             active.next().removeClass('disabled');

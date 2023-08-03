@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('title') {{'JSON Data'}} @endsection
+@section('title') {{'API Insert'}} @endsection
 @section('content')
 <style>
 
@@ -139,43 +139,17 @@
                                                 <h4 class="text-center">Preview</h4>
                                                 <div class="row">
                                                     <div class="new-campaign-table-box table-responsive">
-                                                        <table id="new_campaign_table"  class="table custom-table table-borderless table-striped dataTable no-footer"  style="width:100%">
+                                                        <table  class="table custom-table table-borderless table-striped dataTable no-footer"  style="width:100%">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Campaign Number</th>
-                                                                    <th>Campaign Name</th>
-                                                                    <th>Title</th>
-                                                                    <th>Day/ Time</th>
-                                                                    <th>Brand</th>
-                                                                    <th>Start Flight</th>
-                                                                    <th>End Flight</th>
-                                                                    <th>Media Line</th>
-                                                                    <th>Inv Type</th>
-                                                                    <th>Inv Length</th>
-                                                                    <th>$ Rate</th>
-                                                                    <th>$ Rate</th>
-                                                                    <th>% Rate</th>
-                                                                    <th>Total Avails</th>
-                                                                    <th>Total Unit</th>
+                                                                    <th>Field Name</th>
+                                                                    <th>Field value</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
+                                                            <tbody class="table-field-list">
                                                                 <tr class="tr-shadow">
-                                                                    <td class="new-campaign-id">1100000004</td>
+                                                                    <th class="new-campaign-id">1100000004</th>
                                                                     <td class="new-campaign-name">New I3 all Electric</td>
-                                                                    <td class="new-campaign-deal-name">Electric at USA</td>
-                                                                    <td class="new-campaign_day-time">S M T  T F  20H00</td>
-                                                                    <td class="new-campaign-brand">X3</td>
-                                                                    <td class="new-campaign-start-flight-date">07/19/2023</td>
-                                                                    <td class="new-campaign-end-flight-date">07/19/2023</td>
-                                                                    <td class="new-campaign-media-line">Linear</td>
-                                                                    <td class="new-campaign-inv-type">NR</td>
-                                                                    <td class="new-campaign-inv-length">10:00:20</td>
-                                                                    <td class="new-campaign-rate">29</td>
-                                                                    <td class="new-campaign-do-rate">29</td>
-                                                                    <td class="new-campaign-per-rate">140</td>
-                                                                    <td class="new-campaign-total-avail">144</td>
-                                                                    <td class="new-campaign-total-unit">1</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>

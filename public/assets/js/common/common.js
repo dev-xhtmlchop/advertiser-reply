@@ -49,6 +49,17 @@ function sucessNotification( message ){
       $(".alert-notification-success").hide('medium');
   });
 }
+function errorNotification( message ){
+  $(".alert-notification-error .error-message").empty().text(message);
+  $(".alert-notification-error").show('medium');
+  setTimeout(function(){
+    $(".alert-notification-error").hide('medium');
+  }, 5000);
+  $(".sendButton .close").click(function(){
+      $(".alert-notification-error").hide('medium');
+  });
+}
+
 function addErrorMessage(name, message){
     var errorMessageDiv = '<label class="error invalid-feedback" for="'+name+'">'+message+'</label>';
     $('#'+name).parent().find('.error').empty();
@@ -94,16 +105,6 @@ function countdown( timer2 = null) {
   }, 1000);
 }
 
-function errorNotification( message ){
-  $(".alert-notification-error .error-message").empty().text(message);
-  $(".alert-notification-error").show('medium');
-  setTimeout(function(){
-    $(".alert-notification-error").hide('medium');
-  }, 5000);
-  $(".sendButton .close").click(function(){
-      $(".alert-notification-error").hide('medium');
-  });
-}
 function uniqueArray(list) {
   var result = [];
   $.each(list, function(i, e) {
